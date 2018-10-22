@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.InterestRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.InterestRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="loanRecordId" jdbcType="INTEGER" property="loanrecordid" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="capital" jdbcType="DECIMAL" property="capital" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, loanRecordId, interest, capital, rate, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.InterestRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into interest_record (loanRecordId, interest, capital, 
+      rate, createTime, updateTime
+      )
+    values (#{loanrecordid,jdbcType=INTEGER}, #{interest,jdbcType=DECIMAL}, #{capital,jdbcType=DECIMAL}, 
+      #{rate,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.InterestRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into interest_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="loanrecordid != null">
+        loanRecordId,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="capital != null">
+        capital,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="loanrecordid != null">
+        #{loanrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="capital != null">
+        #{capital,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.InterestRecord">
+    update interest_record
+    set loanRecordId = #{loanrecordid,jdbcType=INTEGER},
+      interest = #{interest,jdbcType=DECIMAL},
+      capital = #{capital,jdbcType=DECIMAL},
+      rate = #{rate,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.InterestRecord">
+    update interest_record
+    <set>
+      <if test="loanrecordid != null">
+        loanRecordId = #{loanrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="capital != null">
+        capital = #{capital,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from interest_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interest_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interest_record
+    where 1=1 
+    <if test="loanrecordid != null">
+       and  loanRecordId = #{loanrecordid,jdbcType=INTEGER}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="capital != null">
+       and  capital = #{capital,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from interest_record
+    where 1=1 
+    <if test="loanrecordid != null">
+       and  loanRecordId = #{loanrecordid,jdbcType=INTEGER}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="capital != null">
+       and  capital = #{capital,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from interest_record 
+    where 1=1 
+    <if test="loanrecordid != null">
+       and  loanRecordId = #{loanrecordid,jdbcType=INTEGER}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="capital != null">
+       and  capital = #{capital,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/yibi-batch/yibi-batch.iml" filepath="$PROJECT_DIR$/yibi-batch/yibi-batch.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-common/yibi-common.iml" filepath="$PROJECT_DIR$/yibi-common/yibi-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-core/yibi-core.iml" filepath="$PROJECT_DIR$/yibi-core/yibi-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-externapi/yibi-externapi.iml" filepath="$PROJECT_DIR$/yibi-externapi/yibi-externapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-globalmarket/yibi-globalmarket.iml" filepath="$PROJECT_DIR$/yibi-globalmarket/yibi-globalmarket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-openapi/yibi-openapi.iml" filepath="$PROJECT_DIR$/yibi-openapi/yibi-openapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-orderapi/yibi-orderapi.iml" filepath="$PROJECT_DIR$/yibi-orderapi/yibi-orderapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-parent.iml" filepath="$PROJECT_DIR$/yibi-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-turnapi/yibi-turnapi.iml" filepath="$PROJECT_DIR$/yibi-turnapi/yibi-turnapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-web/yibi-web.iml" filepath="$PROJECT_DIR$/yibi-web/yibi-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/yibi-websocket/yibi-websocket.iml" filepath="$PROJECT_DIR$/yibi-websocket/yibi-websocket.iml" />
+    </modules>
+  </component>
+</project>

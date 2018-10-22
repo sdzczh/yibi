@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.CoinIntroductionMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.CoinIntroduction">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="coinName" jdbcType="VARCHAR" property="coinname" />
+    <result column="releaseTime" jdbcType="VARCHAR" property="releasetime" />
+    <result column="releaseTotalAmt" jdbcType="VARCHAR" property="releasetotalamt" />
+    <result column="circulationTotalAmt" jdbcType="VARCHAR" property="circulationtotalamt" />
+    <result column="crowdPrice" jdbcType="VARCHAR" property="crowdprice" />
+    <result column="whitePaper" jdbcType="VARCHAR" property="whitepaper" />
+    <result column="officialNetURL" jdbcType="VARCHAR" property="officialneturl" />
+    <result column="blockQuery" jdbcType="VARCHAR" property="blockquery" />
+    <result column="introduction" jdbcType="VARCHAR" property="introduction" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, coinName, releaseTime, releaseTotalAmt, circulationTotalAmt, crowdPrice, 
+    whitePaper, officialNetURL, blockQuery, introduction, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.CoinIntroduction">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coin_introduction (coinType, coinName, releaseTime, 
+      releaseTotalAmt, circulationTotalAmt, crowdPrice, 
+      whitePaper, officialNetURL, blockQuery, 
+      introduction, createTime, updateTime
+      )
+    values (#{cointype,jdbcType=TINYINT}, #{coinname,jdbcType=VARCHAR}, #{releasetime,jdbcType=VARCHAR}, 
+      #{releasetotalamt,jdbcType=VARCHAR}, #{circulationtotalamt,jdbcType=VARCHAR}, #{crowdprice,jdbcType=VARCHAR}, 
+      #{whitepaper,jdbcType=VARCHAR}, #{officialneturl,jdbcType=VARCHAR}, #{blockquery,jdbcType=VARCHAR}, 
+      #{introduction,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.CoinIntroduction">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coin_introduction
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="coinname != null">
+        coinName,
+      </if>
+      <if test="releasetime != null">
+        releaseTime,
+      </if>
+      <if test="releasetotalamt != null">
+        releaseTotalAmt,
+      </if>
+      <if test="circulationtotalamt != null">
+        circulationTotalAmt,
+      </if>
+      <if test="crowdprice != null">
+        crowdPrice,
+      </if>
+      <if test="whitepaper != null">
+        whitePaper,
+      </if>
+      <if test="officialneturl != null">
+        officialNetURL,
+      </if>
+      <if test="blockquery != null">
+        blockQuery,
+      </if>
+      <if test="introduction != null">
+        introduction,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="coinname != null">
+        #{coinname,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null">
+        #{releasetime,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetotalamt != null">
+        #{releasetotalamt,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationtotalamt != null">
+        #{circulationtotalamt,jdbcType=VARCHAR},
+      </if>
+      <if test="crowdprice != null">
+        #{crowdprice,jdbcType=VARCHAR},
+      </if>
+      <if test="whitepaper != null">
+        #{whitepaper,jdbcType=VARCHAR},
+      </if>
+      <if test="officialneturl != null">
+        #{officialneturl,jdbcType=VARCHAR},
+      </if>
+      <if test="blockquery != null">
+        #{blockquery,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.CoinIntroduction">
+    update coin_introduction
+    set coinType = #{cointype,jdbcType=TINYINT},
+      coinName = #{coinname,jdbcType=VARCHAR},
+      releaseTime = #{releasetime,jdbcType=VARCHAR},
+      releaseTotalAmt = #{releasetotalamt,jdbcType=VARCHAR},
+      circulationTotalAmt = #{circulationtotalamt,jdbcType=VARCHAR},
+      crowdPrice = #{crowdprice,jdbcType=VARCHAR},
+      whitePaper = #{whitepaper,jdbcType=VARCHAR},
+      officialNetURL = #{officialneturl,jdbcType=VARCHAR},
+      blockQuery = #{blockquery,jdbcType=VARCHAR},
+      introduction = #{introduction,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.CoinIntroduction">
+    update coin_introduction
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="coinname != null">
+        coinName = #{coinname,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetime != null">
+        releaseTime = #{releasetime,jdbcType=VARCHAR},
+      </if>
+      <if test="releasetotalamt != null">
+        releaseTotalAmt = #{releasetotalamt,jdbcType=VARCHAR},
+      </if>
+      <if test="circulationtotalamt != null">
+        circulationTotalAmt = #{circulationtotalamt,jdbcType=VARCHAR},
+      </if>
+      <if test="crowdprice != null">
+        crowdPrice = #{crowdprice,jdbcType=VARCHAR},
+      </if>
+      <if test="whitepaper != null">
+        whitePaper = #{whitepaper,jdbcType=VARCHAR},
+      </if>
+      <if test="officialneturl != null">
+        officialNetURL = #{officialneturl,jdbcType=VARCHAR},
+      </if>
+      <if test="blockquery != null">
+        blockQuery = #{blockquery,jdbcType=VARCHAR},
+      </if>
+      <if test="introduction != null">
+        introduction = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coin_introduction
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_introduction
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_introduction
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="coinname != null">
+       and  coinName = #{coinname,jdbcType=VARCHAR}
+    </if>
+    <if test="releasetime != null">
+       and  releaseTime = #{releasetime,jdbcType=VARCHAR}
+    </if>
+    <if test="releasetotalamt != null">
+       and  releaseTotalAmt = #{releasetotalamt,jdbcType=VARCHAR}
+    </if>
+    <if test="circulationtotalamt != null">
+       and  circulationTotalAmt = #{circulationtotalamt,jdbcType=VARCHAR}
+    </if>
+    <if test="crowdprice != null">
+       and  crowdPrice = #{crowdprice,jdbcType=VARCHAR}
+    </if>
+    <if test="whitepaper != null">
+       and  whitePaper = #{whitepaper,jdbcType=VARCHAR}
+    </if>
+    <if test="officialneturl != null">
+       and  officialNetURL = #{officialneturl,jdbcType=VARCHAR}
+    </if>
+    <if test="blockquery != null">
+       and  blockQuery = #{blockquery,jdbcType=VARCHAR}
+    </if>
+    <if test="introduction != null">
+       and  introduction = #{introduction,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_introduction
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="coinname != null">
+       and  coinName = #{coinname,jdbcType=VARCHAR}
+    </if>
+    <if test="releasetime != null">
+       and  releaseTime = #{releasetime,jdbcType=VARCHAR}
+    </if>
+    <if test="releasetotalamt != null">
+       and  releaseTotalAmt = #{releasetotalamt,jdbcType=VARCHAR}
+    </if>
+    <if test="circulationtotalamt != null">
+       and  circulationTotalAmt = #{circulationtotalamt,jdbcType=VARCHAR}
+    </if>
+    <if test="crowdprice != null">
+       and  crowdPrice = #{crowdprice,jdbcType=VARCHAR}
+    </if>
+    <if test="whitepaper != null">
+       and  whitePaper = #{whitepaper,jdbcType=VARCHAR}
+    </if>
+    <if test="officialneturl != null">
+       and  officialNetURL = #{officialneturl,jdbcType=VARCHAR}
+    </if>
+    <if test="blockquery != null">
+       and  blockQuery = #{blockquery,jdbcType=VARCHAR}
+    </if>
+    <if test="introduction != null">
+       and  introduction = #{introduction,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from coin_introduction 
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="coinname != null">
+       and  coinName = #{coinname,jdbcType=VARCHAR}
+    </if>
+    <if test="releasetime != null">
+       and  releaseTime = #{releasetime,jdbcType=VARCHAR}
+    </if>
+    <if test="releasetotalamt != null">
+       and  releaseTotalAmt = #{releasetotalamt,jdbcType=VARCHAR}
+    </if>
+    <if test="circulationtotalamt != null">
+       and  circulationTotalAmt = #{circulationtotalamt,jdbcType=VARCHAR}
+    </if>
+    <if test="crowdprice != null">
+       and  crowdPrice = #{crowdprice,jdbcType=VARCHAR}
+    </if>
+    <if test="whitepaper != null">
+       and  whitePaper = #{whitepaper,jdbcType=VARCHAR}
+    </if>
+    <if test="officialneturl != null">
+       and  officialNetURL = #{officialneturl,jdbcType=VARCHAR}
+    </if>
+    <if test="blockquery != null">
+       and  blockQuery = #{blockquery,jdbcType=VARCHAR}
+    </if>
+    <if test="introduction != null">
+       and  introduction = #{introduction,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 配置mybatis的缓存，延迟加载等等一系列属性 -->
+
+	<!--开启二级缓存与EhcachCache整合 -->
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+	</settings>
+
+	<!-- 实体类,简称 -设置别名 -->
+	<typeAliases>
+	</typeAliases>
+	
+	<!-- 实体接口映射资源 -->
+	<mappers>
+
+	</mappers>
+
+</configuration>  

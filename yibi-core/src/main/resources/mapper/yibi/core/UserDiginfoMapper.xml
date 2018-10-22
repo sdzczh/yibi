@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.UserDiginfoMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.UserDiginfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="digFlag" jdbcType="TINYINT" property="digflag" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="digCalcul" jdbcType="INTEGER" property="digcalcul" />
+    <result column="loginDays" jdbcType="TINYINT" property="logindays" />
+    <result column="lastTime" jdbcType="TIMESTAMP" property="lasttime" />
+    <result column="dayRewardState" jdbcType="TINYINT" property="dayrewardstate" />
+    <result column="tenRewardState" jdbcType="TINYINT" property="tenrewardstate" />
+    <result column="monthRewardState" jdbcType="TINYINT" property="monthrewardstate" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, digFlag, startTime, digCalcul, loginDays, lastTime, dayRewardState, tenRewardState, 
+    monthRewardState, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.UserDiginfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_diginfo (userId, digFlag, startTime, 
+      digCalcul, loginDays, lastTime, 
+      dayRewardState, tenRewardState, monthRewardState, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{digflag,jdbcType=TINYINT}, #{starttime,jdbcType=TIMESTAMP}, 
+      #{digcalcul,jdbcType=INTEGER}, #{logindays,jdbcType=TINYINT}, #{lasttime,jdbcType=TIMESTAMP}, 
+      #{dayrewardstate,jdbcType=TINYINT}, #{tenrewardstate,jdbcType=TINYINT}, #{monthrewardstate,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.UserDiginfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_diginfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="digflag != null">
+        digFlag,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="digcalcul != null">
+        digCalcul,
+      </if>
+      <if test="logindays != null">
+        loginDays,
+      </if>
+      <if test="lasttime != null">
+        lastTime,
+      </if>
+      <if test="dayrewardstate != null">
+        dayRewardState,
+      </if>
+      <if test="tenrewardstate != null">
+        tenRewardState,
+      </if>
+      <if test="monthrewardstate != null">
+        monthRewardState,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="digflag != null">
+        #{digflag,jdbcType=TINYINT},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="digcalcul != null">
+        #{digcalcul,jdbcType=INTEGER},
+      </if>
+      <if test="logindays != null">
+        #{logindays,jdbcType=TINYINT},
+      </if>
+      <if test="lasttime != null">
+        #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayrewardstate != null">
+        #{dayrewardstate,jdbcType=TINYINT},
+      </if>
+      <if test="tenrewardstate != null">
+        #{tenrewardstate,jdbcType=TINYINT},
+      </if>
+      <if test="monthrewardstate != null">
+        #{monthrewardstate,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.UserDiginfo">
+    update user_diginfo
+    set userId = #{userid,jdbcType=INTEGER},
+      digFlag = #{digflag,jdbcType=TINYINT},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      digCalcul = #{digcalcul,jdbcType=INTEGER},
+      loginDays = #{logindays,jdbcType=TINYINT},
+      lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      dayRewardState = #{dayrewardstate,jdbcType=TINYINT},
+      tenRewardState = #{tenrewardstate,jdbcType=TINYINT},
+      monthRewardState = #{monthrewardstate,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.UserDiginfo">
+    update user_diginfo
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="digflag != null">
+        digFlag = #{digflag,jdbcType=TINYINT},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="digcalcul != null">
+        digCalcul = #{digcalcul,jdbcType=INTEGER},
+      </if>
+      <if test="logindays != null">
+        loginDays = #{logindays,jdbcType=TINYINT},
+      </if>
+      <if test="lasttime != null">
+        lastTime = #{lasttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dayrewardstate != null">
+        dayRewardState = #{dayrewardstate,jdbcType=TINYINT},
+      </if>
+      <if test="tenrewardstate != null">
+        tenRewardState = #{tenrewardstate,jdbcType=TINYINT},
+      </if>
+      <if test="monthrewardstate != null">
+        monthRewardState = #{monthrewardstate,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_diginfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_diginfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_diginfo
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="digflag != null">
+       and  digFlag = #{digflag,jdbcType=TINYINT}
+    </if>
+    <if test="starttime != null">
+       and  startTime = #{starttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="digcalcul != null">
+       and  digCalcul = #{digcalcul,jdbcType=INTEGER}
+    </if>
+    <if test="logindays != null">
+       and  loginDays = #{logindays,jdbcType=TINYINT}
+    </if>
+    <if test="lasttime != null">
+       and  lastTime = #{lasttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="dayrewardstate != null">
+       and  dayRewardState = #{dayrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="tenrewardstate != null">
+       and  tenRewardState = #{tenrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="monthrewardstate != null">
+       and  monthRewardState = #{monthrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_diginfo
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="digflag != null">
+       and  digFlag = #{digflag,jdbcType=TINYINT}
+    </if>
+    <if test="starttime != null">
+       and  startTime = #{starttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="digcalcul != null">
+       and  digCalcul = #{digcalcul,jdbcType=INTEGER}
+    </if>
+    <if test="logindays != null">
+       and  loginDays = #{logindays,jdbcType=TINYINT}
+    </if>
+    <if test="lasttime != null">
+       and  lastTime = #{lasttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="dayrewardstate != null">
+       and  dayRewardState = #{dayrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="tenrewardstate != null">
+       and  tenRewardState = #{tenrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="monthrewardstate != null">
+       and  monthRewardState = #{monthrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from user_diginfo 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="digflag != null">
+       and  digFlag = #{digflag,jdbcType=TINYINT}
+    </if>
+    <if test="starttime != null">
+       and  startTime = #{starttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="digcalcul != null">
+       and  digCalcul = #{digcalcul,jdbcType=INTEGER}
+    </if>
+    <if test="logindays != null">
+       and  loginDays = #{logindays,jdbcType=TINYINT}
+    </if>
+    <if test="lasttime != null">
+       and  lastTime = #{lasttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="dayrewardstate != null">
+       and  dayRewardState = #{dayrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="tenrewardstate != null">
+       and  tenRewardState = #{tenrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="monthrewardstate != null">
+       and  monthRewardState = #{monthrewardstate,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="queryCountBySoulLevel" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from user_diginfo
+    where  digCalcul &gt;= #{soulMin,jdbcType=INTEGER}
+    and digCalcul &lt;= #{soulMax,jdbcType=INTEGER}
+  </select>
+  <select id="queryRankByUserId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    SELECT t.rownum FROM ( SELECT d.userId, d.id, d.digCalcul, @rowno :=@rowno + 1 AS rownum
+    FROM user_diginfo d, (SELECT @rowno := 0) t ORDER BY d.digCalcul DESC,d.id ASC ) t
+    WHERE t.userId = #{userId}
+  </select>
+  <select id="queryRankList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT d.id,0 as rank, u.nickName as account ,digCalcul as forceNumber, h.roleName AS honorName
+    from user_diginfo d
+    left join user u on d.userId = u.id INNER JOIN dig_honors h ON (d.digCalcul &lt;= h.soulMaxForce AND d.digCalcul &gt;= h.soulMinForce)
+    order by d.digCalcul DESC,d.id ASC limit #{firstResult},#{maxResult}
+  </select>
+
+  <select id="selectDigInfoAndPhone" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT ud.*,u.phone,u.userName FROM user_diginfo ud LEFT JOIN user u ON ud.userId=u.id
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="minDigCalcul != null">
+      and  ud.digCalcul &gt;= #{minDigCalcul,jdbcType=INTEGER}
+    </if>
+    <if test="maxDigCalcul != null">
+      and  ud.digCalcul &lt;= #{maxDigCalcul,jdbcType=INTEGER}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    order by ud.id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectDigInfoCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM user_diginfo ud LEFT JOIN user u ON ud.userId=u.id
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="minDigCalcul != null">
+      and  ud.digCalcul &gt;= #{minDigCalcul,jdbcType=INTEGER}
+    </if>
+    <if test="maxDigCalcul != null">
+      and  ud.digCalcul &lt;= #{maxDigCalcul,jdbcType=INTEGER}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="querySignInterList" parameterType="java.util.Map" resultType="com.yibi.core.entity.UserDiginfo">
+    SELECT d.id,d.userId,d.digFlag,d.startTime,d.digCalcul,d.loginDays,d.lastTime,d.dayRewardState,d.tenRewardState,d.monthRewardState,d.createTime,d.updateTime
+    FROM user_diginfo d
+    LEFT JOIN user u ON u.id = d.userId
+    WHERE u.token !='' AND d.lastTime &lt;#{yesterday} order by u.id
+    limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <update id="updateCalculForceBatch" parameterType="java.util.Map" >
+    update user_diginfo
+    set digCalcul=digCalcul+#{calculForce}
+    WHERE userId in
+    <foreach collection="userIds" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+  </update>
+
+</mapper>

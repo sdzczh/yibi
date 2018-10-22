@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.OrderSpotRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.OrderSpotRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="buyId" jdbcType="INTEGER" property="buyid" />
+    <result column="saleId" jdbcType="INTEGER" property="saleid" />
+    <result column="buyUserId" jdbcType="INTEGER" property="buyuserid" />
+    <result column="saleUserId" jdbcType="INTEGER" property="saleuserid" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="unitCoinType" jdbcType="TINYINT" property="unitcointype" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, buyId, saleId, buyUserId, saleUserId, orderCoinType, unitCoinType, amount, price, 
+    total, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.OrderSpotRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_spot_record (buyId, saleId, buyUserId, 
+      saleUserId, orderCoinType, unitCoinType, 
+      amount, price, total, 
+      createTime, updateTime)
+    values (#{buyid,jdbcType=INTEGER}, #{saleid,jdbcType=INTEGER}, #{buyuserid,jdbcType=INTEGER}, 
+      #{saleuserid,jdbcType=INTEGER}, #{ordercointype,jdbcType=TINYINT}, #{unitcointype,jdbcType=TINYINT}, 
+      #{amount,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, #{total,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.OrderSpotRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_spot_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="buyid != null">
+        buyId,
+      </if>
+      <if test="saleid != null">
+        saleId,
+      </if>
+      <if test="buyuserid != null">
+        buyUserId,
+      </if>
+      <if test="saleuserid != null">
+        saleUserId,
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="buyid != null">
+        #{buyid,jdbcType=INTEGER},
+      </if>
+      <if test="saleid != null">
+        #{saleid,jdbcType=INTEGER},
+      </if>
+      <if test="buyuserid != null">
+        #{buyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="saleuserid != null">
+        #{saleuserid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.OrderSpotRecord">
+    update order_spot_record
+    set buyId = #{buyid,jdbcType=INTEGER},
+      saleId = #{saleid,jdbcType=INTEGER},
+      buyUserId = #{buyuserid,jdbcType=INTEGER},
+      saleUserId = #{saleuserid,jdbcType=INTEGER},
+      orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      total = #{total,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.OrderSpotRecord">
+    update order_spot_record
+    <set>
+      <if test="buyid != null">
+        buyId = #{buyid,jdbcType=INTEGER},
+      </if>
+      <if test="saleid != null">
+        saleId = #{saleid,jdbcType=INTEGER},
+      </if>
+      <if test="buyuserid != null">
+        buyUserId = #{buyuserid,jdbcType=INTEGER},
+      </if>
+      <if test="saleuserid != null">
+        saleUserId = #{saleuserid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_spot_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_spot_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_spot_record
+    where 1=1 
+    <if test="buyid != null">
+       and  buyId = #{buyid,jdbcType=INTEGER}
+    </if>
+    <if test="saleid != null">
+       and  saleId = #{saleid,jdbcType=INTEGER}
+    </if>
+    <if test="buyuserid != null">
+       and  buyUserId = #{buyuserid,jdbcType=INTEGER}
+    </if>
+    <if test="saleuserid != null">
+       and  saleUserId = #{saleuserid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="price != null">
+       and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="total != null">
+       and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_spot_record
+    where 1=1 
+    <if test="buyid != null">
+       and  buyId = #{buyid,jdbcType=INTEGER}
+    </if>
+    <if test="saleid != null">
+       and  saleId = #{saleid,jdbcType=INTEGER}
+    </if>
+    <if test="buyuserid != null">
+       and  buyUserId = #{buyuserid,jdbcType=INTEGER}
+    </if>
+    <if test="saleuserid != null">
+       and  saleUserId = #{saleuserid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="price != null">
+       and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="total != null">
+       and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from order_spot_record 
+    where 1=1 
+    <if test="buyid != null">
+       and  buyId = #{buyid,jdbcType=INTEGER}
+    </if>
+    <if test="saleid != null">
+       and  saleId = #{saleid,jdbcType=INTEGER}
+    </if>
+    <if test="buyuserid != null">
+       and  buyUserId = #{buyuserid,jdbcType=INTEGER}
+    </if>
+    <if test="saleuserid != null">
+       and  saleUserId = #{saleuserid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="price != null">
+       and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="total != null">
+       and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="queryUserCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select count(*)
+    from order_spot_record
+    where
+    buyUserId = #{userId,jdbcType=INTEGER}
+    or saleUserId = #{userId,jdbcType=INTEGER}
+  </select>
+
+  <select id="getSumAmount" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+    select IFNULL(sum(amount),0)
+    from order_spot_record
+    where 1=1
+    <if test="ordercointype != null">
+      and orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+      and unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="startTime != null">
+      and createTime &gt;= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null">
+      and createTime &lt;= #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="getNewRecord" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from order_spot_record
+    where 1=1
+    <if test="ordercointype != null">
+      and orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+      and unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="date != null">
+      and createTime &lt;= #{date}
+    </if>
+    order by id desc limit 0,1
+  </select>
+
+  <select id="getFirstRecord" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from order_spot_record
+    where 1=1
+    <if test="ordercointype != null">
+      and orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+      and unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="date != null">
+      and createTime &gt;= #{date}
+    </if>
+    order by id  limit 0,1
+  </select>
+
+  <select id="getHighLowAmount" parameterType="java.util.Map" resultType="java.util.Map">
+    select IFNULL(max(t.price),0) as high,IFNULL(min(t.price),0) as low,IFNULL(sum(t.amount),0) as amount from order_spot_record t
+    where t.orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    and t.unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    <if test="startTime != null">
+      and t.createTime &gt;  #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null">
+      and t.createTime &lt;=  #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

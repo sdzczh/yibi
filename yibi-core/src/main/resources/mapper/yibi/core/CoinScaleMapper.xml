@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.CoinScaleMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.CoinScale">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="unitCoinType" jdbcType="TINYINT" property="unitcointype" />
+    <result column="orderAmtPriceScale" jdbcType="TINYINT" property="orderamtpricescale" />
+    <result column="orderAmtAmountScale" jdbcType="TINYINT" property="orderamtamountscale" />
+    <result column="availOfSpotUnitScale" jdbcType="TINYINT" property="availofspotunitscale" />
+    <result column="availOfSpotOrderScale" jdbcType="TINYINT" property="availofspotorderscale" />
+    <result column="marketPriceOfCnyScale" jdbcType="TINYINT" property="marketpriceofcnyscale" />
+    <result column="marketTradeNumScale" jdbcType="TINYINT" property="markettradenumscale" />
+    <result column="klinePriceScale" jdbcType="TINYINT" property="klinepricescale" />
+    <result column="calculScale" jdbcType="TINYINT" property="calculscale" />
+    <result column="availOfcnyScale" jdbcType="TINYINT" property="availofcnyscale" />
+    <result column="yubiScale" jdbcType="TINYINT" property="yubiscale" />
+    <result column="c2cPriceScale" jdbcType="TINYINT" property="c2cpricescale" />
+    <result column="c2cNumScale" jdbcType="TINYINT" property="c2cnumscale" />
+    <result column="c2cTotalAmtScale" jdbcType="TINYINT" property="c2ctotalamtscale" />
+    <result column="withdrawScale" jdbcType="TINYINT" property="withdrawScale" />
+    <result column="minSpotTransAmt" jdbcType="DECIMAL" property="minspottransamt" />
+    <result column="minSpotTransNum" jdbcType="DECIMAL" property="minspottransnum" />
+    <result column="minC2cTransAmt" jdbcType="DECIMAL" property="minc2ctransamt" />
+    <result column="minwithdrawNum" jdbcType="DECIMAL" property="minwithdrawnum" />
+    <result column="marketSaleMinNum" jdbcType="DECIMAL" property="marketsaleminnum" />
+    <result column="marketBuyMinAmt" jdbcType="DECIMAL" property="marketbuyminamt" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orderCoinType, unitCoinType, orderAmtPriceScale, orderAmtAmountScale, availOfSpotUnitScale, 
+    availOfSpotOrderScale, marketPriceOfCnyScale, marketTradeNumScale, klinePriceScale, 
+    calculScale, availOfcnyScale, yubiScale, c2cPriceScale, c2cNumScale, c2cTotalAmtScale,withdrawScale,
+    minSpotTransAmt, minSpotTransNum, minC2cTransAmt, minwithdrawNum,marketBuyMinAmt,marketSaleMinNum ,createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.CoinScale">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coin_scale (orderCoinType, unitCoinType, orderAmtPriceScale, 
+      orderAmtAmountScale, availOfSpotUnitScale, 
+      availOfSpotOrderScale, marketPriceOfCnyScale, 
+      marketTradeNumScale, klinePriceScale, calculScale, 
+      availOfcnyScale, yubiScale, c2cPriceScale, 
+      c2cNumScale, c2cTotalAmtScale, minSpotTransAmt, 
+      minSpotTransNum, minC2cTransAmt, minwithdrawNum,marketSaleMinNum, marketBuyMinAmt,
+      createTime, updateTime)
+    values (#{ordercointype,jdbcType=TINYINT}, #{unitcointype,jdbcType=TINYINT}, #{orderamtpricescale,jdbcType=TINYINT}, 
+      #{orderamtamountscale,jdbcType=TINYINT}, #{availofspotunitscale,jdbcType=TINYINT}, 
+      #{availofspotorderscale,jdbcType=TINYINT}, #{marketpriceofcnyscale,jdbcType=TINYINT}, 
+      #{markettradenumscale,jdbcType=TINYINT}, #{klinepricescale,jdbcType=TINYINT}, #{calculscale,jdbcType=TINYINT}, 
+      #{availofcnyscale,jdbcType=TINYINT}, #{yubiscale,jdbcType=TINYINT}, #{c2cpricescale,jdbcType=TINYINT}, 
+      #{c2cnumscale,jdbcType=TINYINT}, #{c2ctotalamtscale,jdbcType=TINYINT}, #{minspottransamt,jdbcType=DECIMAL}, 
+      #{minspottransnum,jdbcType=DECIMAL}, #{minc2ctransamt,jdbcType=DECIMAL}, #{minwithdrawnum,jdbcType=DECIMAL}, #{marketbuyminamt,jdbcType=DECIMAL},#{marketsaleminnum,jdbcType=DECIMAL},
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.CoinScale">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coin_scale
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType,
+      </if>
+      <if test="orderamtpricescale != null">
+        orderAmtPriceScale,
+      </if>
+      <if test="orderamtamountscale != null">
+        orderAmtAmountScale,
+      </if>
+      <if test="availofspotunitscale != null">
+        availOfSpotUnitScale,
+      </if>
+      <if test="availofspotorderscale != null">
+        availOfSpotOrderScale,
+      </if>
+      <if test="marketpriceofcnyscale != null">
+        marketPriceOfCnyScale,
+      </if>
+      <if test="markettradenumscale != null">
+        marketTradeNumScale,
+      </if>
+      <if test="klinepricescale != null">
+        klinePriceScale,
+      </if>
+      <if test="calculscale != null">
+        calculScale,
+      </if>
+      <if test="availofcnyscale != null">
+        availOfcnyScale,
+      </if>
+      <if test="yubiscale != null">
+        yubiScale,
+      </if>
+      <if test="c2cpricescale != null">
+        c2cPriceScale,
+      </if>
+      <if test="c2cnumscale != null">
+        c2cNumScale,
+      </if>
+      <if test="c2ctotalamtscale != null">
+        c2cTotalAmtScale,
+      </if>
+      <if test="withdrawScale != null">
+        withdrawScale,
+      </if>
+      <if test="minspottransamt != null">
+        minSpotTransAmt,
+      </if>
+      <if test="minspottransnum != null">
+        minSpotTransNum,
+      </if>
+      <if test="minc2ctransamt != null">
+        minC2cTransAmt,
+      </if>
+      <if test="minwithdrawnum != null">
+        minwithdrawNum,
+      </if>
+      <if test="marketbuyminamt != null">
+        marketBuyMinAmt,
+      </if>
+      <if test="marketsaleminnum != null">
+        marketSaleMinNum,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="orderamtpricescale != null">
+        #{orderamtpricescale,jdbcType=TINYINT},
+      </if>
+      <if test="orderamtamountscale != null">
+        #{orderamtamountscale,jdbcType=TINYINT},
+      </if>
+      <if test="availofspotunitscale != null">
+        #{availofspotunitscale,jdbcType=TINYINT},
+      </if>
+      <if test="availofspotorderscale != null">
+        #{availofspotorderscale,jdbcType=TINYINT},
+      </if>
+      <if test="marketpriceofcnyscale != null">
+        #{marketpriceofcnyscale,jdbcType=TINYINT},
+      </if>
+      <if test="markettradenumscale != null">
+        #{markettradenumscale,jdbcType=TINYINT},
+      </if>
+      <if test="klinepricescale != null">
+        #{klinepricescale,jdbcType=TINYINT},
+      </if>
+      <if test="calculscale != null">
+        #{calculscale,jdbcType=TINYINT},
+      </if>
+      <if test="availofcnyscale != null">
+        #{availofcnyscale,jdbcType=TINYINT},
+      </if>
+      <if test="yubiscale != null">
+        #{yubiscale,jdbcType=TINYINT},
+      </if>
+      <if test="c2cpricescale != null">
+        #{c2cpricescale,jdbcType=TINYINT},
+      </if>
+      <if test="c2cnumscale != null">
+        #{c2cnumscale,jdbcType=TINYINT},
+      </if>
+      <if test="c2ctotalamtscale != null">
+        #{c2ctotalamtscale,jdbcType=TINYINT},
+      </if>
+        <if test="withdrawScale != null">
+            #{withdrawScale,jdbcType=TINYINT},
+        </if>
+      <if test="minspottransamt != null">
+        #{minspottransamt,jdbcType=DECIMAL},
+      </if>
+      <if test="minspottransnum != null">
+        #{minspottransnum,jdbcType=DECIMAL},
+      </if>
+      <if test="minc2ctransamt != null">
+        #{minc2ctransamt,jdbcType=DECIMAL},
+      </if>
+      <if test="minwithdrawnum != null">
+        #{minwithdrawnum,jdbcType=DECIMAL},
+      </if>
+      <if test="marketsaleminnum != null">
+        #{marketsaleminnum,jdbcType=DECIMAL},
+      </if>
+      <if test="marketbuyminamt != null">
+        #{marketbuyminamt,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.CoinScale">
+    update coin_scale
+    set orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      orderAmtPriceScale = #{orderamtpricescale,jdbcType=TINYINT},
+      orderAmtAmountScale = #{orderamtamountscale,jdbcType=TINYINT},
+      availOfSpotUnitScale = #{availofspotunitscale,jdbcType=TINYINT},
+      availOfSpotOrderScale = #{availofspotorderscale,jdbcType=TINYINT},
+      marketPriceOfCnyScale = #{marketpriceofcnyscale,jdbcType=TINYINT},
+      marketTradeNumScale = #{markettradenumscale,jdbcType=TINYINT},
+      klinePriceScale = #{klinepricescale,jdbcType=TINYINT},
+      calculScale = #{calculscale,jdbcType=TINYINT},
+      availOfcnyScale = #{availofcnyscale,jdbcType=TINYINT},
+      yubiScale = #{yubiscale,jdbcType=TINYINT},
+      c2cPriceScale = #{c2cpricescale,jdbcType=TINYINT},
+      c2cNumScale = #{c2cnumscale,jdbcType=TINYINT},
+      c2cTotalAmtScale = #{c2ctotalamtscale,jdbcType=TINYINT},
+      minSpotTransAmt = #{minspottransamt,jdbcType=DECIMAL},
+      minSpotTransNum = #{minspottransnum,jdbcType=DECIMAL},
+      minC2cTransAmt = #{minc2ctransamt,jdbcType=DECIMAL},
+      minwithdrawNum = #{minwithdrawnum,jdbcType=DECIMAL},
+      marketBuyMinAmt = #{marketbuyminamt,jdbcType=DECIMAL},
+      marketSaleMinNum = #{marketsaleminnum,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.CoinScale">
+    update coin_scale
+    <set>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="orderamtpricescale != null">
+        orderAmtPriceScale = #{orderamtpricescale,jdbcType=TINYINT},
+      </if>
+      <if test="orderamtamountscale != null">
+        orderAmtAmountScale = #{orderamtamountscale,jdbcType=TINYINT},
+      </if>
+      <if test="availofspotunitscale != null">
+        availOfSpotUnitScale = #{availofspotunitscale,jdbcType=TINYINT},
+      </if>
+      <if test="availofspotorderscale != null">
+        availOfSpotOrderScale = #{availofspotorderscale,jdbcType=TINYINT},
+      </if>
+      <if test="marketpriceofcnyscale != null">
+        marketPriceOfCnyScale = #{marketpriceofcnyscale,jdbcType=TINYINT},
+      </if>
+      <if test="markettradenumscale != null">
+        marketTradeNumScale = #{markettradenumscale,jdbcType=TINYINT},
+      </if>
+      <if test="klinepricescale != null">
+        klinePriceScale = #{klinepricescale,jdbcType=TINYINT},
+      </if>
+      <if test="calculscale != null">
+        calculScale = #{calculscale,jdbcType=TINYINT},
+      </if>
+      <if test="availofcnyscale != null">
+        availOfcnyScale = #{availofcnyscale,jdbcType=TINYINT},
+      </if>
+      <if test="yubiscale != null">
+        yubiScale = #{yubiscale,jdbcType=TINYINT},
+      </if>
+      <if test="c2cpricescale != null">
+        c2cPriceScale = #{c2cpricescale,jdbcType=TINYINT},
+      </if>
+      <if test="c2cnumscale != null">
+        c2cNumScale = #{c2cnumscale,jdbcType=TINYINT},
+      </if>
+      <if test="c2ctotalamtscale != null">
+        c2cTotalAmtScale = #{c2ctotalamtscale,jdbcType=TINYINT},
+      </if>
+      <if test="withdrawScale != null">
+        withdrawScale = #{withdrawScale,jdbcType=TINYINT},
+      </if>
+      <if test="minspottransamt != null">
+        minSpotTransAmt = #{minspottransamt,jdbcType=DECIMAL},
+      </if>
+      <if test="minspottransnum != null">
+        minSpotTransNum = #{minspottransnum,jdbcType=DECIMAL},
+      </if>
+      <if test="minc2ctransamt != null">
+        minC2cTransAmt = #{minc2ctransamt,jdbcType=DECIMAL},
+      </if>
+      <if test="minwithdrawnum != null">
+        minwithdrawNum = #{minwithdrawnum,jdbcType=DECIMAL},
+      </if>
+      <if test="marketbuyminamt != null">
+        marketBuyMinAmt = #{marketbuyminamt,jdbcType=DECIMAL},
+      </if>
+      <if test="marketsaleminnum != null">
+        marketSaleMinNum = #{marketsaleminnum,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coin_scale
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_scale
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_scale
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderamtpricescale != null">
+       and  orderAmtPriceScale = #{orderamtpricescale,jdbcType=TINYINT}
+    </if>
+    <if test="orderamtamountscale != null">
+       and  orderAmtAmountScale = #{orderamtamountscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofspotunitscale != null">
+       and  availOfSpotUnitScale = #{availofspotunitscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofspotorderscale != null">
+       and  availOfSpotOrderScale = #{availofspotorderscale,jdbcType=TINYINT}
+    </if>
+    <if test="marketpriceofcnyscale != null">
+       and  marketPriceOfCnyScale = #{marketpriceofcnyscale,jdbcType=TINYINT}
+    </if>
+    <if test="markettradenumscale != null">
+       and  marketTradeNumScale = #{markettradenumscale,jdbcType=TINYINT}
+    </if>
+    <if test="klinepricescale != null">
+       and  klinePriceScale = #{klinepricescale,jdbcType=TINYINT}
+    </if>
+    <if test="calculscale != null">
+       and  calculScale = #{calculscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofcnyscale != null">
+       and  availOfcnyScale = #{availofcnyscale,jdbcType=TINYINT}
+    </if>
+    <if test="yubiscale != null">
+       and  yubiScale = #{yubiscale,jdbcType=TINYINT}
+    </if>
+    <if test="c2cpricescale != null">
+       and  c2cPriceScale = #{c2cpricescale,jdbcType=TINYINT}
+    </if>
+    <if test="c2cnumscale != null">
+       and  c2cNumScale = #{c2cnumscale,jdbcType=TINYINT}
+    </if>
+    <if test="c2ctotalamtscale != null">
+       and  c2cTotalAmtScale = #{c2ctotalamtscale,jdbcType=TINYINT}
+    </if>
+    <if test="minspottransamt != null">
+       and  minSpotTransAmt = #{minspottransamt,jdbcType=DECIMAL}
+    </if>
+    <if test="minspottransnum != null">
+       and  minSpotTransNum = #{minspottransnum,jdbcType=DECIMAL}
+    </if>
+    <if test="minc2ctransamt != null">
+       and  minC2cTransAmt = #{minc2ctransamt,jdbcType=DECIMAL}
+    </if>
+    <if test="minwithdrawnum != null">
+       and  minwithdrawNum = #{minwithdrawnum,jdbcType=DECIMAL}
+    </if>
+    <if test="marketbuyminamt != null">
+       and  marketBuyMinAmt = #{marketbuyminamt,jdbcType=DECIMAL}
+    </if>
+    <if test="marketsaleminnum != null">
+       and  marketSaleMinNum = #{marketsaleminnum,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_scale
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderamtpricescale != null">
+       and  orderAmtPriceScale = #{orderamtpricescale,jdbcType=TINYINT}
+    </if>
+    <if test="orderamtamountscale != null">
+       and  orderAmtAmountScale = #{orderamtamountscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofspotunitscale != null">
+       and  availOfSpotUnitScale = #{availofspotunitscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofspotorderscale != null">
+       and  availOfSpotOrderScale = #{availofspotorderscale,jdbcType=TINYINT}
+    </if>
+    <if test="marketpriceofcnyscale != null">
+       and  marketPriceOfCnyScale = #{marketpriceofcnyscale,jdbcType=TINYINT}
+    </if>
+    <if test="markettradenumscale != null">
+       and  marketTradeNumScale = #{markettradenumscale,jdbcType=TINYINT}
+    </if>
+    <if test="klinepricescale != null">
+       and  klinePriceScale = #{klinepricescale,jdbcType=TINYINT}
+    </if>
+    <if test="calculscale != null">
+       and  calculScale = #{calculscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofcnyscale != null">
+       and  availOfcnyScale = #{availofcnyscale,jdbcType=TINYINT}
+    </if>
+    <if test="yubiscale != null">
+       and  yubiScale = #{yubiscale,jdbcType=TINYINT}
+    </if>
+    <if test="c2cpricescale != null">
+       and  c2cPriceScale = #{c2cpricescale,jdbcType=TINYINT}
+    </if>
+    <if test="c2cnumscale != null">
+       and  c2cNumScale = #{c2cnumscale,jdbcType=TINYINT}
+    </if>
+    <if test="c2ctotalamtscale != null">
+       and  c2cTotalAmtScale = #{c2ctotalamtscale,jdbcType=TINYINT}
+    </if>
+    <if test="minspottransamt != null">
+       and  minSpotTransAmt = #{minspottransamt,jdbcType=DECIMAL}
+    </if>
+    <if test="minspottransnum != null">
+       and  minSpotTransNum = #{minspottransnum,jdbcType=DECIMAL}
+    </if>
+    <if test="minc2ctransamt != null">
+       and  minC2cTransAmt = #{minc2ctransamt,jdbcType=DECIMAL}
+    </if>
+    <if test="minwithdrawnum != null">
+       and  minwithdrawNum = #{minwithdrawnum,jdbcType=DECIMAL}
+    </if>
+    <if test="marketbuyminamt != null">
+       and  marketBuyMinAmt = #{marketbuyminamt,jdbcType=DECIMAL}
+    </if>
+    <if test="marketsaleminnum != null">
+       and  marketSaleMinNum = #{marketsaleminnum,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from coin_scale 
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderamtpricescale != null">
+       and  orderAmtPriceScale = #{orderamtpricescale,jdbcType=TINYINT}
+    </if>
+    <if test="orderamtamountscale != null">
+       and  orderAmtAmountScale = #{orderamtamountscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofspotunitscale != null">
+       and  availOfSpotUnitScale = #{availofspotunitscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofspotorderscale != null">
+       and  availOfSpotOrderScale = #{availofspotorderscale,jdbcType=TINYINT}
+    </if>
+    <if test="marketpriceofcnyscale != null">
+       and  marketPriceOfCnyScale = #{marketpriceofcnyscale,jdbcType=TINYINT}
+    </if>
+    <if test="markettradenumscale != null">
+       and  marketTradeNumScale = #{markettradenumscale,jdbcType=TINYINT}
+    </if>
+    <if test="klinepricescale != null">
+       and  klinePriceScale = #{klinepricescale,jdbcType=TINYINT}
+    </if>
+    <if test="calculscale != null">
+       and  calculScale = #{calculscale,jdbcType=TINYINT}
+    </if>
+    <if test="availofcnyscale != null">
+       and  availOfcnyScale = #{availofcnyscale,jdbcType=TINYINT}
+    </if>
+    <if test="yubiscale != null">
+       and  yubiScale = #{yubiscale,jdbcType=TINYINT}
+    </if>
+    <if test="c2cpricescale != null">
+       and  c2cPriceScale = #{c2cpricescale,jdbcType=TINYINT}
+    </if>
+    <if test="c2cnumscale != null">
+       and  c2cNumScale = #{c2cnumscale,jdbcType=TINYINT}
+    </if>
+    <if test="c2ctotalamtscale != null">
+       and  c2cTotalAmtScale = #{c2ctotalamtscale,jdbcType=TINYINT}
+    </if>
+    <if test="minspottransamt != null">
+       and  minSpotTransAmt = #{minspottransamt,jdbcType=DECIMAL}
+    </if>
+    <if test="minspottransnum != null">
+       and  minSpotTransNum = #{minspottransnum,jdbcType=DECIMAL}
+    </if>
+    <if test="minc2ctransamt != null">
+       and  minC2cTransAmt = #{minc2ctransamt,jdbcType=DECIMAL}
+    </if>
+    <if test="minwithdrawnum != null">
+       and  minwithdrawNum = #{minwithdrawnum,jdbcType=DECIMAL}
+    </if>
+    <if test="marketbuyminamt != null">
+       and  marketBuyMinAmt = #{marketbuyminamt,jdbcType=DECIMAL}
+    </if>
+    <if test="marketsaleminnum != null">
+       and  marketSaleMinNum = #{marketsaleminnum,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectConditionPaging" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT cs.*,cm.coinName AS orderCoinName,cm2.coinName AS unitCoinName FROM coin_scale cs
+    LEFT JOIN coin_manage cm ON cs.orderCoinType=cm.coinType LEFT JOIN coin_manage cm2 ON cs.unitCoinType=cm2.coinType
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+     SELECT count(*) FROM coin_scale cs
+    LEFT JOIN coin_manage cm ON cs.orderCoinType=cm.coinType LEFT JOIN coin_manage cm2 ON cs.unitCoinType=cm2.coinType
+  </select>
+</mapper>

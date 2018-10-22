@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.AccountLeverageMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.AccountLeverage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="unitCoinType" jdbcType="TINYINT" property="unitcointype" />
+    <result column="orderAvailBalance" jdbcType="DECIMAL" property="orderavailbalance" />
+    <result column="unitAvailBalance" jdbcType="DECIMAL" property="unitavailbalance" />
+    <result column="orderFrozenBalance" jdbcType="DECIMAL" property="orderfrozenbalance" />
+    <result column="unitFrozenBalance" jdbcType="DECIMAL" property="unitfrozenbalance" />
+    <result column="orderArrears" jdbcType="DECIMAL" property="orderarrears" />
+    <result column="unitArrears" jdbcType="DECIMAL" property="unitarrears" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="orderInterest" jdbcType="DECIMAL" property="orderinterest" />
+    <result column="unitInterest" jdbcType="DECIMAL" property="unitinterest" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, orderCoinType, unitCoinType, orderAvailBalance, unitAvailBalance, orderFrozenBalance, 
+    unitFrozenBalance, orderArrears, unitArrears, createTime, updateTime, orderInterest, 
+    unitInterest
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.AccountLeverage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account_leverage (userId, orderCoinType, unitCoinType, 
+      orderAvailBalance, unitAvailBalance, orderFrozenBalance, 
+      unitFrozenBalance, orderArrears, unitArrears, 
+      createTime, updateTime, orderInterest, 
+      unitInterest)
+    values (#{userid,jdbcType=INTEGER}, #{ordercointype,jdbcType=TINYINT}, #{unitcointype,jdbcType=TINYINT}, 
+      #{orderavailbalance,jdbcType=DECIMAL}, #{unitavailbalance,jdbcType=DECIMAL}, #{orderfrozenbalance,jdbcType=DECIMAL}, 
+      #{unitfrozenbalance,jdbcType=DECIMAL}, #{orderarrears,jdbcType=DECIMAL}, #{unitarrears,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, #{orderinterest,jdbcType=DECIMAL}, 
+      #{unitinterest,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.AccountLeverage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account_leverage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType,
+      </if>
+      <if test="orderavailbalance != null">
+        orderAvailBalance,
+      </if>
+      <if test="unitavailbalance != null">
+        unitAvailBalance,
+      </if>
+      <if test="orderfrozenbalance != null">
+        orderFrozenBalance,
+      </if>
+      <if test="unitfrozenbalance != null">
+        unitFrozenBalance,
+      </if>
+      <if test="orderarrears != null">
+        orderArrears,
+      </if>
+      <if test="unitarrears != null">
+        unitArrears,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="orderinterest != null">
+        orderInterest,
+      </if>
+      <if test="unitinterest != null">
+        unitInterest,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="orderavailbalance != null">
+        #{orderavailbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="unitavailbalance != null">
+        #{unitavailbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="orderfrozenbalance != null">
+        #{orderfrozenbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="unitfrozenbalance != null">
+        #{unitfrozenbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="orderarrears != null">
+        #{orderarrears,jdbcType=DECIMAL},
+      </if>
+      <if test="unitarrears != null">
+        #{unitarrears,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderinterest != null">
+        #{orderinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unitinterest != null">
+        #{unitinterest,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.AccountLeverage">
+    update account_leverage
+    set userId = #{userid,jdbcType=INTEGER},
+      orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      orderAvailBalance = #{orderavailbalance,jdbcType=DECIMAL},
+      unitAvailBalance = #{unitavailbalance,jdbcType=DECIMAL},
+      orderFrozenBalance = #{orderfrozenbalance,jdbcType=DECIMAL},
+      unitFrozenBalance = #{unitfrozenbalance,jdbcType=DECIMAL},
+      orderArrears = #{orderarrears,jdbcType=DECIMAL},
+      unitArrears = #{unitarrears,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      orderInterest = #{orderinterest,jdbcType=DECIMAL},
+      unitInterest = #{unitinterest,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.AccountLeverage">
+    update account_leverage
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="orderavailbalance != null">
+        orderAvailBalance = #{orderavailbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="unitavailbalance != null">
+        unitAvailBalance = #{unitavailbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="orderfrozenbalance != null">
+        orderFrozenBalance = #{orderfrozenbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="unitfrozenbalance != null">
+        unitFrozenBalance = #{unitfrozenbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="orderarrears != null">
+        orderArrears = #{orderarrears,jdbcType=DECIMAL},
+      </if>
+      <if test="unitarrears != null">
+        unitArrears = #{unitarrears,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderinterest != null">
+        orderInterest = #{orderinterest,jdbcType=DECIMAL},
+      </if>
+      <if test="unitinterest != null">
+        unitInterest = #{unitinterest,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account_leverage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_leverage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_leverage
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderavailbalance != null">
+       and  orderAvailBalance = #{orderavailbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="unitavailbalance != null">
+       and  unitAvailBalance = #{unitavailbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="orderfrozenbalance != null">
+       and  orderFrozenBalance = #{orderfrozenbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="unitfrozenbalance != null">
+       and  unitFrozenBalance = #{unitfrozenbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="orderarrears != null">
+       and  orderArrears = #{orderarrears,jdbcType=DECIMAL}
+    </if>
+    <if test="unitarrears != null">
+       and  unitArrears = #{unitarrears,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="orderinterest != null">
+       and  orderInterest = #{orderinterest,jdbcType=DECIMAL}
+    </if>
+    <if test="unitinterest != null">
+       and  unitInterest = #{unitinterest,jdbcType=DECIMAL}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_leverage
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderavailbalance != null">
+       and  orderAvailBalance = #{orderavailbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="unitavailbalance != null">
+       and  unitAvailBalance = #{unitavailbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="orderfrozenbalance != null">
+       and  orderFrozenBalance = #{orderfrozenbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="unitfrozenbalance != null">
+       and  unitFrozenBalance = #{unitfrozenbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="orderarrears != null">
+       and  orderArrears = #{orderarrears,jdbcType=DECIMAL}
+    </if>
+    <if test="unitarrears != null">
+       and  unitArrears = #{unitarrears,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="orderinterest != null">
+       and  orderInterest = #{orderinterest,jdbcType=DECIMAL}
+    </if>
+    <if test="unitinterest != null">
+       and  unitInterest = #{unitinterest,jdbcType=DECIMAL}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from account_leverage 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderavailbalance != null">
+       and  orderAvailBalance = #{orderavailbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="unitavailbalance != null">
+       and  unitAvailBalance = #{unitavailbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="orderfrozenbalance != null">
+       and  orderFrozenBalance = #{orderfrozenbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="unitfrozenbalance != null">
+       and  unitFrozenBalance = #{unitfrozenbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="orderarrears != null">
+       and  orderArrears = #{orderarrears,jdbcType=DECIMAL}
+    </if>
+    <if test="unitarrears != null">
+       and  unitArrears = #{unitarrears,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="orderinterest != null">
+       and  orderInterest = #{orderinterest,jdbcType=DECIMAL}
+    </if>
+    <if test="unitinterest != null">
+       and  unitInterest = #{unitinterest,jdbcType=DECIMAL}
+    </if>
+  </select>
+</mapper>

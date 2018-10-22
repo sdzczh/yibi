@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="yibi-web:war">
+    <output-path>$PROJECT_DIR$/yibi-web/target</output-path>
+    <root id="archive" name="yibi-web.war">
+      <element id="artifact" artifact-name="yibi-web:war exploded" />
+    </root>
+  </artifact>
+</component>

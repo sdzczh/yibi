@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.AppVersionMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.AppVersion">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="phoneType" jdbcType="TINYINT" property="phonetype" />
+    <result column="appVersion" jdbcType="INTEGER" property="appversion" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="size" jdbcType="INTEGER" property="size" />
+    <result column="verificate" jdbcType="CHAR" property="verificate" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="minVersion" jdbcType="VARCHAR" property="minversion" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phoneType, appVersion, type, address, size, verificate, state, createTime, updateTime, 
+    minVersion, content
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.AppVersion">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into app_version (phoneType, appVersion, type, 
+      address, size, verificate, 
+      state, createTime, updateTime, 
+      minVersion, content)
+    values (#{phonetype,jdbcType=TINYINT}, #{appversion,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{address,jdbcType=VARCHAR}, #{size,jdbcType=INTEGER}, #{verificate,jdbcType=CHAR}, 
+      #{state,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{minversion,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.AppVersion">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into app_version
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="phonetype != null">
+        phoneType,
+      </if>
+      <if test="appversion != null">
+        appVersion,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="size != null">
+        size,
+      </if>
+      <if test="verificate != null">
+        verificate,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="minversion != null">
+        minVersion,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="phonetype != null">
+        #{phonetype,jdbcType=TINYINT},
+      </if>
+      <if test="appversion != null">
+        #{appversion,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="verificate != null">
+        #{verificate,jdbcType=CHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="minversion != null">
+        #{minversion,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.AppVersion">
+    update app_version
+    set phoneType = #{phonetype,jdbcType=TINYINT},
+      appVersion = #{appversion,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      address = #{address,jdbcType=VARCHAR},
+      size = #{size,jdbcType=INTEGER},
+      verificate = #{verificate,jdbcType=CHAR},
+      state = #{state,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      minVersion = #{minversion,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.AppVersion">
+    update app_version
+    <set>
+      <if test="phonetype != null">
+        phoneType = #{phonetype,jdbcType=TINYINT},
+      </if>
+      <if test="appversion != null">
+        appVersion = #{appversion,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="verificate != null">
+        verificate = #{verificate,jdbcType=CHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="minversion != null">
+        minVersion = #{minversion,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from app_version
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_version
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_version
+    where 1=1 
+    <if test="phonetype != null">
+       and  phoneType = #{phonetype,jdbcType=TINYINT}
+    </if>
+    <if test="appversion != null">
+       and  appVersion = #{appversion,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="size != null">
+       and  size = #{size,jdbcType=INTEGER}
+    </if>
+    <if test="verificate != null">
+       and  verificate = #{verificate,jdbcType=CHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="minversion != null">
+       and  minVersion = #{minversion,jdbcType=VARCHAR}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_version
+    where 1=1 
+    <if test="phonetype != null">
+       and  phoneType = #{phonetype,jdbcType=TINYINT}
+    </if>
+    <if test="appversion != null">
+       and  appVersion = #{appversion,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="size != null">
+       and  size = #{size,jdbcType=INTEGER}
+    </if>
+    <if test="verificate != null">
+       and  verificate = #{verificate,jdbcType=CHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="minversion != null">
+       and  minVersion = #{minversion,jdbcType=VARCHAR}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from app_version 
+    where 1=1 
+    <if test="phonetype != null">
+       and  phoneType = #{phonetype,jdbcType=TINYINT}
+    </if>
+    <if test="appversion != null">
+       and  appVersion = #{appversion,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="size != null">
+       and  size = #{size,jdbcType=INTEGER}
+    </if>
+    <if test="verificate != null">
+       and  verificate = #{verificate,jdbcType=CHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="minversion != null">
+       and  minVersion = #{minversion,jdbcType=VARCHAR}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+  </select>
+</mapper>

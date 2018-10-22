@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.FlowMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Flow">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="operType" jdbcType="VARCHAR" property="opertype" />
+    <result column="relateId" jdbcType="INTEGER" property="relateid" />
+    <result column="accountType" jdbcType="TINYINT" property="accounttype" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="operId" jdbcType="INTEGER" property="operid" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="accAmount" jdbcType="DECIMAL" property="accamount" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, operType, relateId, accountType, coinType, operId, amount, accAmount,
+    createTime, updateTime
+  </sql>
+  <sql id="Account_Column_List">
+    operType, amount, createTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Flow">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into flow (userId, operType, relateId, 
+      accountType, coinType, operId, 
+      amount, accAmount)
+    select #{userid,jdbcType=INTEGER}, #{opertype,jdbcType=VARCHAR}, #{relateid,jdbcType=INTEGER},
+      #{accounttype,jdbcType=TINYINT}, #{cointype,jdbcType=TINYINT}, #{operid,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DECIMAL},availBalance
+    from account
+    where userId=#{userid,jdbcType=INTEGER} AND  accountType=#{accounttype,jdbcType=TINYINT} AND coinType=#{cointype,jdbcType=TINYINT}
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Flow">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="opertype != null">
+        operType,
+      </if>
+      <if test="relateid != null">
+        relateId,
+      </if>
+      <if test="accounttype != null">
+        accountType,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="operid != null">
+        operId,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="accamount != null">
+        accAmount,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="opertype != null">
+        #{opertype,jdbcType=VARCHAR},
+      </if>
+      <if test="relateid != null">
+        #{relateid,jdbcType=INTEGER},
+      </if>
+      <if test="accounttype != null">
+        #{accounttype,jdbcType=TINYINT},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="operid != null">
+        #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="accamount != null">
+        #{accamount,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Flow">
+    update flow
+    set userId = #{userid,jdbcType=INTEGER},
+      operType = #{opertype,jdbcType=VARCHAR},
+      relateId = #{relateid,jdbcType=INTEGER},
+      accountType = #{accounttype,jdbcType=TINYINT},
+      coinType = #{cointype,jdbcType=TINYINT},
+      operId = #{operid,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      accAmount = #{accamount,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Flow">
+    update flow
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="opertype != null">
+        operType = #{opertype,jdbcType=VARCHAR},
+      </if>
+      <if test="relateid != null">
+        relateId = #{relateid,jdbcType=INTEGER},
+      </if>
+      <if test="accounttype != null">
+        accountType = #{accounttype,jdbcType=TINYINT},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="operid != null">
+        operId = #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="accamount != null">
+        accAmount = #{accamount,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from flow
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flow
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flow
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="opertype != null">
+       and  operType = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="relateid != null">
+       and  relateId = #{relateid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="accamount != null">
+       and  accAmount = #{accamount,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flow
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="opertype != null">
+       and  operType = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="relateid != null">
+       and  relateId = #{relateid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="accamount != null">
+       and  accAmount = #{accamount,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectPagingForAccount" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Account_Column_List" />
+    from flow
+    where 1=1
+    <if test="userid != null">
+      and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="opertype != null">
+      and  operType = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="relateid != null">
+      and  relateId = #{relateid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+      and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+      and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+      and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="amount != null">
+      and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="accamount != null">
+      and  accAmount = #{accamount,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from flow 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="opertype != null">
+       and  operType = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="relateid != null">
+       and  relateId = #{relateid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="accamount != null">
+       and  accAmount = #{accamount,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectFlowOrPhone" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT cm.coinName,ud.*,u.phone,u.userName FROM flow ud LEFT JOIN user u ON ud.userId=u.id
+    LEFT JOIN coin_manage cm ON ud.coinType = cm.coinType
+
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  ud.cointype = #{coinType,jdbcType=VARCHAR}
+    </if>
+    <if test="accountType != null">
+      and  ud.accountType = #{accountType,jdbcType=VARCHAR}
+    </if>
+    order by ud.id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectFlowCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM flow ud LEFT JOIN user u ON ud.userId=u.id
+    LEFT JOIN coin_manage cm ON ud.coinType = cm.coinType
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  ud.cointype = #{coinType,jdbcType=VARCHAR}
+    </if>
+    <if test="accountType != null">
+      and  ud.accountType = #{accountType,jdbcType=VARCHAR}
+    </if>
+  </select>
+</mapper>

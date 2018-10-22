@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.CoinManageMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.CoinManage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="seque" jdbcType="INTEGER" property="seque" />
+    <result column="coinName" jdbcType="VARCHAR" property="coinname" />
+    <result column="cnName" jdbcType="VARCHAR" property="cnname" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="imgUrl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="c2conoff" jdbcType="TINYINT" property="c2conoff" />
+    <result column="digonoff" jdbcType="TINYINT" property="digonoff" />
+    <result column="spotToC2cOnoff" jdbcType="TINYINT" property="spottoc2conoff" />
+    <result column="c2cToSpotOnoff" jdbcType="TINYINT" property="c2ctospotonoff" />
+    <result column="rechSpotRate" jdbcType="DECIMAL" property="rechspotrate" />
+    <result column="rechSpotOnoff" jdbcType="TINYINT" property="rechspotonoff" />
+    <result column="withSpotOnoff" jdbcType="TINYINT" property="withspotonoff" />
+    <result column="withSpotRate" jdbcType="DECIMAL" property="withspotrate" />
+    <result column="withC2cOnoff" jdbcType="TINYINT" property="withc2conoff" />
+    <result column="c2cOrderDeposit" jdbcType="DECIMAL" property="c2corderdeposit" />
+    <result column="withAmountMax" jdbcType="DECIMAL" property="withamountmax" />
+    <result column="withAmountMin" jdbcType="DECIMAL" property="withamountmin" />
+    <result column="withdrawCountMax" jdbcType="TINYINT" property="withdrawcountmax" />
+    <result column="digToSpotOnoff" jdbcType="TINYINT" property="digtospotonoff" />
+    <result column="digWithdrwaOnoff" jdbcType="TINYINT" property="digwithdrwaonoff" />
+    <result column="redPacketMaxAmtsingle" jdbcType="DECIMAL" property="redpacketmaxamtsingle" />
+    <result column="transferMaxAmtDay" jdbcType="DECIMAL" property="transfermaxamtday" />
+    <result column="get_address" jdbcType="VARCHAR" property="getAddress" />
+    <result column="list_transactions" jdbcType="VARCHAR" property="listTransactions" />
+    <result column="transfer_address" jdbcType="VARCHAR" property="transferAddress" />
+    <result column="SpotToYubiOnoff" jdbcType="TINYINT" property="spottoyubionoff" />
+    <result column="yubiToSpotOnoff" jdbcType="TINYINT" property="yubitospotonoff" />
+    <result column="yubiTransMin" jdbcType="DECIMAL" property="yubitransmin" />
+    <result column="yubiTransMax" jdbcType="DECIMAL" property="yubitransmax" />
+    <result column="yubiRate" jdbcType="DECIMAL" property="yubirate" />
+    <result column="yubiProfitMinAmt" jdbcType="DECIMAL" property="yubiprofitminamt" />
+    <result column="autoRechargeAmt" jdbcType="DECIMAL" property="autorechargeamt" />
+    <result column="rechargeInfo" jdbcType="VARCHAR" property="rechargeinfo" />
+    <result column="withDrawInfo" jdbcType="VARCHAR" property="withdrawinfo" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <resultMap id="ConfigResultMap" type="com.yibi.core.entity.CoinManageModel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="coinName" jdbcType="VARCHAR" property="coinname" />
+    <result column="cnName" jdbcType="VARCHAR" property="cnname" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="imgUrl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="minC2cTransAmt" jdbcType="DECIMAL" property="minC2cTransAmt" />
+    <result column="minwithdrawNum" jdbcType="DECIMAL" property="minwithdrawNum" />
+    <result column="c2cNumScale" jdbcType="TINYINT" property="c2cNumScale" />
+    <result column="c2cPriceScale" jdbcType="TINYINT" property="c2cPriceScale" />
+    <result column="yubiScale" jdbcType="TINYINT" property="yubiScale" />
+    <result column="calculScale" jdbcType="TINYINT" property="calculScale" />
+    <result column="withdrawScale" jdbcType="TINYINT" property="withdrawScale" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, seque, coinName, cnName, description, imgUrl, c2conoff, digonoff,spotToC2cOnoff, c2cToSpotOnoff,
+    rechSpotRate, rechSpotOnoff, withSpotOnoff, withSpotRate, withC2cOnoff, c2cOrderDeposit, 
+    withAmountMax, withAmountMin, withdrawCountMax, digToSpotOnoff, digWithdrwaOnoff, 
+    redPacketMaxAmtsingle, transferMaxAmtDay, get_address, list_transactions, transfer_address, 
+    SpotToYubiOnoff, yubiToSpotOnoff, yubiTransMin, yubiTransMax, yubiRate,yubiProfitMinAmt, autoRechargeAmt,
+    rechargeInfo, withDrawInfo, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.CoinManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coin_manage (coinType, coinName, cnName, seque,
+      description, imgUrl, c2conoff, digonoff,
+      spotToC2cOnoff, c2cToSpotOnoff, rechSpotRate, 
+      rechSpotOnoff, withSpotOnoff, withSpotRate, 
+      withC2cOnoff, c2cOrderDeposit, withAmountMax, 
+      withAmountMin, withdrawCountMax, digToSpotOnoff,
+      digWithdrwaOnoff, redPacketMaxAmtsingle, 
+      transferMaxAmtDay, get_address, list_transactions, 
+      transfer_address, SpotToYubiOnoff, yubiToSpotOnoff, 
+      yubiTransMin, yubiTransMax, yubiRate, yubiProfitMinAmt,
+      autoRechargeAmt, rechargeInfo, withDrawInfo, 
+      createTime, updateTime)
+    values (#{cointype,jdbcType=TINYINT},#{seque,jdbcType=INTEGER}, #{coinname,jdbcType=VARCHAR}, #{cnname,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{c2conoff,jdbcType=TINYINT}, #{digonoff,jdbcType=TINYINT},
+      #{spottoc2conoff,jdbcType=TINYINT}, #{c2ctospotonoff,jdbcType=TINYINT}, #{rechspotrate,jdbcType=DECIMAL}, 
+      #{rechspotonoff,jdbcType=TINYINT}, #{withspotonoff,jdbcType=TINYINT}, #{withspotrate,jdbcType=DECIMAL}, 
+      #{withc2conoff,jdbcType=TINYINT}, #{c2corderdeposit,jdbcType=DECIMAL}, #{withamountmax,jdbcType=DECIMAL}, 
+      #{withamountmin,jdbcType=DECIMAL}, #{withdrawcountmax,jdbcType=TINYINT}, #{digtospotonoff,jdbcType=TINYINT}, 
+      #{digwithdrwaonoff,jdbcType=TINYINT}, #{redpacketmaxamtsingle,jdbcType=DECIMAL}, 
+      #{transfermaxamtday,jdbcType=DECIMAL}, #{getAddress,jdbcType=VARCHAR}, #{listTransactions,jdbcType=VARCHAR}, 
+      #{transferAddress,jdbcType=VARCHAR}, #{spottoyubionoff,jdbcType=TINYINT}, #{yubitospotonoff,jdbcType=TINYINT}, 
+      #{yubitransmin,jdbcType=DECIMAL}, #{yubitransmax,jdbcType=DECIMAL}, #{yubirate,jdbcType=DECIMAL}, #{yubiprofitminamt,jdbcType=DECIMAL},
+      #{autorechargeamt,jdbcType=DECIMAL}, #{rechargeinfo,jdbcType=VARCHAR}, #{withdrawinfo,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.CoinManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into coin_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="seque != null">
+        seque,
+      </if>
+      <if test="coinname != null">
+        coinName,
+      </if>
+      <if test="cnname != null">
+        cnName,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="imgurl != null">
+        imgUrl,
+      </if>
+      <if test="c2conoff != null">
+        c2conoff,
+      </if>
+      <if test="digonoff != null">
+        digonoff,
+      </if>
+      <if test="spottoc2conoff != null">
+        spotToC2cOnoff,
+      </if>
+      <if test="c2ctospotonoff != null">
+        c2cToSpotOnoff,
+      </if>
+      <if test="rechspotrate != null">
+        rechSpotRate,
+      </if>
+      <if test="rechspotonoff != null">
+        rechSpotOnoff,
+      </if>
+      <if test="withspotonoff != null">
+        withSpotOnoff,
+      </if>
+      <if test="withspotrate != null">
+        withSpotRate,
+      </if>
+      <if test="withc2conoff != null">
+        withC2cOnoff,
+      </if>
+      <if test="c2corderdeposit != null">
+        c2cOrderDeposit,
+      </if>
+      <if test="withamountmax != null">
+        withAmountMax,
+      </if>
+      <if test="withamountmin != null">
+        withAmountMin,
+      </if>
+      <if test="withdrawcountmax != null">
+        withdrawCountMax,
+      </if>
+      <if test="digtospotonoff != null">
+        digToSpotOnoff,
+      </if>
+      <if test="digwithdrwaonoff != null">
+        digWithdrwaOnoff,
+      </if>
+      <if test="redpacketmaxamtsingle != null">
+        redPacketMaxAmtsingle,
+      </if>
+      <if test="transfermaxamtday != null">
+        transferMaxAmtDay,
+      </if>
+      <if test="getAddress != null">
+        get_address,
+      </if>
+      <if test="listTransactions != null">
+        list_transactions,
+      </if>
+      <if test="transferAddress != null">
+        transfer_address,
+      </if>
+      <if test="spottoyubionoff != null">
+        SpotToYubiOnoff,
+      </if>
+      <if test="yubitospotonoff != null">
+        yubiToSpotOnoff,
+      </if>
+      <if test="yubitransmin != null">
+        yubiTransMin,
+      </if>
+      <if test="yubitransmax != null">
+        yubiTransMax,
+      </if>
+      <if test="yubirate != null">
+        yubiRate,
+      </if>
+      <if test="yubiprofitminamt != null">
+        yubiProfitMinAmt,
+      </if>
+      <if test="autorechargeamt != null">
+        autoRechargeAmt,
+      </if>
+      <if test="rechargeinfo != null">
+        rechargeInfo,
+      </if>
+      <if test="withdrawinfo != null">
+        withDrawInfo,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="seque != null">
+        #{seque,jdbcType=INTEGER},
+      </if>
+      <if test="coinname != null">
+        #{coinname,jdbcType=VARCHAR},
+      </if>
+      <if test="cnname != null">
+        #{cnname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="c2conoff != null">
+        #{c2conoff,jdbcType=TINYINT},
+      </if>
+      <if test="digonoff != null">
+        #{digonoff,jdbcType=TINYINT},
+      </if>
+      <if test="spottoc2conoff != null">
+        #{spottoc2conoff,jdbcType=TINYINT},
+      </if>
+      <if test="c2ctospotonoff != null">
+        #{c2ctospotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="rechspotrate != null">
+        #{rechspotrate,jdbcType=DECIMAL},
+      </if>
+      <if test="rechspotonoff != null">
+        #{rechspotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="withspotonoff != null">
+        #{withspotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="withspotrate != null">
+        #{withspotrate,jdbcType=DECIMAL},
+      </if>
+      <if test="withc2conoff != null">
+        #{withc2conoff,jdbcType=TINYINT},
+      </if>
+      <if test="c2corderdeposit != null">
+        #{c2corderdeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="withamountmax != null">
+        #{withamountmax,jdbcType=DECIMAL},
+      </if>
+      <if test="withamountmin != null">
+        #{withamountmin,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawcountmax != null">
+        #{withdrawcountmax,jdbcType=TINYINT},
+      </if>
+      <if test="digtospotonoff != null">
+        #{digtospotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="digwithdrwaonoff != null">
+        #{digwithdrwaonoff,jdbcType=TINYINT},
+      </if>
+      <if test="redpacketmaxamtsingle != null">
+        #{redpacketmaxamtsingle,jdbcType=DECIMAL},
+      </if>
+      <if test="transfermaxamtday != null">
+        #{transfermaxamtday,jdbcType=DECIMAL},
+      </if>
+      <if test="getAddress != null">
+        #{getAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="listTransactions != null">
+        #{listTransactions,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAddress != null">
+        #{transferAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spottoyubionoff != null">
+        #{spottoyubionoff,jdbcType=TINYINT},
+      </if>
+      <if test="yubitospotonoff != null">
+        #{yubitospotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="yubitransmin != null">
+        #{yubitransmin,jdbcType=DECIMAL},
+      </if>
+      <if test="yubitransmax != null">
+        #{yubitransmax,jdbcType=DECIMAL},
+      </if>
+      <if test="yubirate != null">
+        #{yubirate,jdbcType=DECIMAL},
+      </if>
+      <if test="yubiprofitminamt != null">
+        #{yubiprofitminamt,jdbcType=DECIMAL},
+      </if>
+      <if test="autorechargeamt != null">
+        #{autorechargeamt,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeinfo != null">
+        #{rechargeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawinfo != null">
+        #{withdrawinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.CoinManage">
+    update coin_manage
+    set coinType = #{cointype,jdbcType=TINYINT},seque = #{seque,jdbcType=INTEGER},
+      coinName = #{coinname,jdbcType=VARCHAR},
+      cnName = #{cnname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      c2conoff = #{c2conoff,jdbcType=TINYINT},
+      digonoff = #{digonoff,jdbcType=TINYINT},
+      spotToC2cOnoff = #{spottoc2conoff,jdbcType=TINYINT},
+      c2cToSpotOnoff = #{c2ctospotonoff,jdbcType=TINYINT},
+      rechSpotRate = #{rechspotrate,jdbcType=DECIMAL},
+      rechSpotOnoff = #{rechspotonoff,jdbcType=TINYINT},
+      withSpotOnoff = #{withspotonoff,jdbcType=TINYINT},
+      withSpotRate = #{withspotrate,jdbcType=DECIMAL},
+      withC2cOnoff = #{withc2conoff,jdbcType=TINYINT},
+      c2cOrderDeposit = #{c2corderdeposit,jdbcType=DECIMAL},
+      withAmountMax = #{withamountmax,jdbcType=DECIMAL},
+      withAmountMin = #{withamountmin,jdbcType=DECIMAL},
+      withdrawCountMax = #{withdrawcountmax,jdbcType=TINYINT},
+      digToSpotOnoff = #{digtospotonoff,jdbcType=TINYINT},
+      digWithdrwaOnoff = #{digwithdrwaonoff,jdbcType=TINYINT},
+      redPacketMaxAmtsingle = #{redpacketmaxamtsingle,jdbcType=DECIMAL},
+      transferMaxAmtDay = #{transfermaxamtday,jdbcType=DECIMAL},
+      get_address = #{getAddress,jdbcType=VARCHAR},
+      list_transactions = #{listTransactions,jdbcType=VARCHAR},
+      transfer_address = #{transferAddress,jdbcType=VARCHAR},
+      SpotToYubiOnoff = #{spottoyubionoff,jdbcType=TINYINT},
+      yubiToSpotOnoff = #{yubitospotonoff,jdbcType=TINYINT},
+      yubiTransMin = #{yubitransmin,jdbcType=DECIMAL},
+      yubiTransMax = #{yubitransmax,jdbcType=DECIMAL},
+      yubiRate = #{yubirate,jdbcType=DECIMAL},
+      yubiProfitMinAmt = #{yubiprofitminamt,jdbcType=DECIMAL},
+      autoRechargeAmt = #{autorechargeamt,jdbcType=DECIMAL},
+      rechargeInfo = #{rechargeinfo,jdbcType=VARCHAR},
+      withDrawInfo = #{withdrawinfo,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.CoinManage">
+    update coin_manage
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="seque != null">
+        seque = #{seque,jdbcType=INTEGER},
+      </if>
+      <if test="coinname != null">
+        coinName = #{coinname,jdbcType=VARCHAR},
+      </if>
+      <if test="cnname != null">
+        cnName = #{cnname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="c2conoff != null">
+        c2conoff = #{c2conoff,jdbcType=TINYINT},
+      </if>
+      <if test="digonoff != null">
+        digonoff = #{digonoff,jdbcType=TINYINT},
+      </if>
+      <if test="spottoc2conoff != null">
+        spotToC2cOnoff = #{spottoc2conoff,jdbcType=TINYINT},
+      </if>
+      <if test="c2ctospotonoff != null">
+        c2cToSpotOnoff = #{c2ctospotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="rechspotrate != null">
+        rechSpotRate = #{rechspotrate,jdbcType=DECIMAL},
+      </if>
+      <if test="rechspotonoff != null">
+        rechSpotOnoff = #{rechspotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="withspotonoff != null">
+        withSpotOnoff = #{withspotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="withspotrate != null">
+        withSpotRate = #{withspotrate,jdbcType=DECIMAL},
+      </if>
+      <if test="withc2conoff != null">
+        withC2cOnoff = #{withc2conoff,jdbcType=TINYINT},
+      </if>
+      <if test="c2corderdeposit != null">
+        c2cOrderDeposit = #{c2corderdeposit,jdbcType=DECIMAL},
+      </if>
+      <if test="withamountmax != null">
+        withAmountMax = #{withamountmax,jdbcType=DECIMAL},
+      </if>
+      <if test="withamountmin != null">
+        withAmountMin = #{withamountmin,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawcountmax != null">
+        withdrawCountMax = #{withdrawcountmax,jdbcType=TINYINT},
+      </if>
+      <if test="digtospotonoff != null">
+        digToSpotOnoff = #{digtospotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="digwithdrwaonoff != null">
+        digWithdrwaOnoff = #{digwithdrwaonoff,jdbcType=TINYINT},
+      </if>
+      <if test="redpacketmaxamtsingle != null">
+        redPacketMaxAmtsingle = #{redpacketmaxamtsingle,jdbcType=DECIMAL},
+      </if>
+      <if test="transfermaxamtday != null">
+        transferMaxAmtDay = #{transfermaxamtday,jdbcType=DECIMAL},
+      </if>
+      <if test="getAddress != null">
+        get_address = #{getAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="listTransactions != null">
+        list_transactions = #{listTransactions,jdbcType=VARCHAR},
+      </if>
+      <if test="transferAddress != null">
+        transfer_address = #{transferAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="spottoyubionoff != null">
+        SpotToYubiOnoff = #{spottoyubionoff,jdbcType=TINYINT},
+      </if>
+      <if test="yubitospotonoff != null">
+        yubiToSpotOnoff = #{yubitospotonoff,jdbcType=TINYINT},
+      </if>
+      <if test="yubitransmin != null">
+        yubiTransMin = #{yubitransmin,jdbcType=DECIMAL},
+      </if>
+      <if test="yubitransmax != null">
+        yubiTransMax = #{yubitransmax,jdbcType=DECIMAL},
+      </if>
+      <if test="yubirate != null">
+        yubiRate = #{yubirate,jdbcType=DECIMAL},
+      </if>
+      <if test="yubiprofitminamt != null">
+        yubiProfitMinAmt = #{yubiprofitminamt,jdbcType=DECIMAL},
+      </if>
+      <if test="autorechargeamt != null">
+        autoRechargeAmt = #{autorechargeamt,jdbcType=DECIMAL},
+      </if>
+      <if test="rechargeinfo != null">
+        rechargeInfo = #{rechargeinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawinfo != null">
+        withDrawInfo = #{withdrawinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from coin_manage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_manage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryAllByConfig" parameterType="java.util.Map" resultMap="ConfigResultMap">
+    SELECT cm.id, cm.cointype, cm.coinname, cm.cnname, cs.c2cPriceScale, cm.description, cm.imgurl, cs.yubiScale,cs.c2cNumScale,cs.calculScale,cs.withdrawScale,cs.minwithdrawNum,cs.minC2cTransAmt
+    FROM coin_manage cm LEFT JOIN coin_scale cs ON cs.orderCoinType = cm.coinType AND cs.unitCoinType=-1
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_manage
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="seque != null">
+       and  seque = #{seque,jdbcType=INTEGER}
+    </if>
+    <if test="coinname != null">
+       and  coinName = #{coinname,jdbcType=VARCHAR}
+    </if>
+    <if test="cnname != null">
+       and  cnName = #{cnname,jdbcType=VARCHAR}
+    </if>
+    <if test="description != null">
+       and  description = #{description,jdbcType=VARCHAR}
+    </if>
+    <if test="imgurl != null">
+       and  imgUrl = #{imgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="c2conoff != null">
+       and  c2conoff = #{c2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="digonoff != null">
+       and  digonoff = #{digonoff,jdbcType=TINYINT}
+    </if>
+    <if test="spottoc2conoff != null">
+       and  spotToC2cOnoff = #{spottoc2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="c2ctospotonoff != null">
+       and  c2cToSpotOnoff = #{c2ctospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="rechspotrate != null">
+       and  rechSpotRate = #{rechspotrate,jdbcType=DECIMAL}
+    </if>
+    <if test="rechspotonoff != null">
+       and  rechSpotOnoff = #{rechspotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="withspotonoff != null">
+       and  withSpotOnoff = #{withspotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="withspotrate != null">
+       and  withSpotRate = #{withspotrate,jdbcType=DECIMAL}
+    </if>
+    <if test="withc2conoff != null">
+       and  withC2cOnoff = #{withc2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="c2corderdeposit != null">
+       and  c2cOrderDeposit = #{c2corderdeposit,jdbcType=DECIMAL}
+    </if>
+    <if test="withamountmax != null">
+       and  withAmountMax = #{withamountmax,jdbcType=DECIMAL}
+    </if>
+    <if test="withamountmin != null">
+       and  withAmountMin = #{withamountmin,jdbcType=DECIMAL}
+    </if>
+    <if test="withdrawcountmax != null">
+       and  withdrawCountMax = #{withdrawcountmax,jdbcType=TINYINT}
+    </if>
+    <if test="digtospotonoff != null">
+       and  digToSpotOnoff = #{digtospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="digwithdrwaonoff != null">
+       and  digWithdrwaOnoff = #{digwithdrwaonoff,jdbcType=TINYINT}
+    </if>
+    <if test="redpacketmaxamtsingle != null">
+       and  redPacketMaxAmtsingle = #{redpacketmaxamtsingle,jdbcType=DECIMAL}
+    </if>
+    <if test="transfermaxamtday != null">
+       and  transferMaxAmtDay = #{transfermaxamtday,jdbcType=DECIMAL}
+    </if>
+    <if test="getAddress != null">
+       and  get_address = #{getAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="listTransactions != null">
+       and  list_transactions = #{listTransactions,jdbcType=VARCHAR}
+    </if>
+    <if test="transferAddress != null">
+       and  transfer_address = #{transferAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="spottoyubionoff != null">
+       and  SpotToYubiOnoff = #{spottoyubionoff,jdbcType=TINYINT}
+    </if>
+    <if test="yubitospotonoff != null">
+       and  yubiToSpotOnoff = #{yubitospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="yubitransmin != null">
+       and  yubiTransMin = #{yubitransmin,jdbcType=DECIMAL}
+    </if>
+    <if test="yubitransmax != null">
+       and  yubiTransMax = #{yubitransmax,jdbcType=DECIMAL}
+    </if>
+    <if test="yubirate != null">
+       and  yubiRate = #{yubirate,jdbcType=DECIMAL}
+    </if>
+    <if test="yubiprofitminamt != null">
+       and  yubiProfitMinAmt = #{yubiprofitminamt,jdbcType=DECIMAL}
+    </if>
+    <if test="autorechargeamt != null">
+       and  autoRechargeAmt = #{autorechargeamt,jdbcType=DECIMAL}
+    </if>
+    <if test="rechargeinfo != null">
+       and  rechargeInfo = #{rechargeinfo,jdbcType=VARCHAR}
+    </if>
+    <if test="withdrawinfo != null">
+       and  withDrawInfo = #{withdrawinfo,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coin_manage
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="seque != null">
+       and  seque = #{seque,jdbcType=INTEGER}
+    </if>
+    <if test="coinname != null">
+       and  coinName = #{coinname,jdbcType=VARCHAR}
+    </if>
+    <if test="cnname != null">
+       and  cnName = #{cnname,jdbcType=VARCHAR}
+    </if>
+    <if test="description != null">
+       and  description = #{description,jdbcType=VARCHAR}
+    </if>
+    <if test="imgurl != null">
+       and  imgUrl = #{imgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="c2conoff != null">
+       and  c2conoff = #{c2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="digonoff != null">
+       and  digonoff = #{digonoff,jdbcType=TINYINT}
+    </if>
+    <if test="spottoc2conoff != null">
+       and  spotToC2cOnoff = #{spottoc2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="c2ctospotonoff != null">
+       and  c2cToSpotOnoff = #{c2ctospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="rechspotrate != null">
+       and  rechSpotRate = #{rechspotrate,jdbcType=DECIMAL}
+    </if>
+    <if test="rechspotonoff != null">
+       and  rechSpotOnoff = #{rechspotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="withspotonoff != null">
+       and  withSpotOnoff = #{withspotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="withspotrate != null">
+       and  withSpotRate = #{withspotrate,jdbcType=DECIMAL}
+    </if>
+    <if test="withc2conoff != null">
+       and  withC2cOnoff = #{withc2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="c2corderdeposit != null">
+       and  c2cOrderDeposit = #{c2corderdeposit,jdbcType=DECIMAL}
+    </if>
+    <if test="withamountmax != null">
+       and  withAmountMax = #{withamountmax,jdbcType=DECIMAL}
+    </if>
+    <if test="withamountmin != null">
+       and  withAmountMin = #{withamountmin,jdbcType=DECIMAL}
+    </if>
+    <if test="withdrawcountmax != null">
+       and  withdrawCountMax = #{withdrawcountmax,jdbcType=TINYINT}
+    </if>
+    <if test="digtospotonoff != null">
+       and  digToSpotOnoff = #{digtospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="digwithdrwaonoff != null">
+       and  digWithdrwaOnoff = #{digwithdrwaonoff,jdbcType=TINYINT}
+    </if>
+    <if test="redpacketmaxamtsingle != null">
+       and  redPacketMaxAmtsingle = #{redpacketmaxamtsingle,jdbcType=DECIMAL}
+    </if>
+    <if test="transfermaxamtday != null">
+       and  transferMaxAmtDay = #{transfermaxamtday,jdbcType=DECIMAL}
+    </if>
+    <if test="getAddress != null">
+       and  get_address = #{getAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="listTransactions != null">
+       and  list_transactions = #{listTransactions,jdbcType=VARCHAR}
+    </if>
+    <if test="transferAddress != null">
+       and  transfer_address = #{transferAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="spottoyubionoff != null">
+       and  SpotToYubiOnoff = #{spottoyubionoff,jdbcType=TINYINT}
+    </if>
+    <if test="yubitospotonoff != null">
+       and  yubiToSpotOnoff = #{yubitospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="yubitransmin != null">
+       and  yubiTransMin = #{yubitransmin,jdbcType=DECIMAL}
+    </if>
+    <if test="yubitransmax != null">
+       and  yubiTransMax = #{yubitransmax,jdbcType=DECIMAL}
+    </if>
+    <if test="yubirate != null">
+       and  yubiRate = #{yubirate,jdbcType=DECIMAL}
+    </if>
+    <if test="yubiprofitminamt != null">
+       and  yubiProfitMinAmt = #{yubiprofitminamt,jdbcType=DECIMAL}
+    </if>
+    <if test="autorechargeamt != null">
+       and  autoRechargeAmt = #{autorechargeamt,jdbcType=DECIMAL}
+    </if>
+    <if test="rechargeinfo != null">
+       and  rechargeInfo = #{rechargeinfo,jdbcType=VARCHAR}
+    </if>
+    <if test="withdrawinfo != null">
+       and  withDrawInfo = #{withdrawinfo,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from coin_manage 
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="seque != null">
+       and  seque = #{seque,jdbcType=INTEGER}
+    </if>
+    <if test="coinname != null">
+       and  coinName = #{coinname,jdbcType=VARCHAR}
+    </if>
+    <if test="cnname != null">
+       and  cnName = #{cnname,jdbcType=VARCHAR}
+    </if>
+    <if test="description != null">
+       and  description = #{description,jdbcType=VARCHAR}
+    </if>
+    <if test="imgurl != null">
+       and  imgUrl = #{imgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="c2conoff != null">
+       and  c2conoff = #{c2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="digonoff != null">
+       and  digonoff = #{digonoff,jdbcType=TINYINT}
+    </if>
+    <if test="spottoc2conoff != null">
+       and  spotToC2cOnoff = #{spottoc2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="c2ctospotonoff != null">
+       and  c2cToSpotOnoff = #{c2ctospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="rechspotrate != null">
+       and  rechSpotRate = #{rechspotrate,jdbcType=DECIMAL}
+    </if>
+    <if test="rechspotonoff != null">
+       and  rechSpotOnoff = #{rechspotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="withspotonoff != null">
+       and  withSpotOnoff = #{withspotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="withspotrate != null">
+       and  withSpotRate = #{withspotrate,jdbcType=DECIMAL}
+    </if>
+    <if test="withc2conoff != null">
+       and  withC2cOnoff = #{withc2conoff,jdbcType=TINYINT}
+    </if>
+    <if test="c2corderdeposit != null">
+       and  c2cOrderDeposit = #{c2corderdeposit,jdbcType=DECIMAL}
+    </if>
+    <if test="withamountmax != null">
+       and  withAmountMax = #{withamountmax,jdbcType=DECIMAL}
+    </if>
+    <if test="withamountmin != null">
+       and  withAmountMin = #{withamountmin,jdbcType=DECIMAL}
+    </if>
+    <if test="withdrawcountmax != null">
+       and  withdrawCountMax = #{withdrawcountmax,jdbcType=TINYINT}
+    </if>
+    <if test="digtospotonoff != null">
+       and  digToSpotOnoff = #{digtospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="digwithdrwaonoff != null">
+       and  digWithdrwaOnoff = #{digwithdrwaonoff,jdbcType=TINYINT}
+    </if>
+    <if test="redpacketmaxamtsingle != null">
+       and  redPacketMaxAmtsingle = #{redpacketmaxamtsingle,jdbcType=DECIMAL}
+    </if>
+    <if test="transfermaxamtday != null">
+       and  transferMaxAmtDay = #{transfermaxamtday,jdbcType=DECIMAL}
+    </if>
+    <if test="getAddress != null">
+       and  get_address = #{getAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="listTransactions != null">
+       and  list_transactions = #{listTransactions,jdbcType=VARCHAR}
+    </if>
+    <if test="transferAddress != null">
+       and  transfer_address = #{transferAddress,jdbcType=VARCHAR}
+    </if>
+    <if test="spottoyubionoff != null">
+       and  SpotToYubiOnoff = #{spottoyubionoff,jdbcType=TINYINT}
+    </if>
+    <if test="yubitospotonoff != null">
+       and  yubiToSpotOnoff = #{yubitospotonoff,jdbcType=TINYINT}
+    </if>
+    <if test="yubitransmin != null">
+       and  yubiTransMin = #{yubitransmin,jdbcType=DECIMAL}
+    </if>
+    <if test="yubitransmax != null">
+       and  yubiTransMax = #{yubitransmax,jdbcType=DECIMAL}
+    </if>
+    <if test="yubirate != null">
+       and  yubiRate = #{yubirate,jdbcType=DECIMAL}
+    </if>
+    <if test="yubiprofitminamt != null">
+       and  yubiProfitMinAmt = #{yubiprofitminamt,jdbcType=DECIMAL}
+    </if>
+    <if test="autorechargeamt != null">
+       and  autoRechargeAmt = #{autorechargeamt,jdbcType=DECIMAL}
+    </if>
+    <if test="rechargeinfo != null">
+       and  rechargeInfo = #{rechargeinfo,jdbcType=VARCHAR}
+    </if>
+    <if test="withdrawinfo != null">
+       and  withDrawInfo = #{withdrawinfo,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

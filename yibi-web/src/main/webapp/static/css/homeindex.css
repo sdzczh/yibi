@@ -1,0 +1,171 @@
+body a {
+	outline: none;
+}
+
+.i_accordion_menu {
+	color: #F7F6C3;
+}
+
+.i_accordion_menu .panel-with-icon {
+	padding-left: 0px;
+}
+
+.i_accordion_menu .accordion-header-selected {
+	background: #F7F6C3;
+}
+
+.i_accordion_menu .nav-item {
+	padding: 5px 0px 5px 10px;
+	margin: 5px 6px 10px 6px;
+	cursor: pointer;
+}
+
+.i_accordion_menu .nav-item:hover {
+	background: rgba(0, 0, 255, 0.20);
+	border-radius: 6px;
+}
+
+.i_accordion_menu .nav-item:hover a {
+	display: block;
+	color: #00f;
+}
+
+.i_accordion_menu .nav-item a {
+	color: #0697da;
+	text-decoration: none;
+}
+
+.menu_icon_datadeal {
+	border: 0px;
+	padding: 2px 8px;
+	margin-right: 5px;
+	width: 0px;
+	background: url(../images/tabicons.gif) no-repeat -380px -60px;
+}
+
+.menu_icon_service {
+	border: 0px;
+	padding: 2px 8px;
+	margin-right: 5px;
+	width: 0px;
+	background: url(../images/tabicons.gif) no-repeat -100px -480px;
+}
+
+.icon_company {
+	background: url(../images/ext/company.png) no-repeat center center;
+}
+
+.icon_dic {
+	background: url(../images/ext/dic.png) no-repeat center center;
+}
+
+.icon_folder {
+	background: url(../images/ext/folder.png) no-repeat center center;
+}
+
+.icon_add {
+	background: url(../images/ext/add.png) no-repeat center center;
+}
+
+.icon_home {
+	background: url(../images/ext/home.png) no-repeat center center;
+}
+
+.icon_refresh {
+	background: url(../images/ext/refresh.png) no-repeat center center;
+}
+
+.icon_org {
+	background: url(../images/ext/org.png) no-repeat center center;
+}
+
+.icon_resource {
+	background: url(../images/ext/resource.png) no-repeat center center;
+}
+
+.icon_role {
+	background: url(../images/ext/role.png) no-repeat center center;
+}
+
+.icon_user {
+	background: url(../images/ext/user.png) no-repeat center center;
+}
+
+.icon_del {
+	background: url(../images/ext/del.png) no-repeat center center;
+}
+
+.icon_sys {
+	background: url(../images/ext/sys.png) no-repeat center center;
+}
+
+.icon-goodman{
+	background:url('../images/ext/icon-goodman.png') no-repeat center center;
+}
+
+.icon-dept{
+	background:url('../images/ext/dept.png') no-repeat center center;
+}
+.header {
+	background: url('../images/tophbjjjdzcgl1.png') no-repeat left;
+	width: 410px;
+	height: 70px;
+	float: left;
+}
+
+.navright {
+	float: left;
+	height: 70px;
+	margin: 0px;
+	padding: 0px;
+	line-height: normal;
+}
+
+.navright li {
+	float: left;
+	width: 70px;
+	height: 70px;
+	text-align: center;
+	list-style-type: none;
+}
+
+.navright li a {
+	display: block;
+	width: 70px;
+	height: 70px;
+	-moz-transition: none;
+	transition: background-color 0.3s linear;
+	-moz-transition: background-color 0.3s linear;
+	-webkit-transition: background-color 0.3s linear;
+	-o-transition: background-color 0.3s linear;
+}
+
+.navright img {
+	margin-top: 10px;
+	margin-right: 10px;
+	height: 56px;
+	border: 0px;
+}
+
+.navright li a {
+	display: block;
+	text-decoration: none;
+}
+
+.topbackgroundimg {
+	width: 100%;
+	height: 70px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('../images/headbg1.png');
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/headbg1.png', sizingMethod='scale');
+}
+
+.indexbackgroundimg {
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-image: url('../images/shouye1.png');
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/shouye1.png', sizingMethod='scale');
+}

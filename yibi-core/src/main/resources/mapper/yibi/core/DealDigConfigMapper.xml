@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.DealDigConfigMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.DealDigConfig">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ordercoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="buyRole" jdbcType="TINYINT" property="buyrole" />
+    <result column="saleRole" jdbcType="TINYINT" property="salerole" />
+    <result column="feeRate" jdbcType="DECIMAL" property="feerate" />
+    <result column="saleCashBack" jdbcType="DECIMAL" property="salecashback" />
+    <result column="buyCashBack" jdbcType="DECIMAL" property="buycashback" />
+    <result column="saleRefCashBack" jdbcType="DECIMAL" property="salerefcashback" />
+    <result column="buyRefCashBack" jdbcType="DECIMAL" property="buyrefcashback" />
+    <result column="orderType" jdbcType="TINYINT" property="ordertype" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ordercoinType, buyRole, saleRole, feeRate, saleCashBack, buyCashBack, saleRefCashBack, 
+    buyRefCashBack, orderType, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.DealDigConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into deal_dig_config (ordercoinType, buyRole, saleRole, 
+      feeRate, saleCashBack, buyCashBack, 
+      saleRefCashBack, buyRefCashBack, orderType, 
+      createTime, updateTime)
+    values (#{ordercointype,jdbcType=TINYINT}, #{buyrole,jdbcType=TINYINT}, #{salerole,jdbcType=TINYINT}, 
+      #{feerate,jdbcType=DECIMAL}, #{salecashback,jdbcType=DECIMAL}, #{buycashback,jdbcType=DECIMAL}, 
+      #{salerefcashback,jdbcType=DECIMAL}, #{buyrefcashback,jdbcType=DECIMAL}, #{ordertype,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.DealDigConfig">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into deal_dig_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        ordercoinType,
+      </if>
+      <if test="buyrole != null">
+        buyRole,
+      </if>
+      <if test="salerole != null">
+        saleRole,
+      </if>
+      <if test="feerate != null">
+        feeRate,
+      </if>
+      <if test="salecashback != null">
+        saleCashBack,
+      </if>
+      <if test="buycashback != null">
+        buyCashBack,
+      </if>
+      <if test="salerefcashback != null">
+        saleRefCashBack,
+      </if>
+      <if test="buyrefcashback != null">
+        buyRefCashBack,
+      </if>
+      <if test="ordertype != null">
+        orderType,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="buyrole != null">
+        #{buyrole,jdbcType=TINYINT},
+      </if>
+      <if test="salerole != null">
+        #{salerole,jdbcType=TINYINT},
+      </if>
+      <if test="feerate != null">
+        #{feerate,jdbcType=DECIMAL},
+      </if>
+      <if test="salecashback != null">
+        #{salecashback,jdbcType=DECIMAL},
+      </if>
+      <if test="buycashback != null">
+        #{buycashback,jdbcType=DECIMAL},
+      </if>
+      <if test="salerefcashback != null">
+        #{salerefcashback,jdbcType=DECIMAL},
+      </if>
+      <if test="buyrefcashback != null">
+        #{buyrefcashback,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertype != null">
+        #{ordertype,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.DealDigConfig">
+    update deal_dig_config
+    set ordercoinType = #{ordercointype,jdbcType=TINYINT},
+      buyRole = #{buyrole,jdbcType=TINYINT},
+      saleRole = #{salerole,jdbcType=TINYINT},
+      feeRate = #{feerate,jdbcType=DECIMAL},
+      saleCashBack = #{salecashback,jdbcType=DECIMAL},
+      buyCashBack = #{buycashback,jdbcType=DECIMAL},
+      saleRefCashBack = #{salerefcashback,jdbcType=DECIMAL},
+      buyRefCashBack = #{buyrefcashback,jdbcType=DECIMAL},
+      orderType = #{ordertype,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.DealDigConfig">
+    update deal_dig_config
+    <set>
+      <if test="ordercointype != null">
+        ordercoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="buyrole != null">
+        buyRole = #{buyrole,jdbcType=TINYINT},
+      </if>
+      <if test="salerole != null">
+        saleRole = #{salerole,jdbcType=TINYINT},
+      </if>
+      <if test="feerate != null">
+        feeRate = #{feerate,jdbcType=DECIMAL},
+      </if>
+      <if test="salecashback != null">
+        saleCashBack = #{salecashback,jdbcType=DECIMAL},
+      </if>
+      <if test="buycashback != null">
+        buyCashBack = #{buycashback,jdbcType=DECIMAL},
+      </if>
+      <if test="salerefcashback != null">
+        saleRefCashBack = #{salerefcashback,jdbcType=DECIMAL},
+      </if>
+      <if test="buyrefcashback != null">
+        buyRefCashBack = #{buyrefcashback,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertype != null">
+        orderType = #{ordertype,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deal_dig_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_dig_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_dig_config
+    where 1=1 
+    <if test="ordercointype != null">
+       and  ordercoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="buyrole != null">
+       and  buyRole = #{buyrole,jdbcType=TINYINT}
+    </if>
+    <if test="salerole != null">
+       and  saleRole = #{salerole,jdbcType=TINYINT}
+    </if>
+    <if test="feerate != null">
+       and  feeRate = #{feerate,jdbcType=DECIMAL}
+    </if>
+    <if test="salecashback != null">
+       and  saleCashBack = #{salecashback,jdbcType=DECIMAL}
+    </if>
+    <if test="buycashback != null">
+       and  buyCashBack = #{buycashback,jdbcType=DECIMAL}
+    </if>
+    <if test="salerefcashback != null">
+       and  saleRefCashBack = #{salerefcashback,jdbcType=DECIMAL}
+    </if>
+    <if test="buyrefcashback != null">
+       and  buyRefCashBack = #{buyrefcashback,jdbcType=DECIMAL}
+    </if>
+    <if test="ordertype != null">
+       and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_dig_config
+    where 1=1 
+    <if test="ordercointype != null">
+       and  ordercoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="buyrole != null">
+       and  buyRole = #{buyrole,jdbcType=TINYINT}
+    </if>
+    <if test="salerole != null">
+       and  saleRole = #{salerole,jdbcType=TINYINT}
+    </if>
+    <if test="feerate != null">
+       and  feeRate = #{feerate,jdbcType=DECIMAL}
+    </if>
+    <if test="salecashback != null">
+       and  saleCashBack = #{salecashback,jdbcType=DECIMAL}
+    </if>
+    <if test="buycashback != null">
+       and  buyCashBack = #{buycashback,jdbcType=DECIMAL}
+    </if>
+    <if test="salerefcashback != null">
+       and  saleRefCashBack = #{salerefcashback,jdbcType=DECIMAL}
+    </if>
+    <if test="buyrefcashback != null">
+       and  buyRefCashBack = #{buyrefcashback,jdbcType=DECIMAL}
+    </if>
+    <if test="ordertype != null">
+       and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from deal_dig_config 
+    where 1=1 
+    <if test="ordercointype != null">
+       and  ordercoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="buyrole != null">
+       and  buyRole = #{buyrole,jdbcType=TINYINT}
+    </if>
+    <if test="salerole != null">
+       and  saleRole = #{salerole,jdbcType=TINYINT}
+    </if>
+    <if test="feerate != null">
+       and  feeRate = #{feerate,jdbcType=DECIMAL}
+    </if>
+    <if test="salecashback != null">
+       and  saleCashBack = #{salecashback,jdbcType=DECIMAL}
+    </if>
+    <if test="buycashback != null">
+       and  buyCashBack = #{buycashback,jdbcType=DECIMAL}
+    </if>
+    <if test="salerefcashback != null">
+       and  saleRefCashBack = #{salerefcashback,jdbcType=DECIMAL}
+    </if>
+    <if test="buyrefcashback != null">
+       and  buyRefCashBack = #{buyrefcashback,jdbcType=DECIMAL}
+    </if>
+    <if test="ordertype != null">
+       and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectConditionAll" parameterType="java.util.Map"  resultType="java.util.Map">
+    SELECT cm.coinName,ddc.* FROM deal_dig_config ddc LEFT JOIN coin_manage cm ON ddc.ordercoinType=cm.coinType
+    <if test="ordercoinType != null">
+      where  ddc.ordercoinType = #{ordercoinType,jdbcType=TINYINT}
+    </if>
+    order by ddc.id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) from deal_dig_config ddc LEFT JOIN coin_manage cm ON ddc.ordercoinType=cm.coinType
+      <if test="ordercoinType != null">
+        where  ddc.ordercoinType = #{ordercoinType,jdbcType=TINYINT}
+      </if>
+
+  </select>
+
+</mapper>

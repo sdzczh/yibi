@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.DigBaseMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.DigBase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="INTEGER" property="cointype" />
+    <result column="rate0" jdbcType="DOUBLE" property="rate0" />
+    <result column="rate1" jdbcType="DOUBLE" property="rate1" />
+    <result column="rate2" jdbcType="DOUBLE" property="rate2" />
+    <result column="rate3" jdbcType="DOUBLE" property="rate3" />
+    <result column="rate4" jdbcType="DOUBLE" property="rate4" />
+    <result column="rate5" jdbcType="DOUBLE" property="rate5" />
+    <result column="rate6" jdbcType="DOUBLE" property="rate6" />
+    <result column="rate7" jdbcType="DOUBLE" property="rate7" />
+    <result column="rate8" jdbcType="DOUBLE" property="rate8" />
+    <result column="rate9" jdbcType="DOUBLE" property="rate9" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, rate0, rate1, rate2, rate3, rate4, rate5, rate6, rate7, rate8, rate9, 
+    createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.DigBase">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dig_base (coinType, rate0, rate1, 
+      rate2, rate3, rate4, rate5, 
+      rate6, rate7, rate8, rate9, 
+      createTime, updateTime)
+    values (#{cointype,jdbcType=INTEGER}, #{rate0,jdbcType=DOUBLE}, #{rate1,jdbcType=DOUBLE}, 
+      #{rate2,jdbcType=DOUBLE}, #{rate3,jdbcType=DOUBLE}, #{rate4,jdbcType=DOUBLE}, #{rate5,jdbcType=DOUBLE}, 
+      #{rate6,jdbcType=DOUBLE}, #{rate7,jdbcType=DOUBLE}, #{rate8,jdbcType=DOUBLE}, #{rate9,jdbcType=DOUBLE}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.DigBase">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dig_base
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="rate0 != null">
+        rate0,
+      </if>
+      <if test="rate1 != null">
+        rate1,
+      </if>
+      <if test="rate2 != null">
+        rate2,
+      </if>
+      <if test="rate3 != null">
+        rate3,
+      </if>
+      <if test="rate4 != null">
+        rate4,
+      </if>
+      <if test="rate5 != null">
+        rate5,
+      </if>
+      <if test="rate6 != null">
+        rate6,
+      </if>
+      <if test="rate7 != null">
+        rate7,
+      </if>
+      <if test="rate8 != null">
+        rate8,
+      </if>
+      <if test="rate9 != null">
+        rate9,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=INTEGER},
+      </if>
+      <if test="rate0 != null">
+        #{rate0,jdbcType=DOUBLE},
+      </if>
+      <if test="rate1 != null">
+        #{rate1,jdbcType=DOUBLE},
+      </if>
+      <if test="rate2 != null">
+        #{rate2,jdbcType=DOUBLE},
+      </if>
+      <if test="rate3 != null">
+        #{rate3,jdbcType=DOUBLE},
+      </if>
+      <if test="rate4 != null">
+        #{rate4,jdbcType=DOUBLE},
+      </if>
+      <if test="rate5 != null">
+        #{rate5,jdbcType=DOUBLE},
+      </if>
+      <if test="rate6 != null">
+        #{rate6,jdbcType=DOUBLE},
+      </if>
+      <if test="rate7 != null">
+        #{rate7,jdbcType=DOUBLE},
+      </if>
+      <if test="rate8 != null">
+        #{rate8,jdbcType=DOUBLE},
+      </if>
+      <if test="rate9 != null">
+        #{rate9,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.DigBase">
+    update dig_base
+    set coinType = #{cointype,jdbcType=INTEGER},
+      rate0 = #{rate0,jdbcType=DOUBLE},
+      rate1 = #{rate1,jdbcType=DOUBLE},
+      rate2 = #{rate2,jdbcType=DOUBLE},
+      rate3 = #{rate3,jdbcType=DOUBLE},
+      rate4 = #{rate4,jdbcType=DOUBLE},
+      rate5 = #{rate5,jdbcType=DOUBLE},
+      rate6 = #{rate6,jdbcType=DOUBLE},
+      rate7 = #{rate7,jdbcType=DOUBLE},
+      rate8 = #{rate8,jdbcType=DOUBLE},
+      rate9 = #{rate9,jdbcType=DOUBLE},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.DigBase">
+    update dig_base
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=INTEGER},
+      </if>
+      <if test="rate0 != null">
+        rate0 = #{rate0,jdbcType=DOUBLE},
+      </if>
+      <if test="rate1 != null">
+        rate1 = #{rate1,jdbcType=DOUBLE},
+      </if>
+      <if test="rate2 != null">
+        rate2 = #{rate2,jdbcType=DOUBLE},
+      </if>
+      <if test="rate3 != null">
+        rate3 = #{rate3,jdbcType=DOUBLE},
+      </if>
+      <if test="rate4 != null">
+        rate4 = #{rate4,jdbcType=DOUBLE},
+      </if>
+      <if test="rate5 != null">
+        rate5 = #{rate5,jdbcType=DOUBLE},
+      </if>
+      <if test="rate6 != null">
+        rate6 = #{rate6,jdbcType=DOUBLE},
+      </if>
+      <if test="rate7 != null">
+        rate7 = #{rate7,jdbcType=DOUBLE},
+      </if>
+      <if test="rate8 != null">
+        rate8 = #{rate8,jdbcType=DOUBLE},
+      </if>
+      <if test="rate9 != null">
+        rate9 = #{rate9,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dig_base
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dig_base
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dig_base
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="rate0 != null">
+       and  rate0 = #{rate0,jdbcType=DOUBLE}
+    </if>
+    <if test="rate1 != null">
+       and  rate1 = #{rate1,jdbcType=DOUBLE}
+    </if>
+    <if test="rate2 != null">
+       and  rate2 = #{rate2,jdbcType=DOUBLE}
+    </if>
+    <if test="rate3 != null">
+       and  rate3 = #{rate3,jdbcType=DOUBLE}
+    </if>
+    <if test="rate4 != null">
+       and  rate4 = #{rate4,jdbcType=DOUBLE}
+    </if>
+    <if test="rate5 != null">
+       and  rate5 = #{rate5,jdbcType=DOUBLE}
+    </if>
+    <if test="rate6 != null">
+       and  rate6 = #{rate6,jdbcType=DOUBLE}
+    </if>
+    <if test="rate7 != null">
+       and  rate7 = #{rate7,jdbcType=DOUBLE}
+    </if>
+    <if test="rate8 != null">
+       and  rate8 = #{rate8,jdbcType=DOUBLE}
+    </if>
+    <if test="rate9 != null">
+       and  rate9 = #{rate9,jdbcType=DOUBLE}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dig_base
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="rate0 != null">
+       and  rate0 = #{rate0,jdbcType=DOUBLE}
+    </if>
+    <if test="rate1 != null">
+       and  rate1 = #{rate1,jdbcType=DOUBLE}
+    </if>
+    <if test="rate2 != null">
+       and  rate2 = #{rate2,jdbcType=DOUBLE}
+    </if>
+    <if test="rate3 != null">
+       and  rate3 = #{rate3,jdbcType=DOUBLE}
+    </if>
+    <if test="rate4 != null">
+       and  rate4 = #{rate4,jdbcType=DOUBLE}
+    </if>
+    <if test="rate5 != null">
+       and  rate5 = #{rate5,jdbcType=DOUBLE}
+    </if>
+    <if test="rate6 != null">
+       and  rate6 = #{rate6,jdbcType=DOUBLE}
+    </if>
+    <if test="rate7 != null">
+       and  rate7 = #{rate7,jdbcType=DOUBLE}
+    </if>
+    <if test="rate8 != null">
+       and  rate8 = #{rate8,jdbcType=DOUBLE}
+    </if>
+    <if test="rate9 != null">
+       and  rate9 = #{rate9,jdbcType=DOUBLE}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from dig_base 
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="rate0 != null">
+       and  rate0 = #{rate0,jdbcType=DOUBLE}
+    </if>
+    <if test="rate1 != null">
+       and  rate1 = #{rate1,jdbcType=DOUBLE}
+    </if>
+    <if test="rate2 != null">
+       and  rate2 = #{rate2,jdbcType=DOUBLE}
+    </if>
+    <if test="rate3 != null">
+       and  rate3 = #{rate3,jdbcType=DOUBLE}
+    </if>
+    <if test="rate4 != null">
+       and  rate4 = #{rate4,jdbcType=DOUBLE}
+    </if>
+    <if test="rate5 != null">
+       and  rate5 = #{rate5,jdbcType=DOUBLE}
+    </if>
+    <if test="rate6 != null">
+       and  rate6 = #{rate6,jdbcType=DOUBLE}
+    </if>
+    <if test="rate7 != null">
+       and  rate7 = #{rate7,jdbcType=DOUBLE}
+    </if>
+    <if test="rate8 != null">
+       and  rate8 = #{rate8,jdbcType=DOUBLE}
+    </if>
+    <if test="rate9 != null">
+       and  rate9 = #{rate9,jdbcType=DOUBLE}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+
+  <select id="selectAllByCondtion"  resultType="java.util.Map">
+    SELECT cm.coinName,db.* FROM dig_base db LEFT JOIN coin_manage cm ON db.coinType=cm.coinType
+    order by db.id desc
+  </select>
+</mapper>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.SysparamsMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Sysparams">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="keyName" jdbcType="VARCHAR" property="keyname" />
+    <result column="keyVal" jdbcType="VARCHAR" property="keyval" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, keyName, keyVal, remark, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Sysparams">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sysparams (keyName, keyVal, remark, 
+      createTime, updateTime)
+    values (#{keyname,jdbcType=VARCHAR}, #{keyval,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Sysparams">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sysparams
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="keyname != null">
+        keyName,
+      </if>
+      <if test="keyval != null">
+        keyVal,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="keyname != null">
+        #{keyname,jdbcType=VARCHAR},
+      </if>
+      <if test="keyval != null">
+        #{keyval,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Sysparams">
+    update sysparams
+    set keyName = #{keyname,jdbcType=VARCHAR},
+      keyVal = #{keyval,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Sysparams">
+    update sysparams
+    <set>
+      <if test="keyname != null">
+        keyName = #{keyname,jdbcType=VARCHAR},
+      </if>
+      <if test="keyval != null">
+        keyVal = #{keyval,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sysparams
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysparams
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sysparams
+    where keyName = #{key,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysparams
+    where 1=1 
+    <if test="keyname != null">
+       and  keyName = #{keyname,jdbcType=VARCHAR}
+    </if>
+    <if test="keyval != null">
+       and  keyVal = #{keyval,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sysparams
+    where 1=1
+    <if test="keyname != null">
+       and  keyName = #{keyname,jdbcType=VARCHAR}
+    </if>
+    <if test="keyval != null">
+       and  keyVal = #{keyval,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from sysparams 
+    where 1=1 
+    <if test="keyname != null">
+       and  keyName = #{keyname,jdbcType=VARCHAR}
+    </if>
+    <if test="keyval != null">
+       and  keyVal = #{keyval,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectSystemParamCountByCondition" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM sysparams
+    WHERE 1=1 and keyName != 'RECHARGE_ONOFF_TOTAL'
+    <if test="remark != null">
+      and    remark LIKE CONCAT(CONCAT('%',#{remark}),'%')
+    </if>
+
+  </select>
+
+  <select id="selectSystemParamByCondition" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    FROM sysparams WHERE keyName != 'RECHARGE_ONOFF_TOTAL'
+    <if test="remark != null">
+      and remark LIKE CONCAT(CONCAT('%',#{remark,jdbcType=VARCHAR}),'%')
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+
+</mapper>

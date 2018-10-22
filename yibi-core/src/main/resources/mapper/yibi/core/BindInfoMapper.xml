@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.BindInfoMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.BindInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="imgUrl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="bankName" jdbcType="VARCHAR" property="bankname" />
+    <result column="branchName" jdbcType="VARCHAR" property="branchname" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, type, account, name, imgUrl, bankName, branchName, state, createTime, 
+    updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.BindInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bind_info (userId, type, account, 
+      name, imgUrl, bankName, 
+      branchName, state, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{account,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{bankname,jdbcType=VARCHAR}, 
+      #{branchname,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.BindInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into bind_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="imgurl != null">
+        imgUrl,
+      </if>
+      <if test="bankname != null">
+        bankName,
+      </if>
+      <if test="branchname != null">
+        branchName,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null">
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="branchname != null">
+        #{branchname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.BindInfo">
+    update bind_info
+    set userId = #{userid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      account = #{account,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      imgUrl = #{imgurl,jdbcType=VARCHAR},
+      bankName = #{bankname,jdbcType=VARCHAR},
+      branchName = #{branchname,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.BindInfo">
+    update bind_info
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null">
+        imgUrl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null">
+        bankName = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="branchname != null">
+        branchName = #{branchname,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bind_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bind_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bind_info
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="account != null">
+       and  account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="imgurl != null">
+       and  imgUrl = #{imgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="bankname != null">
+       and  bankName = #{bankname,jdbcType=VARCHAR}
+    </if>
+    <if test="branchname != null">
+       and  branchName = #{branchname,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bind_info
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="account != null">
+       and  account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="imgurl != null">
+       and  imgUrl = #{imgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="bankname != null">
+       and  bankName = #{bankname,jdbcType=VARCHAR}
+    </if>
+    <if test="branchname != null">
+       and  branchName = #{branchname,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from bind_info 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="account != null">
+       and  account = #{account,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="imgurl != null">
+       and  imgUrl = #{imgurl,jdbcType=VARCHAR}
+    </if>
+    <if test="bankname != null">
+       and  bankName = #{bankname,jdbcType=VARCHAR}
+    </if>
+    <if test="branchname != null">
+       and  branchName = #{branchname,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

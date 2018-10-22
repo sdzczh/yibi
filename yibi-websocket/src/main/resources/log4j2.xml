@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <properties>
+        <property name="logRootDir">@log.logRootDir@</property>
+        <property name="layout">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p  [%t] %location - %m%n</property>
+        <property name="moduleName">yibi-websocket</property>
+        <property name="outputAppender">@log.appenderName@</property>
+    </properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layout}"/>
+        </Console>
+        <RollingRandomAccessFile name="RollingFile" fileName="${logRootDir}/${moduleName}.log"
+                                 filePattern="${logRootDir}/${moduleName}-$${date:yyyy-MM}/${moduleName}-%d{yyyy-MM-dd}.log">
+            <PatternLayout charset="UTF-8" pattern="${layout}">
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="${outputAppender}"/>
+        </Root>
+    </Loggers>
+</Configuration>

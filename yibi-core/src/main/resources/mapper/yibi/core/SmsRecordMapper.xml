@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.SmsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.SmsRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="code" jdbcType="CHAR" property="code" />
+    <result column="times" jdbcType="TINYINT" property="times" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, type, state, code, times, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.SmsRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms_record (phone, type, state, 
+      code, times, createTime, 
+      updateTime)
+    values (#{phone,jdbcType=CHAR}, #{type,jdbcType=TINYINT}, #{state,jdbcType=INTEGER}, 
+      #{code,jdbcType=CHAR}, #{times,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.SmsRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into sms_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.SmsRecord">
+    update sms_record
+    set phone = #{phone,jdbcType=CHAR},
+      type = #{type,jdbcType=TINYINT},
+      state = #{state,jdbcType=INTEGER},
+      code = #{code,jdbcType=CHAR},
+      times = #{times,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.SmsRecord">
+    update sms_record
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=CHAR},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sms_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from sms_record
+  where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryListByTimeLimit"  resultMap="BaseResultMap" parameterType="java.util.Map">
+  select
+  <include refid="Base_Column_List" />
+   FROM sms_record WHERE createTime &gt; DATE_SUB(NOW(),INTERVAL 1 MINUTE)
+   <if test="phone != null">
+    and  phone = #{phone,jdbcType=CHAR}
+   </if>
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms_record
+    where 1=1 
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=INTEGER}
+    </if>
+    <if test="code != null">
+       and  code = #{code,jdbcType=CHAR}
+    </if>
+    <if test="times != null">
+       and  times = #{times,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms_record
+    where 1=1 
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=INTEGER}
+    </if>
+    <if test="code != null">
+       and  code = #{code,jdbcType=CHAR}
+    </if>
+    <if test="times != null">
+       and  times = #{times,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from sms_record 
+    where 1=1 
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=INTEGER}
+    </if>
+    <if test="code != null">
+       and  code = #{code,jdbcType=CHAR}
+    </if>
+    <if test="times != null">
+       and  times = #{times,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

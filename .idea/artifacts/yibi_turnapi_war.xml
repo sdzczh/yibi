@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="yibi-turnapi:war">
+    <output-path>$PROJECT_DIR$/yibi-turnapi/target</output-path>
+    <root id="archive" name="yibi-turnapi.war">
+      <element id="artifact" artifact-name="yibi-turnapi:war exploded" />
+    </root>
+  </artifact>
+</component>

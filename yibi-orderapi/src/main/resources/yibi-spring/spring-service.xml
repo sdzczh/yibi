@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-4.2.xsd
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!-- 激活自动代理功能 -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+    <!-- 启用Spring注解 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.yibi.orderapi">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <task:annotation-driven />
+
+    <!--融云-->
+    <bean id="rongCloud" class="com.yibi.extern.api.rongcloud.RongCloudFactoryBean">
+        <property name="appKey" value="${rongCloud.app.key}"/>
+        <property name="appSecret" value="${rongCloud.app.secret}"/>
+    </bean>
+
+    <!--实人认证-->
+    <bean id="aliyunRPBasicAuthenticate" class="com.yibi.extern.api.aliyun.cloudauth.AliyunRPBasicAuthenticate">
+        <property name="accessKeyId" value="${aliyun.authenticate.accessKeyId}"/>
+        <property name="accessKeySecret" value="${aliyun.authenticate.accessKeySecret}"/>
+    </bean>
+
+    <bean id="groupRequest" class="com.yibi.extern.api.rongcloud.request.RongCloudGroupRequest"/>
+    <bean id="userRequest" class="com.yibi.extern.api.rongcloud.request.RongCloudUserRequest"/>
+    <bean id="msgRequest" class="com.yibi.extern.api.rongcloud.request.RongCloudMsgRequest"/>
+    <bean id="conversationRequest" class="com.yibi.extern.api.rongcloud.request.RongCloudConversationRequest"/>
+
+    <bean id="smsCodeUtil" class="com.yibi.extern.api.aliyun.smscode.SMSCodeUtil">
+        <property name="accessKeyId" value="${aliyun.smsCode.accessKeyId}"/>
+        <property name="accessKeySecret" value="${aliyun.smsCode.accessKeySecret}"/>
+        <property name="signName" value="${aliyun.smsCode.signName}"/>
+    </bean>
+
+    <bean name="cancelOrderListener" class="com.yibi.orderapi.event.CancelOrderListener"/>
+    <bean name="addCalcForceListener" class="com.yibi.orderapi.event.AddCalcForceListener"/>
+    <bean name="dealDigListener" class="com.yibi.orderapi.event.DealDigListener"/>
+    <bean name="afterOrderListener" class="com.yibi.orderapi.event.AfterOrderListener"/>
+    <task:executor id="eventBusExcutor" keep-alive="50" pool-size="50-500" queue-capacity="10000"/>
+    <bean id="orderEventBus" class="com.yibi.orderapi.event.EventBusFactoryBean">
+        <property name="eventIdentifier" value="orderListUpdate"/>
+        <property name="registerObject">
+            <array>
+                <ref bean="cancelOrderListener"/>
+                 <ref bean="addCalcForceListener"/>
+                <ref bean="dealDigListener"/>
+                <ref bean="afterOrderListener"/>
+            </array>
+        </property>
+        <property name="executor" ref="eventBusExcutor"/>
+    </bean>
+
+</beans>

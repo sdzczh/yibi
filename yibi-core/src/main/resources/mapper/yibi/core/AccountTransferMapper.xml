@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.AccountTransferMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.AccountTransfer">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="toAccount" jdbcType="TINYINT" property="toaccount" />
+    <result column="fromAccount" jdbcType="TINYINT" property="fromaccount" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="relatedId" jdbcType="INTEGER" property="relatedid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, coinType, toAccount, fromAccount, amount, relatedId, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.AccountTransfer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account_transfer (userId, coinType, toAccount, 
+      fromAccount, amount, relatedId, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{cointype,jdbcType=TINYINT}, #{toaccount,jdbcType=TINYINT}, 
+      #{fromaccount,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, #{relatedid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.AccountTransfer">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account_transfer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="toaccount != null">
+        toAccount,
+      </if>
+      <if test="fromaccount != null">
+        fromAccount,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="relatedid != null">
+        relatedId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="toaccount != null">
+        #{toaccount,jdbcType=TINYINT},
+      </if>
+      <if test="fromaccount != null">
+        #{fromaccount,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="relatedid != null">
+        #{relatedid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.AccountTransfer">
+    update account_transfer
+    set userId = #{userid,jdbcType=INTEGER},
+      coinType = #{cointype,jdbcType=TINYINT},
+      toAccount = #{toaccount,jdbcType=TINYINT},
+      fromAccount = #{fromaccount,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      relatedId = #{relatedid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.AccountTransfer">
+    update account_transfer
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="toaccount != null">
+        toAccount = #{toaccount,jdbcType=TINYINT},
+      </if>
+      <if test="fromaccount != null">
+        fromAccount = #{fromaccount,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="relatedid != null">
+        relatedId = #{relatedid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account_transfer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_transfer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_transfer
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="toaccount != null">
+       and  toAccount = #{toaccount,jdbcType=TINYINT}
+    </if>
+    <if test="fromaccount != null">
+       and  fromAccount = #{fromaccount,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="relatedid != null">
+       and  relatedId = #{relatedid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account_transfer
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="toaccount != null">
+       and  toAccount = #{toaccount,jdbcType=TINYINT}
+    </if>
+    <if test="fromaccount != null">
+       and  fromAccount = #{fromaccount,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="relatedid != null">
+       and  relatedId = #{relatedid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from account_transfer 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="toaccount != null">
+       and  toAccount = #{toaccount,jdbcType=TINYINT}
+    </if>
+    <if test="fromaccount != null">
+       and  fromAccount = #{fromaccount,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="relatedid != null">
+       and  relatedId = #{relatedid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="querySumByCoinAndTime" parameterType="java.util.HashMap" resultType="java.math.BigDecimal">
+    SELECT IFNULL(SUM(amount),0) sumAmt
+    FROM account_transfer
+    WHERE userId=#{userId} AND coinType=#{coinType} AND toAccount=#{toAccountType} AND fromAccount=#{fromAccountType} AND createTime &gt;= #{startTime}
+
+  </select>
+</mapper>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.ChatFriendsMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.ChatFriends">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="friendId" jdbcType="INTEGER" property="friendid" />
+    <result column="remarkName" jdbcType="VARCHAR" property="remarkname" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, friendId, remarkName, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.ChatFriends">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_friends (userId, friendId, remarkName, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{friendid,jdbcType=INTEGER}, #{remarkname,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.ChatFriends">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_friends
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="friendid != null">
+        friendId,
+      </if>
+      <if test="remarkname != null">
+        remarkName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="friendid != null">
+        #{friendid,jdbcType=INTEGER},
+      </if>
+      <if test="remarkname != null">
+        #{remarkname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.ChatFriends">
+    update chat_friends
+    set userId = #{userid,jdbcType=INTEGER},
+      friendId = #{friendid,jdbcType=INTEGER},
+      remarkName = #{remarkname,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.ChatFriends">
+    update chat_friends
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="friendid != null">
+        friendId = #{friendid,jdbcType=INTEGER},
+      </if>
+      <if test="remarkname != null">
+        remarkName = #{remarkname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chat_friends
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteFriend" parameterType="Map">
+    delete from chat_friends
+    where userId = #{userid,jdbcType=INTEGER}
+        and friendId = #{friendid,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_friends
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_friends
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="friendid != null">
+       and  friendId = #{friendid,jdbcType=INTEGER}
+    </if>
+    <if test="remarkname != null">
+       and  remarkName = #{remarkname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_friends
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="friendid != null">
+       and  friendId = #{friendid,jdbcType=INTEGER}
+    </if>
+    <if test="remarkname != null">
+       and  remarkName = #{remarkname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from chat_friends 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="friendid != null">
+       and  friendId = #{friendid,jdbcType=INTEGER}
+    </if>
+    <if test="remarkname != null">
+       and  remarkName = #{remarkname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="queryUserModelByPhone" parameterType="Map" resultType="Map">
+    select u.id, u.`phone`,u.nickName,u.`headPath`,if(i.sex is null,-1,IF(i.sex ='m',0,1)) sex,f.remarkName,h.roleName  ,IF(f.id IS NULL ,false,true) isFriend
+    from  user u
+    LEFT JOIN idcard_validate i ON u.id = i.userId AND i.state=1
+    LEFT JOIN chat_friends f ON u.id = f.friendId  AND f.userId = #{userId}
+    LEFT JOIN user_diginfo d ON u.id = d.userId
+    LEFT JOIN dig_honors h ON d.digCalcul &gt;=soulMinForce AND d.digCalcul&lt;=soulMaxForce
+    WHERE u.phone =#{phone}
+  </select>
+  <select id="queryFriends" parameterType="Integer" resultType="Map">
+    select u.phone,IF(f.remarkName IS NULL OR f.remarkName='',u.nickName,f.remarkName) AS name,u.headPath
+    from  chat_friends f
+    LEFT JOIN user u ON f.friendId = u.id
+    WHERE f.userId = #{userId}
+  </select>
+
+</mapper>

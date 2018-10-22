@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.ChatRedpacketReciveMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.ChatRedpacketRecive">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="redpacId" jdbcType="INTEGER" property="redpacid" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="amtOfCny" jdbcType="DECIMAL" property="amtofcny" />
+    <result column="reciveTime" jdbcType="TIMESTAMP" property="recivetime" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, redpacId, coinType, amount, amtOfCny, reciveTime, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.ChatRedpacketRecive">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_redpacket_recive (userId, redpacId, coinType, 
+      amount, amtOfCny, reciveTime, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{redpacid,jdbcType=INTEGER}, #{cointype,jdbcType=TINYINT}, 
+      #{amount,jdbcType=DECIMAL}, #{amtofcny,jdbcType=DECIMAL}, #{recivetime,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.ChatRedpacketRecive">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_redpacket_recive
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="redpacid != null">
+        redpacId,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="amtofcny != null">
+        amtOfCny,
+      </if>
+      <if test="recivetime != null">
+        reciveTime,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="redpacid != null">
+        #{redpacid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="amtofcny != null">
+        #{amtofcny,jdbcType=DECIMAL},
+      </if>
+      <if test="recivetime != null">
+        #{recivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.ChatRedpacketRecive">
+    update chat_redpacket_recive
+    set userId = #{userid,jdbcType=INTEGER},
+      redpacId = #{redpacid,jdbcType=INTEGER},
+      coinType = #{cointype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      amtOfCny = #{amtofcny,jdbcType=DECIMAL},
+      reciveTime = #{recivetime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.ChatRedpacketRecive">
+    update chat_redpacket_recive
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="redpacid != null">
+        redpacId = #{redpacid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="amtofcny != null">
+        amtOfCny = #{amtofcny,jdbcType=DECIMAL},
+      </if>
+      <if test="recivetime != null">
+        reciveTime = #{recivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chat_redpacket_recive
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_redpacket_recive
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_redpacket_recive
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="redpacid != null">
+       and  redpacId = #{redpacid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="amtofcny != null">
+       and  amtOfCny = #{amtofcny,jdbcType=DECIMAL}
+    </if>
+    <if test="recivetime != null">
+       and  reciveTime = #{recivetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_redpacket_recive
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="redpacid != null">
+       and  redpacId = #{redpacid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="amtofcny != null">
+       and  amtOfCny = #{amtofcny,jdbcType=DECIMAL}
+    </if>
+    <if test="recivetime != null">
+       and  reciveTime = #{recivetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="queryRedPacketRecives" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT u.headPath,IF(f.id is NULL OR f.remarkName='' ,u.nickName,f.remarkName) name,re.amount,re.coinType,re.amtOfCny,re.reciveTime,0 AS besthand
+    FROM chat_redpacket_recive re
+    LEFT JOIN user u ON re.userId = u.id
+    LEFT JOIN chat_friends f ON u.id = f.friendId AND f.userId=#{userId}
+    WHERE re.redpacId=#{packetId} order by re.id desc
+  </select>
+
+
+  <select id="queryReciveList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT IF(f.id IS NULL OR f.remarkName='' ,u.nickName,f.remarkName) name,rec.amount,rec.coinType,rec.amtOfCny,rec.reciveTime as createTime
+    FROM chat_redpacket_recive  rec
+    LEFT JOIN chat_redpacket send ON send.id = rec.redpacId
+    LEFT JOIN user u ON send.sendUserId = u.id
+    LEFT JOIN chat_friends f ON  send.sendUserId = f.friendId AND f.userId=#{userId}
+    WHERE rec.userId=#{userId} AND send.state=1 order by rec.id desc
+    limit #{firstResult},#{maxResult}
+  </select>
+
+  <select id="querySumRecive" parameterType="Integer" resultType="BigDecimal">
+    SELECT IFNULL(SUM(rec.amtOfCny),0) sumAmt FROM chat_redpacket_recive rec
+    LEFT JOIN chat_redpacket send ON send.id = rec.redpacId
+    WHERE rec.userId = #{userId} AND send.state=1
+  </select>
+</mapper>

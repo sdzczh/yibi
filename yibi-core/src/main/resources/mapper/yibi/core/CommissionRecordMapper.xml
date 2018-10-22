@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.CommissionRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.CommissionRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="commAmount" jdbcType="DECIMAL" property="commamount" />
+    <result column="commCoinType" jdbcType="TINYINT" property="commcointype" />
+    <result column="orderAmount" jdbcType="DECIMAL" property="orderamount" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="referenceId" jdbcType="INTEGER" property="referenceid" />
+    <result column="orderId" jdbcType="INTEGER" property="orderid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, commAmount, commCoinType, orderAmount, orderCoinType, type, referenceId, 
+    orderId, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.CommissionRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into commission_record (userId, commAmount, commCoinType, 
+      orderAmount, orderCoinType, type, 
+      referenceId, orderId, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{commamount,jdbcType=DECIMAL}, #{commcointype,jdbcType=TINYINT}, 
+      #{orderamount,jdbcType=DECIMAL}, #{ordercointype,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, 
+      #{referenceid,jdbcType=INTEGER}, #{orderid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.CommissionRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into commission_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="commamount != null">
+        commAmount,
+      </if>
+      <if test="commcointype != null">
+        commCoinType,
+      </if>
+      <if test="orderamount != null">
+        orderAmount,
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="referenceid != null">
+        referenceId,
+      </if>
+      <if test="orderid != null">
+        orderId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commamount != null">
+        #{commamount,jdbcType=DECIMAL},
+      </if>
+      <if test="commcointype != null">
+        #{commcointype,jdbcType=TINYINT},
+      </if>
+      <if test="orderamount != null">
+        #{orderamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="referenceid != null">
+        #{referenceid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.CommissionRecord">
+    update commission_record
+    set userId = #{userid,jdbcType=INTEGER},
+      commAmount = #{commamount,jdbcType=DECIMAL},
+      commCoinType = #{commcointype,jdbcType=TINYINT},
+      orderAmount = #{orderamount,jdbcType=DECIMAL},
+      orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      referenceId = #{referenceid,jdbcType=INTEGER},
+      orderId = #{orderid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.CommissionRecord">
+    update commission_record
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="commamount != null">
+        commAmount = #{commamount,jdbcType=DECIMAL},
+      </if>
+      <if test="commcointype != null">
+        commCoinType = #{commcointype,jdbcType=TINYINT},
+      </if>
+      <if test="orderamount != null">
+        orderAmount = #{orderamount,jdbcType=DECIMAL},
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="referenceid != null">
+        referenceId = #{referenceid,jdbcType=INTEGER},
+      </if>
+      <if test="orderid != null">
+        orderId = #{orderid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from commission_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commission_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commission_record
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="commamount != null">
+       and  commAmount = #{commamount,jdbcType=DECIMAL}
+    </if>
+    <if test="commcointype != null">
+       and  commCoinType = #{commcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderamount != null">
+       and  orderAmount = #{orderamount,jdbcType=DECIMAL}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="referenceid != null">
+       and  referenceId = #{referenceid,jdbcType=INTEGER}
+    </if>
+    <if test="orderid != null">
+       and  orderId = #{orderid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commission_record
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="commamount != null">
+       and  commAmount = #{commamount,jdbcType=DECIMAL}
+    </if>
+    <if test="commcointype != null">
+       and  commCoinType = #{commcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderamount != null">
+       and  orderAmount = #{orderamount,jdbcType=DECIMAL}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="referenceid != null">
+       and  referenceId = #{referenceid,jdbcType=INTEGER}
+    </if>
+    <if test="orderid != null">
+       and  orderId = #{orderid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from commission_record 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="commamount != null">
+       and  commAmount = #{commamount,jdbcType=DECIMAL}
+    </if>
+    <if test="commcointype != null">
+       and  commCoinType = #{commcointype,jdbcType=TINYINT}
+    </if>
+    <if test="orderamount != null">
+       and  orderAmount = #{orderamount,jdbcType=DECIMAL}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="referenceid != null">
+       and  referenceId = #{referenceid,jdbcType=INTEGER}
+    </if>
+    <if test="orderid != null">
+       and  orderId = #{orderid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectSumAmountByOrderid" parameterType="java.lang.Integer" resultType="java.math.BigDecimal">
+    select IFNULL(sum(commAmount),0)
+    from commission_record
+    where 1=1
+     and  orderId = #{orderid,jdbcType=INTEGER}
+  </select>
+</mapper>

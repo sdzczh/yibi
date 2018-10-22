@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.YubiProfitMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.YubiProfit">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="cointype" jdbcType="TINYINT" property="cointype" />
+    <result column="principle" jdbcType="DECIMAL" property="principle" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="yubiTotalProfit" jdbcType="DECIMAL" property="yubitotalprofit" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, cointype, principle, rate, interest, yubiTotalProfit, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.YubiProfit">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yubi_profit (userId, cointype, principle, 
+      rate, interest, yubiTotalProfit, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{cointype,jdbcType=TINYINT}, #{principle,jdbcType=DECIMAL}, 
+      #{rate,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{yubitotalprofit,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.YubiProfit">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into yubi_profit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="cointype != null">
+        cointype,
+      </if>
+      <if test="principle != null">
+        principle,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="yubitotalprofit != null">
+        yubiTotalProfit,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="principle != null">
+        #{principle,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="yubitotalprofit != null">
+        #{yubitotalprofit,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.YubiProfit">
+    update yubi_profit
+    set userId = #{userid,jdbcType=INTEGER},
+      cointype = #{cointype,jdbcType=TINYINT},
+      principle = #{principle,jdbcType=DECIMAL},
+      rate = #{rate,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      yubiTotalProfit = #{yubitotalprofit,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.YubiProfit">
+    update yubi_profit
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        cointype = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="principle != null">
+        principle = #{principle,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="yubitotalprofit != null">
+        yubiTotalProfit = #{yubitotalprofit,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from yubi_profit
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yubi_profit
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yubi_profit
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="principle != null">
+       and  principle = #{principle,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="yubitotalprofit != null">
+       and  yubiTotalProfit = #{yubitotalprofit,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yubi_profit
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="principle != null">
+       and  principle = #{principle,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="yubitotalprofit != null">
+       and  yubiTotalProfit = #{yubitotalprofit,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from yubi_profit 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="principle != null">
+       and  principle = #{principle,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="yubitotalprofit != null">
+       and  yubiTotalProfit = #{yubitotalprofit,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectYbProfitByCondition" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT yp.*,cm.coinName,u.phone,u.userName FROM yubi_profit yp LEFT JOIN coin_manage cm ON yp.cointype=cm.coinType LEFT JOIN user u ON u.id=yp.userId
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="userName != null">
+      and  u.userName = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  yp.coinType = #{coinType,jdbcType=INTEGER}
+    </if>
+    order by yp.id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectYbProfitByConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM yubi_profit yp LEFT JOIN coin_manage cm ON yp.cointype=cm.coinType LEFT JOIN user u ON u.id=yp.userId
+    where 1=1
+
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="userName != null">
+      and  u.userName = #{userName,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  yp.coinType = #{coinType,jdbcType=INTEGER}
+    </if>
+  </select>
+
+</mapper>

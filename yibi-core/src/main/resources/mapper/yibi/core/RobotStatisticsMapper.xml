@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.RobotStatisticsMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.RobotStatistics">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="robotAndRobotDealNum" jdbcType="DECIMAL" property="robotandrobotdealnum" />
+    <result column="robotAndRobotDealAmt" jdbcType="DECIMAL" property="robotandrobotdealamt" />
+    <result column="robotAndPersonDealNum" jdbcType="DECIMAL" property="robotandpersondealnum" />
+    <result column="robotAndPersonDealAmt" jdbcType="DECIMAL" property="robotandpersondealamt" />
+    <result column="personAndPersonDealNum" jdbcType="DECIMAL" property="personandpersondealnum" />
+    <result column="personAndPersonDealAmt" jdbcType="DECIMAL" property="personandpersondealamt" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, robotAndRobotDealNum, robotAndRobotDealAmt, robotAndPersonDealNum, 
+    robotAndPersonDealAmt, personAndPersonDealNum, personAndPersonDealAmt, createTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.RobotStatistics">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into robot_statistics (coinType, robotAndRobotDealNum, robotAndRobotDealAmt, 
+      robotAndPersonDealNum, robotAndPersonDealAmt, 
+      personAndPersonDealNum, personAndPersonDealAmt, 
+      createTime)
+    values (#{cointype,jdbcType=TINYINT}, #{robotandrobotdealnum,jdbcType=DECIMAL}, #{robotandrobotdealamt,jdbcType=DECIMAL}, 
+      #{robotandpersondealnum,jdbcType=DECIMAL}, #{robotandpersondealamt,jdbcType=DECIMAL}, 
+      #{personandpersondealnum,jdbcType=DECIMAL}, #{personandpersondealamt,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.RobotStatistics">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into robot_statistics
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="robotandrobotdealnum != null">
+        robotAndRobotDealNum,
+      </if>
+      <if test="robotandrobotdealamt != null">
+        robotAndRobotDealAmt,
+      </if>
+      <if test="robotandpersondealnum != null">
+        robotAndPersonDealNum,
+      </if>
+      <if test="robotandpersondealamt != null">
+        robotAndPersonDealAmt,
+      </if>
+      <if test="personandpersondealnum != null">
+        personAndPersonDealNum,
+      </if>
+      <if test="personandpersondealamt != null">
+        personAndPersonDealAmt,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="robotandrobotdealnum != null">
+        #{robotandrobotdealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="robotandrobotdealamt != null">
+        #{robotandrobotdealamt,jdbcType=DECIMAL},
+      </if>
+      <if test="robotandpersondealnum != null">
+        #{robotandpersondealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="robotandpersondealamt != null">
+        #{robotandpersondealamt,jdbcType=DECIMAL},
+      </if>
+      <if test="personandpersondealnum != null">
+        #{personandpersondealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="personandpersondealamt != null">
+        #{personandpersondealamt,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.RobotStatistics">
+    update robot_statistics
+    set coinType = #{cointype,jdbcType=TINYINT},
+      robotAndRobotDealNum = #{robotandrobotdealnum,jdbcType=DECIMAL},
+      robotAndRobotDealAmt = #{robotandrobotdealamt,jdbcType=DECIMAL},
+      robotAndPersonDealNum = #{robotandpersondealnum,jdbcType=DECIMAL},
+      robotAndPersonDealAmt = #{robotandpersondealamt,jdbcType=DECIMAL},
+      personAndPersonDealNum = #{personandpersondealnum,jdbcType=DECIMAL},
+      personAndPersonDealAmt = #{personandpersondealamt,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.RobotStatistics">
+    update robot_statistics
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="robotandrobotdealnum != null">
+        robotAndRobotDealNum = #{robotandrobotdealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="robotandrobotdealamt != null">
+        robotAndRobotDealAmt = #{robotandrobotdealamt,jdbcType=DECIMAL},
+      </if>
+      <if test="robotandpersondealnum != null">
+        robotAndPersonDealNum = #{robotandpersondealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="robotandpersondealamt != null">
+        robotAndPersonDealAmt = #{robotandpersondealamt,jdbcType=DECIMAL},
+      </if>
+      <if test="personandpersondealnum != null">
+        personAndPersonDealNum = #{personandpersondealnum,jdbcType=DECIMAL},
+      </if>
+      <if test="personandpersondealamt != null">
+        personAndPersonDealAmt = #{personandpersondealamt,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from robot_statistics
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot_statistics
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot_statistics
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="robotandrobotdealnum != null">
+       and  robotAndRobotDealNum = #{robotandrobotdealnum,jdbcType=DECIMAL}
+    </if>
+    <if test="robotandrobotdealamt != null">
+       and  robotAndRobotDealAmt = #{robotandrobotdealamt,jdbcType=DECIMAL}
+    </if>
+    <if test="robotandpersondealnum != null">
+       and  robotAndPersonDealNum = #{robotandpersondealnum,jdbcType=DECIMAL}
+    </if>
+    <if test="robotandpersondealamt != null">
+       and  robotAndPersonDealAmt = #{robotandpersondealamt,jdbcType=DECIMAL}
+    </if>
+    <if test="personandpersondealnum != null">
+       and  personAndPersonDealNum = #{personandpersondealnum,jdbcType=DECIMAL}
+    </if>
+    <if test="personandpersondealamt != null">
+       and  personAndPersonDealAmt = #{personandpersondealamt,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from robot_statistics
+  where 1=1
+  <if test="cointype != null">
+    and  coinType = #{cointype,jdbcType=TINYINT}
+  </if>
+  <if test="robotandrobotdealnum != null">
+    and  robotAndRobotDealNum = #{robotandrobotdealnum,jdbcType=DECIMAL}
+  </if>
+  <if test="robotandrobotdealamt != null">
+    and  robotAndRobotDealAmt = #{robotandrobotdealamt,jdbcType=DECIMAL}
+  </if>
+  <if test="robotandpersondealnum != null">
+    and  robotAndPersonDealNum = #{robotandpersondealnum,jdbcType=DECIMAL}
+  </if>
+  <if test="robotandpersondealamt != null">
+    and  robotAndPersonDealAmt = #{robotandpersondealamt,jdbcType=DECIMAL}
+  </if>
+  <if test="personandpersondealnum != null">
+    and  personAndPersonDealNum = #{personandpersondealnum,jdbcType=DECIMAL}
+  </if>
+  <if test="personandpersondealamt != null">
+    and  personAndPersonDealAmt = #{personandpersondealamt,jdbcType=DECIMAL}
+  </if>
+  <if test="createtime != null">
+    and  createTime = #{createtime,jdbcType=TIMESTAMP}
+  </if>
+  order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+</select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from robot_statistics
+    where 1=1
+    <if test="cointype != null">
+      and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="robotandrobotdealnum != null">
+      and  robotAndRobotDealNum = #{robotandrobotdealnum,jdbcType=DECIMAL}
+    </if>
+    <if test="robotandrobotdealamt != null">
+      and  robotAndRobotDealAmt = #{robotandrobotdealamt,jdbcType=DECIMAL}
+    </if>
+    <if test="robotandpersondealnum != null">
+      and  robotAndPersonDealNum = #{robotandpersondealnum,jdbcType=DECIMAL}
+    </if>
+    <if test="robotandpersondealamt != null">
+      and  robotAndPersonDealAmt = #{robotandpersondealamt,jdbcType=DECIMAL}
+    </if>
+    <if test="personandpersondealnum != null">
+      and  personAndPersonDealNum = #{personandpersondealnum,jdbcType=DECIMAL}
+    </if>
+    <if test="personandpersondealamt != null">
+      and  personAndPersonDealAmt = #{personandpersondealamt,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+
+
+  <select id="selectRelationPaging" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT rs.*,cm.coinName FROM robot_statistics rs LEFT JOIN coin_manage cm ON rs.coinType=cm.coinType
+    where 1=1
+    <if test="coinType != null">
+      and rs.coinType = #{coinType,jdbcType=TINYINT}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectRelationCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM robot_statistics rs LEFT JOIN coin_manage cm ON rs.coinType=cm.coinType
+    where 1=1
+    <if test="coinType != null">
+      and rs.coinType = #{coinType,jdbcType=TINYINT}
+    </if>
+  </select>
+
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	    http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+    <!-- 配置使Spring采用CGLIB代理 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<context:component-scan base-package="com.yibi.core">
+	</context:component-scan>
+
+	<bean class="com.yibi.core.common.CustomPropertyPlaceHoderConfigurer">
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="locations">
+			<array>
+				<value>classpath:yibi.properties</value>
+			</array>
+		</property>
+		<property name="fileEncoding" value="UTF-8"/>
+		<property name="secretKeys">
+			<set value-type="java.lang.String">
+				<value>jdbc.password</value>
+				<value>jdbc.username</value>
+				<value>redis.password</value>
+			</set>
+		</property>
+	</bean>
+
+	<!-- Redis连接池 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="800"></property>
+		<property name="minIdle" value="2"></property>
+		<property name="maxWaitMillis" value="15000"></property>
+		<property name="minEvictableIdleTimeMillis" value="100"></property>
+		<property name="numTestsPerEvictionRun" value="100"></property>
+		<property name="timeBetweenEvictionRunsMillis" value="1000"></property>
+		<property name="testOnBorrow" value="true"></property>
+		<property name="testOnReturn" value="true"></property>
+		<property name="testWhileIdle" value="true"></property>
+	</bean>
+
+	<!-- Redis连接  -->
+	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+		<property name="hostName" value="${redis.host}" />
+		<property name="port" value="${redis.port}" />
+		<property name="password" value="${redis.password}" />
+		<property name="timeout" value="15000" />
+		<property name="database" value="0" />
+		<property name="usePool" value="true" />
+		<property name="poolConfig" ref="jedisPoolConfig" />
+	</bean>
+
+    <!-- 对string操作的封装 -->
+    <bean id="redis" class="org.springframework.data.redis.core.StringRedisTemplate" p:connection-factory-ref="jedisConnectionFactory" p:enableTransactionSupport="false" >
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashKeySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        <property name="hashValueSerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+    </bean>
+
+    <!-- 阿里 druid 数据库连接池 -->
+    <bean id="druid_dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+		<!--初始化连接-->
+        <property name="initialSize" value="10" />
+		<!--最大连接池数量-->
+        <property name="maxActive" value="500" />
+		<!--最小连接池数量-->
+        <property name="minIdle" value="10" />
+		<!--获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启用公平锁，并发效率会有所下降，如果需要可以通过配置useUnfairLock属性为true使用非公平锁。-->
+        <property name="maxWait" value="60000" />
+		<!--是否使用非公平锁-->
+        <property name="useUnfairLock" value="true"></property>
+		<!--1) Destroy线程会检测连接的间隔时间2) testWhileIdle的判断依据，详细看testWhileIdle属性的说明-->
+        <property name="timeBetweenEvictionRunsMillis" value="2000" />
+		<!--Destory线程中如果检测到当前连接的最后活跃时间和当前时间的差值大于minEvictableIdleTimeMillis，则关闭当前连接。-->
+        <property name="minEvictableIdleTimeMillis" value="30000" />
+		<!--对于建立时间超过removeAbandonedTimeout的连接强制关闭-->
+        <property name = "removeAbandoned" value = "true" />
+		<!--指定连接建立多长时间就需要被强制关闭-->
+        <property name = "removeAbandonedTimeout" value ="1200" />
+        <property name="filters" value="stat" />
+        <property name = "validationQuery" value = "SELECT 'x'" />
+        <property name = "testWhileIdle" value = "true" />
+        <property name = "testOnBorrow" value = "false" />
+        <property name = "testOnReturn" value = "false" />
+        <property name = "maxOpenPreparedStatements" value ="20" />
+        <property name = "logAbandoned" value = "true" />
+        <property name="proxyFilters">
+            <list>
+                <ref bean="stat-filter" />
+            </list>
+        </property>
+    </bean>
+
+	<!-- 1. druid监控统计bean 对应上文dataSource中的proxyFilters -->
+	<bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+		<property name="slowSqlMillis" value="1000" />
+		<property name="logSlowSql" value="true" />
+	</bean>
+
+	<!-- 2. mybatis的SqlSession的工厂: SqlSessionFactoryBean dataSource:引用数据源 MyBatis定义数据源,同意加载配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="druid_dataSource"></property>
+		<property name="mapperLocations" value="classpath*:mapper/**/*.xml"></property>
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+
+	<!-- 3. mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory basePackage:指定sql映射文件/接口所在的包（自动扫描） -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.yibi.core.dao"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 对dataSource 数据源进行事务管理 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="druid_dataSource" />
+	<!-- 启用对事务注解的支持 -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+	<!-- 事务管理 通知 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- 对insert,update,delete 开头的方法进行事务管理,只要有异常就回滚 -->
+			<tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Throwable" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Throwable" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Throwable" />
+			<!-- select,count开头的方法,开启只读,提高数据库访问性能 -->
+			<tx:method name="select*" read-only="true" />
+			<tx:method name="count*" read-only="true" />
+			<tx:method name="query*" read-only="true" />
+			<!-- 对其他方法 使用默认的事务管理 -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 事务 aop 配置 -->
+	<aop:config>
+		<aop:pointcut id="serviceMethods" expression="execution(* com.yibi.core.service..*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
+	</aop:config>
+
+	<bean id="smsCodeUtil" class="com.yibi.extern.api.aliyun.smscode.SMSCodeUtil">
+		<property name="accessKeyId" value="${aliyun.smsCode.accessKeyId}"/>
+		<property name="accessKeySecret" value="${aliyun.smsCode.accessKeySecret}"/>
+		<property name="signName" value="${aliyun.smsCode.signName}"/>
+	</bean>
+
+
+
+
+</beans>

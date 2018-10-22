@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.ManagerMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Manager">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userAccount" jdbcType="VARCHAR" property="useraccount" />
+    <result column="userPassword" jdbcType="CHAR" property="userpassword" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="token" jdbcType="CHAR" property="token" />
+    <result column="tokenCreateTime" jdbcType="TIMESTAMP" property="tokencreatetime" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="loginTime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userAccount, userPassword, userName, token, tokenCreateTime, type, loginTime, 
+    createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Manager">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into manager (userAccount, userPassword, userName, 
+      token, tokenCreateTime, type, 
+      loginTime, createTime, updateTime
+      )
+    values (#{useraccount,jdbcType=VARCHAR}, #{userpassword,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+      #{token,jdbcType=CHAR}, #{tokencreatetime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, 
+      #{logintime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Manager">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="useraccount != null">
+        userAccount,
+      </if>
+      <if test="userpassword != null">
+        userPassword,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="tokencreatetime != null">
+        tokenCreateTime,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="logintime != null">
+        loginTime,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="useraccount != null">
+        #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        #{userpassword,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=CHAR},
+      </if>
+      <if test="tokencreatetime != null">
+        #{tokencreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Manager">
+    update manager
+    set userAccount = #{useraccount,jdbcType=VARCHAR},
+      userPassword = #{userpassword,jdbcType=CHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      token = #{token,jdbcType=CHAR},
+      tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Manager">
+    update manager
+    <set>
+      <if test="useraccount != null">
+        userAccount = #{useraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null">
+        userPassword = #{userpassword,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=CHAR},
+      </if>
+      <if test="tokencreatetime != null">
+        tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="logintime != null">
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from manager
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where 1=1 
+    <if test="useraccount != null">
+       and  userAccount = #{useraccount,jdbcType=VARCHAR}
+    </if>
+    <if test="userpassword != null">
+       and  userPassword = #{userpassword,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+       and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="token != null">
+       and  token = #{token,jdbcType=CHAR}
+    </if>
+    <if test="tokencreatetime != null">
+       and  tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="logintime != null">
+       and  loginTime = #{logintime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from manager
+    where 1=1 
+    <if test="useraccount != null">
+       and  userAccount = #{useraccount,jdbcType=VARCHAR}
+    </if>
+    <if test="userpassword != null">
+       and  userPassword = #{userpassword,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+       and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="token != null">
+       and  token = #{token,jdbcType=CHAR}
+    </if>
+    <if test="tokencreatetime != null">
+       and  tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="logintime != null">
+       and  loginTime = #{logintime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from manager 
+    where 1=1 
+    <if test="useraccount != null">
+       and  userAccount = #{useraccount,jdbcType=VARCHAR}
+    </if>
+    <if test="userpassword != null">
+       and  userPassword = #{userpassword,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+       and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="token != null">
+       and  token = #{token,jdbcType=CHAR}
+    </if>
+    <if test="tokencreatetime != null">
+       and  tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="logintime != null">
+       and  loginTime = #{logintime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

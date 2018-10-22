@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.RobotMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Robot">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="onoff" jdbcType="TINYINT" property="onoff" />
+    <result column="operId" jdbcType="INTEGER" property="operid" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, onoff, operId, state, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Robot">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into robot (coinType, onoff, operId, 
+      state, createTime, updateTime
+      )
+    values (#{cointype,jdbcType=TINYINT}, #{onoff,jdbcType=TINYINT}, #{operid,jdbcType=INTEGER}, 
+      #{state,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Robot">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into robot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="onoff != null">
+        onoff,
+      </if>
+      <if test="operid != null">
+        operId,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="onoff != null">
+        #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="operid != null">
+        #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Robot">
+    update robot
+    set coinType = #{cointype,jdbcType=TINYINT},
+      onoff = #{onoff,jdbcType=TINYINT},
+      operId = #{operid,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Robot">
+    update robot
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="onoff != null">
+        onoff = #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="operid != null">
+        operId = #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from robot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from robot 
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectRobotOrUserName"  resultType="java.util.Map">
+    SELECT r.*,m.userName,cm.coinName FROM robot r LEFT JOIN manager m ON r.operId=m.id LEFT JOIN coin_manage cm ON r.coinType=cm.coinType where r.state=1
+  </select>
+
+</mapper>

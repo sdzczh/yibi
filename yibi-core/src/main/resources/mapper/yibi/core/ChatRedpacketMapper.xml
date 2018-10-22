@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.ChatRedpacketMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.ChatRedpacket">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sendUserId" jdbcType="INTEGER" property="senduserid" />
+    <result column="accountType" jdbcType="TINYINT" property="accounttype" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="amtOfCny" jdbcType="DECIMAL" property="amtofcny" />
+    <result column="remainAmt" jdbcType="DECIMAL" property="remainamt" />
+    <result column="remainNum" jdbcType="INTEGER" property="remainnum" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="inactiveTime" jdbcType="TIMESTAMP" property="inactivetime" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, sendUserId, accountType, type, coinType, amount, num, amtOfCny, remainAmt, remainNum, 
+    state, note, inactiveTime, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.ChatRedpacket">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_redpacket (sendUserId, accountType, type, 
+      coinType, amount, num, 
+      amtOfCny, remainAmt, remainNum, 
+      state, note, inactiveTime, 
+      createTime, updateTime)
+    values (#{senduserid,jdbcType=INTEGER}, #{accounttype,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, 
+      #{cointype,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, 
+      #{amtofcny,jdbcType=DECIMAL}, #{remainamt,jdbcType=DECIMAL}, #{remainnum,jdbcType=INTEGER}, 
+      #{state,jdbcType=TINYINT}, #{note,jdbcType=VARCHAR}, #{inactivetime,jdbcType=TIMESTAMP}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.ChatRedpacket">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_redpacket
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="senduserid != null">
+        sendUserId,
+      </if>
+      <if test="accounttype != null">
+        accountType,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="amtofcny != null">
+        amtOfCny,
+      </if>
+      <if test="remainamt != null">
+        remainAmt,
+      </if>
+      <if test="remainnum != null">
+        remainNum,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="note != null">
+        note,
+      </if>
+      <if test="inactivetime != null">
+        inactiveTime,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="senduserid != null">
+        #{senduserid,jdbcType=INTEGER},
+      </if>
+      <if test="accounttype != null">
+        #{accounttype,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="amtofcny != null">
+        #{amtofcny,jdbcType=DECIMAL},
+      </if>
+      <if test="remainamt != null">
+        #{remainamt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainnum != null">
+        #{remainnum,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="note != null">
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="inactivetime != null">
+        #{inactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.ChatRedpacket">
+    update chat_redpacket
+    set sendUserId = #{senduserid,jdbcType=INTEGER},
+      accountType = #{accounttype,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      coinType = #{cointype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      num = #{num,jdbcType=INTEGER},
+      amtOfCny = #{amtofcny,jdbcType=DECIMAL},
+      remainAmt = #{remainamt,jdbcType=DECIMAL},
+      remainNum = #{remainnum,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT},
+      note = #{note,jdbcType=VARCHAR},
+      inactiveTime = #{inactivetime,jdbcType=TIMESTAMP},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.ChatRedpacket">
+    update chat_redpacket
+    <set>
+      <if test="senduserid != null">
+        sendUserId = #{senduserid,jdbcType=INTEGER},
+      </if>
+      <if test="accounttype != null">
+        accountType = #{accounttype,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="amtofcny != null">
+        amtOfCny = #{amtofcny,jdbcType=DECIMAL},
+      </if>
+      <if test="remainamt != null">
+        remainAmt = #{remainamt,jdbcType=DECIMAL},
+      </if>
+      <if test="remainnum != null">
+        remainNum = #{remainnum,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="note != null">
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="inactivetime != null">
+        inactiveTime = #{inactivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chat_redpacket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_redpacket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_redpacket
+    where 1=1 
+    <if test="senduserid != null">
+       and  sendUserId = #{senduserid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="num != null">
+       and  num = #{num,jdbcType=INTEGER}
+    </if>
+    <if test="amtofcny != null">
+       and  amtOfCny = #{amtofcny,jdbcType=DECIMAL}
+    </if>
+    <if test="remainamt != null">
+       and  remainAmt = #{remainamt,jdbcType=DECIMAL}
+    </if>
+    <if test="remainnum != null">
+       and  remainNum = #{remainnum,jdbcType=INTEGER}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="note != null">
+       and  note = #{note,jdbcType=VARCHAR}
+    </if>
+    <if test="inactivetime != null">
+       and  inactiveTime = #{inactivetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_redpacket
+    where 1=1 
+    <if test="senduserid != null">
+       and  sendUserId = #{senduserid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="num != null">
+       and  num = #{num,jdbcType=INTEGER}
+    </if>
+    <if test="amtofcny != null">
+       and  amtOfCny = #{amtofcny,jdbcType=DECIMAL}
+    </if>
+    <if test="remainamt != null">
+       and  remainAmt = #{remainamt,jdbcType=DECIMAL}
+    </if>
+    <if test="remainnum != null">
+       and  remainNum = #{remainnum,jdbcType=INTEGER}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="note != null">
+       and  note = #{note,jdbcType=VARCHAR}
+    </if>
+    <if test="inactivetime != null">
+       and  inactiveTime = #{inactivetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from chat_redpacket 
+    where 1=1 
+    <if test="senduserid != null">
+       and  sendUserId = #{senduserid,jdbcType=INTEGER}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="num != null">
+       and  num = #{num,jdbcType=INTEGER}
+    </if>
+    <if test="amtofcny != null">
+       and  amtOfCny = #{amtofcny,jdbcType=DECIMAL}
+    </if>
+    <if test="remainamt != null">
+       and  remainAmt = #{remainamt,jdbcType=DECIMAL}
+    </if>
+    <if test="remainnum != null">
+       and  remainNum = #{remainnum,jdbcType=INTEGER}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="note != null">
+       and  note = #{note,jdbcType=VARCHAR}
+    </if>
+    <if test="inactivetime != null">
+       and  inactiveTime = #{inactivetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="querySendList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT  IF(f.id IS NULL OR f.remarkName='' ,u.nickName,f.remarkName) name,send.amount,send.coinType,send.amtOfCny,send.createTime
+    FROM chat_redpacket send
+    LEFT JOIN chat_redpacket_recive rec ON send.id = rec.redpacId
+    LEFT JOIN user u ON rec.userId = u.id
+    LEFT JOIN chat_friends f ON  rec.userId = f.friendId AND f.userId=#{userId}
+    WHERE send.sendUserId=#{userId}  order by send.id desc
+    limit #{firstResult},#{maxResult}
+  </select>
+  <select id="querySumSend" parameterType="Integer" resultType="BigDecimal">
+    SELECT IFNULL(SUM(amtOfCny),0) sumAmt FROM chat_redpacket WHERE sendUserId = #{userId}
+  </select>
+</mapper>

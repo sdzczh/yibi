@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-batch" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-externapi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-globalmarket" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-openapi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-orderapi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-turnapi" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/yibi-websocket" charset="UTF-8" />
+  </component>
+</project>

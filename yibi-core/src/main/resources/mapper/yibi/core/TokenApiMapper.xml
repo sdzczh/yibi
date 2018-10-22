@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.TokenApiMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.TokenApi">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="INTEGER" property="cointype" />
+    <result column="rpcurl" jdbcType="VARCHAR" property="rpcurl" />
+    <result column="rpcport" jdbcType="VARCHAR" property="rpcport" />
+    <result column="tokenAddress" jdbcType="VARCHAR" property="tokenaddress" />
+    <result column="transMethodId" jdbcType="VARCHAR" property="transmethodid" />
+    <result column="balanceMethodId" jdbcType="VARCHAR" property="balancemethodid" />
+    <result column="wei" jdbcType="DECIMAL" property="wei" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, rpcurl, rpcport, tokenAddress, transMethodId, balanceMethodId, wei, 
+    createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.TokenApi">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into token_api (coinType, rpcurl, rpcport, 
+      tokenAddress, transMethodId, balanceMethodId, 
+      wei, createTime, updateTime
+      )
+    values (#{cointype,jdbcType=INTEGER}, #{rpcurl,jdbcType=VARCHAR}, #{rpcport,jdbcType=VARCHAR}, 
+      #{tokenaddress,jdbcType=VARCHAR}, #{transmethodid,jdbcType=VARCHAR}, #{balancemethodid,jdbcType=VARCHAR}, 
+      #{wei,jdbcType=DECIMAL}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.TokenApi">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into token_api
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="rpcurl != null">
+        rpcurl,
+      </if>
+      <if test="rpcport != null">
+        rpcport,
+      </if>
+      <if test="tokenaddress != null">
+        tokenAddress,
+      </if>
+      <if test="transmethodid != null">
+        transMethodId,
+      </if>
+      <if test="balancemethodid != null">
+        balanceMethodId,
+      </if>
+      <if test="wei != null">
+        wei,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=INTEGER},
+      </if>
+      <if test="rpcurl != null">
+        #{rpcurl,jdbcType=VARCHAR},
+      </if>
+      <if test="rpcport != null">
+        #{rpcport,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenaddress != null">
+        #{tokenaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="transmethodid != null">
+        #{transmethodid,jdbcType=VARCHAR},
+      </if>
+      <if test="balancemethodid != null">
+        #{balancemethodid,jdbcType=VARCHAR},
+      </if>
+      <if test="wei != null">
+        #{wei,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.TokenApi">
+    update token_api
+    set coinType = #{cointype,jdbcType=INTEGER},
+      rpcurl = #{rpcurl,jdbcType=VARCHAR},
+      rpcport = #{rpcport,jdbcType=VARCHAR},
+      tokenAddress = #{tokenaddress,jdbcType=VARCHAR},
+      transMethodId = #{transmethodid,jdbcType=VARCHAR},
+      balanceMethodId = #{balancemethodid,jdbcType=VARCHAR},
+      wei = #{wei,jdbcType=DECIMAL},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.TokenApi">
+    update token_api
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=INTEGER},
+      </if>
+      <if test="rpcurl != null">
+        rpcurl = #{rpcurl,jdbcType=VARCHAR},
+      </if>
+      <if test="rpcport != null">
+        rpcport = #{rpcport,jdbcType=VARCHAR},
+      </if>
+      <if test="tokenaddress != null">
+        tokenAddress = #{tokenaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="transmethodid != null">
+        transMethodId = #{transmethodid,jdbcType=VARCHAR},
+      </if>
+      <if test="balancemethodid != null">
+        balanceMethodId = #{balancemethodid,jdbcType=VARCHAR},
+      </if>
+      <if test="wei != null">
+        wei = #{wei,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from token_api
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from token_api
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from token_api
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="rpcurl != null">
+       and  rpcurl = #{rpcurl,jdbcType=VARCHAR}
+    </if>
+    <if test="rpcport != null">
+       and  rpcport = #{rpcport,jdbcType=VARCHAR}
+    </if>
+    <if test="tokenaddress != null">
+       and  tokenAddress = #{tokenaddress,jdbcType=VARCHAR}
+    </if>
+    <if test="transmethodid != null">
+       and  transMethodId = #{transmethodid,jdbcType=VARCHAR}
+    </if>
+    <if test="balancemethodid != null">
+       and  balanceMethodId = #{balancemethodid,jdbcType=VARCHAR}
+    </if>
+    <if test="wei != null">
+       and  wei = #{wei,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from token_api
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="rpcurl != null">
+       and  rpcurl = #{rpcurl,jdbcType=VARCHAR}
+    </if>
+    <if test="rpcport != null">
+       and  rpcport = #{rpcport,jdbcType=VARCHAR}
+    </if>
+    <if test="tokenaddress != null">
+       and  tokenAddress = #{tokenaddress,jdbcType=VARCHAR}
+    </if>
+    <if test="transmethodid != null">
+       and  transMethodId = #{transmethodid,jdbcType=VARCHAR}
+    </if>
+    <if test="balancemethodid != null">
+       and  balanceMethodId = #{balancemethodid,jdbcType=VARCHAR}
+    </if>
+    <if test="wei != null">
+       and  wei = #{wei,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from token_api 
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="rpcurl != null">
+       and  rpcurl = #{rpcurl,jdbcType=VARCHAR}
+    </if>
+    <if test="rpcport != null">
+       and  rpcport = #{rpcport,jdbcType=VARCHAR}
+    </if>
+    <if test="tokenaddress != null">
+       and  tokenAddress = #{tokenaddress,jdbcType=VARCHAR}
+    </if>
+    <if test="transmethodid != null">
+       and  transMethodId = #{transmethodid,jdbcType=VARCHAR}
+    </if>
+    <if test="balancemethodid != null">
+       and  balanceMethodId = #{balancemethodid,jdbcType=VARCHAR}
+    </if>
+    <if test="wei != null">
+       and  wei = #{wei,jdbcType=DECIMAL}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

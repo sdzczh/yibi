@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.DealDigRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.DealDigRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="orderRecordId" jdbcType="INTEGER" property="orderrecordid" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="operType" jdbcType="VARCHAR" property="opertype" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <resultMap id="ListResultMap" type="com.yibi.core.entity.DealDigRecordModel">
+    <result column="today" jdbcType="DECIMAL" property="today" />
+    <result column="yesterday" jdbcType="DECIMAL" property="yesterday" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, orderRecordId, coinType, amount, opertype, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.DealDigRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into deal_dig_record (userId, orderRecordId, coinType, 
+      amount, opertype, createTime, updateTime
+      )
+    values (#{userid,jdbcType=INTEGER}, #{orderrecordid,jdbcType=INTEGER}, #{cointype,jdbcType=TINYINT}, 
+      #{amount,jdbcType=DECIMAL}, #{opertype,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.DealDigRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into deal_dig_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="orderrecordid != null">
+        orderRecordId,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="opertype != null">
+        opertype,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderrecordid != null">
+        #{orderrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="opertype != null">
+        #{opertype,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.DealDigRecord">
+    update deal_dig_record
+    set userId = #{userid,jdbcType=INTEGER},
+      orderRecordId = #{orderrecordid,jdbcType=INTEGER},
+      coinType = #{cointype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      opertype = #{opertype,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.DealDigRecord">
+    update deal_dig_record
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="orderrecordid != null">
+        orderRecordId = #{orderrecordid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        opertype = #{opertype,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deal_dig_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_dig_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryProfit" parameterType="java.lang.Integer" resultMap="ListResultMap">
+    SELECT * FROM
+     (SELECT SUM(amount) today FROM deal_dig_record WHERE TO_DAYS(createTime) = TO_DAYS(NOW()) AND userId=#{userid,jdbcType=INTEGER}) a,
+      (SELECT SUM(amount) yesterday FROM deal_dig_record WHERE TO_DAYS( NOW( ) ) - TO_DAYS( createTime) = 1 AND userId=#{userid,jdbcType=INTEGER})b,
+       (SELECT SUM(amount) total FROM deal_dig_record WHERE userId=#{userid,jdbcType=INTEGER})c
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_dig_record
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="orderrecordid != null">
+       and  orderRecordId = #{orderrecordid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="opertype != null">
+      and  opertype = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deal_dig_record
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="orderrecordid != null">
+       and  orderRecordId = #{orderrecordid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="opertype != null">
+       and  opertype = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from deal_dig_record 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="orderrecordid != null">
+       and  orderRecordId = #{orderrecordid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="opertype != null">
+       and  opertype = #{opertype,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

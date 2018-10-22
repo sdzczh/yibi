@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Account">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="availBalance" jdbcType="DECIMAL" property="availbalance" />
+    <result column="frozenBlance" jdbcType="DECIMAL" property="frozenblance" />
+    <result column="accountType" jdbcType="TINYINT" property="accounttype" />
+    <result column="cointype" jdbcType="TINYINT" property="cointype" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, availBalance, frozenBlance, accountType, cointype, createTime, updateTime
+  </sql>
+  <sql id="Account_Column_List">
+    availBalance, frozenBlance, cointype
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Account">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account (userId, availBalance, frozenBlance, 
+      accountType, cointype, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{availbalance,jdbcType=DECIMAL}, #{frozenblance,jdbcType=DECIMAL}, 
+      #{accounttype,jdbcType=TINYINT}, #{cointype,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Account">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="availbalance != null">
+        availBalance,
+      </if>
+      <if test="frozenblance != null">
+        frozenBlance,
+      </if>
+      <if test="accounttype != null">
+        accountType,
+      </if>
+      <if test="cointype != null">
+        cointype,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="availbalance != null">
+        #{availbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenblance != null">
+        #{frozenblance,jdbcType=DECIMAL},
+      </if>
+      <if test="accounttype != null">
+        #{accounttype,jdbcType=TINYINT},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Account">
+    update account
+    set userId = #{userid,jdbcType=INTEGER},
+      availBalance = #{availbalance,jdbcType=DECIMAL},
+      frozenBlance = #{frozenblance,jdbcType=DECIMAL},
+      accountType = #{accounttype,jdbcType=TINYINT},
+      cointype = #{cointype,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Account">
+    update account
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="availbalance != null">
+        availBalance = #{availbalance,jdbcType=DECIMAL},
+      </if>
+      <if test="frozenblance != null">
+        frozenBlance = #{frozenblance,jdbcType=DECIMAL},
+      </if>
+      <if test="accounttype != null">
+        accountType = #{accounttype,jdbcType=TINYINT},
+      </if>
+      <if test="cointype != null">
+        cointype = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="availbalance != null">
+       and  availBalance = #{availbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="frozenblance != null">
+       and  frozenBlance = #{frozenblance,jdbcType=DECIMAL}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectBySeque" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    ac.id, ac.userId, ac.availBalance, ac.frozenBlance, ac.accountType, ac.cointype, ac.createTime, ac.updateTime
+    from account ac LEFT JOIN coin_manage cm ON ac.cointype=cm.coinType
+    where 1=1
+    <if test="userid != null">
+       and  ac.userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="availbalance != null">
+       and  ac.availBalance = #{availbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="frozenblance != null">
+       and  ac.frozenBlance = #{frozenblance,jdbcType=DECIMAL}
+    </if>
+    <if test="accounttype != null">
+       and  ac.accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  ac.cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  ac.createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  ac.updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    ORDER BY cm.seque
+  </select>
+  <select id="selectAllForWallet" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Account_Column_List" />
+    from account
+    where 1=1
+    <if test="userid != null">
+      and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="availbalance != null">
+      and  availBalance = #{availbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="frozenblance != null">
+      and  frozenBlance = #{frozenblance,jdbcType=DECIMAL}
+    </if>
+    <if test="accounttype != null">
+      and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+      and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+      and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    order by id desc
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="availbalance != null">
+       and  availBalance = #{availbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="frozenblance != null">
+       and  frozenBlance = #{frozenblance,jdbcType=DECIMAL}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from account 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="availbalance != null">
+       and  availBalance = #{availbalance,jdbcType=DECIMAL}
+    </if>
+    <if test="frozenblance != null">
+       and  frozenBlance = #{frozenblance,jdbcType=DECIMAL}
+    </if>
+    <if test="accounttype != null">
+       and  accountType = #{accounttype,jdbcType=TINYINT}
+    </if>
+    <if test="cointype != null">
+       and  cointype = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <update id="updateBalance" parameterType="com.yibi.core.entity.Account">
+    update account
+    set availBalance=availBalance + #{availbalance},frozenBlance = frozenBlance+ #{frozenblance}
+    where userId=#{userid} and accountType=#{accounttype} and cointype=#{cointype}
+    <if test="availbalance &lt; 0">
+      and availBalance &gt;= -#{availbalance}
+    </if>
+    <if test="frozenblance &lt; 0">
+      and frozenBlance &gt;= -#{frozenblance}
+    </if>
+
+  </update>
+
+  <select id="selectAccountOrPhone" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT cm.coinName,ud.*,u.phone,u.userName FROM account ud LEFT JOIN user u ON ud.userId=u.id
+    LEFT JOIN coin_manage cm ON ud.coinType = cm.coinType
+
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  ud.cointype = #{coinType,jdbcType=VARCHAR}
+    </if>
+    <if test="accountType != null">
+      and  ud.accountType = #{accountType,jdbcType=VARCHAR}
+    </if>
+    order by ud.id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAccountCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM account ud LEFT JOIN user u ON ud.userId=u.id
+    LEFT JOIN coin_manage cm ON ud.coinType = cm.coinType
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  ud.cointype = #{coinType,jdbcType=VARCHAR}
+    </if>
+    <if test="accountType != null">
+      and  ud.accountType = #{accountType,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="queryByAvailBalance" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from account
+    where accountType=#{accountType} and cointype =#{coinType} and availBalance &gt;= #{minAvailBalance}
+    order by id limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+</mapper>

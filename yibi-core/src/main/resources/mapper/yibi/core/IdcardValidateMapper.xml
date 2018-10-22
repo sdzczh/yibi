@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.IdcardValidateMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.IdcardValidate">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="identificationNumber" jdbcType="VARCHAR" property="identificationnumber" />
+    <result column="idCardType" jdbcType="VARCHAR" property="idcardtype" />
+    <result column="idCardExpiry" jdbcType="CHAR" property="idcardexpiry" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="idCardFrontPic" jdbcType="VARCHAR" property="idcardfrontpic" />
+    <result column="idCardBackPic" jdbcType="VARCHAR" property="idcardbackpic" />
+    <result column="facePic" jdbcType="VARCHAR" property="facepic" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="taskId" jdbcType="CHAR" property="taskid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, name, identificationNumber, idCardType, idCardExpiry, address, sex, idCardFrontPic, 
+    idCardBackPic, facePic, state, taskId, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.IdcardValidate">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into idcard_validate (userId, name, identificationNumber, 
+      idCardType, idCardExpiry, address, 
+      sex, idCardFrontPic, idCardBackPic, 
+      facePic, state, taskId, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{identificationnumber,jdbcType=VARCHAR}, 
+      #{idcardtype,jdbcType=VARCHAR}, #{idcardexpiry,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{idcardfrontpic,jdbcType=VARCHAR}, #{idcardbackpic,jdbcType=VARCHAR}, 
+      #{facepic,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{taskid,jdbcType=CHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.IdcardValidate">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into idcard_validate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="identificationnumber != null">
+        identificationNumber,
+      </if>
+      <if test="idcardtype != null">
+        idCardType,
+      </if>
+      <if test="idcardexpiry != null">
+        idCardExpiry,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="idcardfrontpic != null">
+        idCardFrontPic,
+      </if>
+      <if test="idcardbackpic != null">
+        idCardBackPic,
+      </if>
+      <if test="facepic != null">
+        facePic,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="taskid != null">
+        taskId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identificationnumber != null">
+        #{identificationnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardtype != null">
+        #{idcardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardexpiry != null">
+        #{idcardexpiry,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="idcardfrontpic != null">
+        #{idcardfrontpic,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardbackpic != null">
+        #{idcardbackpic,jdbcType=VARCHAR},
+      </if>
+      <if test="facepic != null">
+        #{facepic,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="taskid != null">
+        #{taskid,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.IdcardValidate">
+    update idcard_validate
+    set userId = #{userid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      identificationNumber = #{identificationnumber,jdbcType=VARCHAR},
+      idCardType = #{idcardtype,jdbcType=VARCHAR},
+      idCardExpiry = #{idcardexpiry,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      idCardFrontPic = #{idcardfrontpic,jdbcType=VARCHAR},
+      idCardBackPic = #{idcardbackpic,jdbcType=VARCHAR},
+      facePic = #{facepic,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      taskId = #{taskid,jdbcType=CHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.IdcardValidate">
+    update idcard_validate
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identificationnumber != null">
+        identificationNumber = #{identificationnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardtype != null">
+        idCardType = #{idcardtype,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardexpiry != null">
+        idCardExpiry = #{idcardexpiry,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="idcardfrontpic != null">
+        idCardFrontPic = #{idcardfrontpic,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardbackpic != null">
+        idCardBackPic = #{idcardbackpic,jdbcType=VARCHAR},
+      </if>
+      <if test="facepic != null">
+        facePic = #{facepic,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="taskid != null">
+        taskId = #{taskid,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from idcard_validate
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from idcard_validate
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryValidateTimes" parameterType="java.util.Map" resultType="map">
+    SELECT COUNT(*) as counts, DATE_FORMAT(createTime, '%Y-%m-%d') as valiDate  FROM idcard_validate
+     WHERE userId=#{userid,jdbcType=INTEGER} and createTime between #{startDate,jdbcType=VARCHAR} and #{currDate,jdbcType=VARCHAR} GROUP BY  valiDate
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from idcard_validate
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="identificationnumber != null">
+       and  identificationNumber = #{identificationnumber,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardtype != null">
+       and  idCardType = #{idcardtype,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardexpiry != null">
+       and  idCardExpiry = #{idcardexpiry,jdbcType=CHAR}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="sex != null">
+       and  sex = #{sex,jdbcType=CHAR}
+    </if>
+    <if test="idcardfrontpic != null">
+       and  idCardFrontPic = #{idcardfrontpic,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardbackpic != null">
+       and  idCardBackPic = #{idcardbackpic,jdbcType=VARCHAR}
+    </if>
+    <if test="facepic != null">
+       and  facePic = #{facepic,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="taskid != null">
+       and  taskId = #{taskid,jdbcType=CHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from idcard_validate
+  where 1=1
+  <if test="userid != null">
+    and  userId = #{userid,jdbcType=INTEGER}
+  </if>
+  <if test="name != null">
+    and  name = #{name,jdbcType=VARCHAR}
+  </if>
+  <if test="identificationnumber != null">
+    and  identificationNumber = #{identificationnumber,jdbcType=VARCHAR}
+  </if>
+  <if test="idcardtype != null">
+    and  idCardType = #{idcardtype,jdbcType=VARCHAR}
+  </if>
+  <if test="idcardexpiry != null">
+    and  idCardExpiry = #{idcardexpiry,jdbcType=CHAR}
+  </if>
+  <if test="address != null">
+    and  address = #{address,jdbcType=VARCHAR}
+  </if>
+  <if test="sex != null">
+    and  sex = #{sex,jdbcType=CHAR}
+  </if>
+  <if test="idcardfrontpic != null">
+    and  idCardFrontPic = #{idcardfrontpic,jdbcType=VARCHAR}
+  </if>
+  <if test="idcardbackpic != null">
+    and  idCardBackPic = #{idcardbackpic,jdbcType=VARCHAR}
+  </if>
+  <if test="facepic != null">
+    and  facePic = #{facepic,jdbcType=VARCHAR}
+  </if>
+  <if test="state != null">
+    and  state = #{state,jdbcType=TINYINT}
+  </if>
+  <if test="taskid != null">
+    and  taskId = #{taskid,jdbcType=CHAR}
+  </if>
+  <if test="createtime != null">
+    and  createTime = #{createtime,jdbcType=TIMESTAMP}
+  </if>
+  <if test="updatetime != null">
+    and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+  </if>
+  order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+</select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from idcard_validate
+    where 1=1
+    <if test="userid != null">
+      and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+      and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="identificationnumber != null">
+      and  identificationNumber = #{identificationnumber,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardtype != null">
+      and  idCardType = #{idcardtype,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardexpiry != null">
+      and  idCardExpiry = #{idcardexpiry,jdbcType=CHAR}
+    </if>
+    <if test="address != null">
+      and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="sex != null">
+      and  sex = #{sex,jdbcType=CHAR}
+    </if>
+    <if test="idcardfrontpic != null">
+      and  idCardFrontPic = #{idcardfrontpic,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardbackpic != null">
+      and  idCardBackPic = #{idcardbackpic,jdbcType=VARCHAR}
+    </if>
+    <if test="facepic != null">
+      and  facePic = #{facepic,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+      and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="taskid != null">
+      and  taskId = #{taskid,jdbcType=CHAR}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+      and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+
+
+
+  <select id="selectConditionPaging" parameterType="java.util.Map" resultType="java.util.Map">
+    select iv.*,u.phone from idcard_validate iv left join user u on iv.userId=u.id
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+      and iv.state = #{state,jdbcType=TINYINT}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) from idcard_validate iv left join user u on iv.userId=u.id
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+      and iv.state = #{state,jdbcType=TINYINT}
+    </if>
+  </select>
+</mapper>

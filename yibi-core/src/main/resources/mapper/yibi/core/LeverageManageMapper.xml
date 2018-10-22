@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.LeverageManageMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.LeverageManage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="unitCoinType" jdbcType="TINYINT" property="unitcointype" />
+    <result column="onoff" jdbcType="TINYINT" property="onoff" />
+    <result column="orderRate" jdbcType="DECIMAL" property="orderrate" />
+    <result column="unitRate" jdbcType="DECIMAL" property="unitrate" />
+    <result column="orderTimeLimit" jdbcType="INTEGER" property="ordertimelimit" />
+    <result column="unitTimeLimit" jdbcType="INTEGER" property="unittimelimit" />
+    <result column="orderMin" jdbcType="DECIMAL" property="ordermin" />
+    <result column="unitMin" jdbcType="DECIMAL" property="unitmin" />
+    <result column="orderOnoff" jdbcType="TINYINT" property="orderonoff" />
+    <result column="unitOnoff" jdbcType="TINYINT" property="unitonoff" />
+    <result column="orderRerate" jdbcType="INTEGER" property="orderrerate" />
+    <result column="unitRerate" jdbcType="INTEGER" property="unitrerate" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="performRate" jdbcType="DECIMAL" property="performrate" />
+    <result column="referRate" jdbcType="DECIMAL" property="referrate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orderCoinType, unitCoinType, onoff, orderRate, unitRate, orderTimeLimit, unitTimeLimit, 
+    orderMin, unitMin, orderOnoff, unitOnoff, orderRerate, unitRerate, createTime, updateTime, 
+    performRate, referRate
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.LeverageManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into leverage_manage (orderCoinType, unitCoinType, onoff, 
+      orderRate, unitRate, orderTimeLimit, 
+      unitTimeLimit, orderMin, unitMin, 
+      orderOnoff, unitOnoff, orderRerate, 
+      unitRerate, createTime, updateTime, 
+      performRate, referRate)
+    values (#{ordercointype,jdbcType=TINYINT}, #{unitcointype,jdbcType=TINYINT}, #{onoff,jdbcType=TINYINT}, 
+      #{orderrate,jdbcType=DECIMAL}, #{unitrate,jdbcType=DECIMAL}, #{ordertimelimit,jdbcType=INTEGER}, 
+      #{unittimelimit,jdbcType=INTEGER}, #{ordermin,jdbcType=DECIMAL}, #{unitmin,jdbcType=DECIMAL}, 
+      #{orderonoff,jdbcType=TINYINT}, #{unitonoff,jdbcType=TINYINT}, #{orderrerate,jdbcType=INTEGER}, 
+      #{unitrerate,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{performrate,jdbcType=DECIMAL}, #{referrate,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.LeverageManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into leverage_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType,
+      </if>
+      <if test="onoff != null">
+        onoff,
+      </if>
+      <if test="orderrate != null">
+        orderRate,
+      </if>
+      <if test="unitrate != null">
+        unitRate,
+      </if>
+      <if test="ordertimelimit != null">
+        orderTimeLimit,
+      </if>
+      <if test="unittimelimit != null">
+        unitTimeLimit,
+      </if>
+      <if test="ordermin != null">
+        orderMin,
+      </if>
+      <if test="unitmin != null">
+        unitMin,
+      </if>
+      <if test="orderonoff != null">
+        orderOnoff,
+      </if>
+      <if test="unitonoff != null">
+        unitOnoff,
+      </if>
+      <if test="orderrerate != null">
+        orderRerate,
+      </if>
+      <if test="unitrerate != null">
+        unitRerate,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="performrate != null">
+        performRate,
+      </if>
+      <if test="referrate != null">
+        referRate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="onoff != null">
+        #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="orderrate != null">
+        #{orderrate,jdbcType=DECIMAL},
+      </if>
+      <if test="unitrate != null">
+        #{unitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertimelimit != null">
+        #{ordertimelimit,jdbcType=INTEGER},
+      </if>
+      <if test="unittimelimit != null">
+        #{unittimelimit,jdbcType=INTEGER},
+      </if>
+      <if test="ordermin != null">
+        #{ordermin,jdbcType=DECIMAL},
+      </if>
+      <if test="unitmin != null">
+        #{unitmin,jdbcType=DECIMAL},
+      </if>
+      <if test="orderonoff != null">
+        #{orderonoff,jdbcType=TINYINT},
+      </if>
+      <if test="unitonoff != null">
+        #{unitonoff,jdbcType=TINYINT},
+      </if>
+      <if test="orderrerate != null">
+        #{orderrerate,jdbcType=INTEGER},
+      </if>
+      <if test="unitrerate != null">
+        #{unitrerate,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="performrate != null">
+        #{performrate,jdbcType=DECIMAL},
+      </if>
+      <if test="referrate != null">
+        #{referrate,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.LeverageManage">
+    update leverage_manage
+    set orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      onoff = #{onoff,jdbcType=TINYINT},
+      orderRate = #{orderrate,jdbcType=DECIMAL},
+      unitRate = #{unitrate,jdbcType=DECIMAL},
+      orderTimeLimit = #{ordertimelimit,jdbcType=INTEGER},
+      unitTimeLimit = #{unittimelimit,jdbcType=INTEGER},
+      orderMin = #{ordermin,jdbcType=DECIMAL},
+      unitMin = #{unitmin,jdbcType=DECIMAL},
+      orderOnoff = #{orderonoff,jdbcType=TINYINT},
+      unitOnoff = #{unitonoff,jdbcType=TINYINT},
+      orderRerate = #{orderrerate,jdbcType=INTEGER},
+      unitRerate = #{unitrerate,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      performRate = #{performrate,jdbcType=DECIMAL},
+      referRate = #{referrate,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.LeverageManage">
+    update leverage_manage
+    <set>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="onoff != null">
+        onoff = #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="orderrate != null">
+        orderRate = #{orderrate,jdbcType=DECIMAL},
+      </if>
+      <if test="unitrate != null">
+        unitRate = #{unitrate,jdbcType=DECIMAL},
+      </if>
+      <if test="ordertimelimit != null">
+        orderTimeLimit = #{ordertimelimit,jdbcType=INTEGER},
+      </if>
+      <if test="unittimelimit != null">
+        unitTimeLimit = #{unittimelimit,jdbcType=INTEGER},
+      </if>
+      <if test="ordermin != null">
+        orderMin = #{ordermin,jdbcType=DECIMAL},
+      </if>
+      <if test="unitmin != null">
+        unitMin = #{unitmin,jdbcType=DECIMAL},
+      </if>
+      <if test="orderonoff != null">
+        orderOnoff = #{orderonoff,jdbcType=TINYINT},
+      </if>
+      <if test="unitonoff != null">
+        unitOnoff = #{unitonoff,jdbcType=TINYINT},
+      </if>
+      <if test="orderrerate != null">
+        orderRerate = #{orderrerate,jdbcType=INTEGER},
+      </if>
+      <if test="unitrerate != null">
+        unitRerate = #{unitrerate,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="performrate != null">
+        performRate = #{performrate,jdbcType=DECIMAL},
+      </if>
+      <if test="referrate != null">
+        referRate = #{referrate,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from leverage_manage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from leverage_manage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from leverage_manage
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="orderrate != null">
+       and  orderRate = #{orderrate,jdbcType=DECIMAL}
+    </if>
+    <if test="unitrate != null">
+       and  unitRate = #{unitrate,jdbcType=DECIMAL}
+    </if>
+    <if test="ordertimelimit != null">
+       and  orderTimeLimit = #{ordertimelimit,jdbcType=INTEGER}
+    </if>
+    <if test="unittimelimit != null">
+       and  unitTimeLimit = #{unittimelimit,jdbcType=INTEGER}
+    </if>
+    <if test="ordermin != null">
+       and  orderMin = #{ordermin,jdbcType=DECIMAL}
+    </if>
+    <if test="unitmin != null">
+       and  unitMin = #{unitmin,jdbcType=DECIMAL}
+    </if>
+    <if test="orderonoff != null">
+       and  orderOnoff = #{orderonoff,jdbcType=TINYINT}
+    </if>
+    <if test="unitonoff != null">
+       and  unitOnoff = #{unitonoff,jdbcType=TINYINT}
+    </if>
+    <if test="orderrerate != null">
+       and  orderRerate = #{orderrerate,jdbcType=INTEGER}
+    </if>
+    <if test="unitrerate != null">
+       and  unitRerate = #{unitrerate,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from leverage_manage
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="orderrate != null">
+       and  orderRate = #{orderrate,jdbcType=DECIMAL}
+    </if>
+    <if test="unitrate != null">
+       and  unitRate = #{unitrate,jdbcType=DECIMAL}
+    </if>
+    <if test="ordertimelimit != null">
+       and  orderTimeLimit = #{ordertimelimit,jdbcType=INTEGER}
+    </if>
+    <if test="unittimelimit != null">
+       and  unitTimeLimit = #{unittimelimit,jdbcType=INTEGER}
+    </if>
+    <if test="ordermin != null">
+       and  orderMin = #{ordermin,jdbcType=DECIMAL}
+    </if>
+    <if test="unitmin != null">
+       and  unitMin = #{unitmin,jdbcType=DECIMAL}
+    </if>
+    <if test="orderonoff != null">
+       and  orderOnoff = #{orderonoff,jdbcType=TINYINT}
+    </if>
+    <if test="unitonoff != null">
+       and  unitOnoff = #{unitonoff,jdbcType=TINYINT}
+    </if>
+    <if test="orderrerate != null">
+       and  orderRerate = #{orderrerate,jdbcType=INTEGER}
+    </if>
+    <if test="unitrerate != null">
+       and  unitRerate = #{unitrerate,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from leverage_manage 
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="orderrate != null">
+       and  orderRate = #{orderrate,jdbcType=DECIMAL}
+    </if>
+    <if test="unitrate != null">
+       and  unitRate = #{unitrate,jdbcType=DECIMAL}
+    </if>
+    <if test="ordertimelimit != null">
+       and  orderTimeLimit = #{ordertimelimit,jdbcType=INTEGER}
+    </if>
+    <if test="unittimelimit != null">
+       and  unitTimeLimit = #{unittimelimit,jdbcType=INTEGER}
+    </if>
+    <if test="ordermin != null">
+       and  orderMin = #{ordermin,jdbcType=DECIMAL}
+    </if>
+    <if test="unitmin != null">
+       and  unitMin = #{unitmin,jdbcType=DECIMAL}
+    </if>
+    <if test="orderonoff != null">
+       and  orderOnoff = #{orderonoff,jdbcType=TINYINT}
+    </if>
+    <if test="unitonoff != null">
+       and  unitOnoff = #{unitonoff,jdbcType=TINYINT}
+    </if>
+    <if test="orderrerate != null">
+       and  orderRerate = #{orderrerate,jdbcType=INTEGER}
+    </if>
+    <if test="unitrerate != null">
+       and  unitRerate = #{unitrerate,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+  </select>
+</mapper>

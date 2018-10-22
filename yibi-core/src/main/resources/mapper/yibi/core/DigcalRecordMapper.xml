@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.DigcalRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.DigcalRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="digCalcul" jdbcType="INTEGER" property="digcalcul" />
+    <result column="allCalculForce" jdbcType="INTEGER" property="allcalculforce" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, digCalcul, allCalculForce, name, type, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.DigcalRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into digcal_record (userId, digCalcul, allCalculForce, 
+      name, type, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{digcalcul,jdbcType=INTEGER}, #{allcalculforce,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.DigcalRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into digcal_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="digcalcul != null">
+        digCalcul,
+      </if>
+      <if test="allcalculforce != null">
+        allCalculForce,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="digcalcul != null">
+        #{digcalcul,jdbcType=INTEGER},
+      </if>
+      <if test="allcalculforce != null">
+        #{allcalculforce,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.DigcalRecord">
+    update digcal_record
+    set userId = #{userid,jdbcType=INTEGER},
+      digCalcul = #{digcalcul,jdbcType=INTEGER},
+      allCalculForce = #{allcalculforce,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.DigcalRecord">
+    update digcal_record
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="digcalcul != null">
+        digCalcul = #{digcalcul,jdbcType=INTEGER},
+      </if>
+      <if test="allcalculforce != null">
+        allCalculForce = #{allcalculforce,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from digcal_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from digcal_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from digcal_record
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="digcalcul != null">
+       and  digCalcul = #{digcalcul,jdbcType=INTEGER}
+    </if>
+    <if test="allcalculforce != null">
+       and  allCalculForce = #{allcalculforce,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from digcal_record
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="digcalcul != null">
+       and  digCalcul = #{digcalcul,jdbcType=INTEGER}
+    </if>
+    <if test="allcalculforce != null">
+       and  allCalculForce = #{allcalculforce,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+       and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from digcal_record
+    where 1=1
+    <if test="userid != null">
+      and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="digcalcul != null">
+      and  digCalcul = #{digcalcul,jdbcType=INTEGER}
+    </if>
+    <if test="allcalculforce != null">
+      and  allCalculForce = #{allcalculforce,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+      and  name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+      and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+      and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="existCalcalForceDay" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from digcal_record
+    where 1=1
+    and userId=#{userid,jdbcType=INTEGER} and type=#{type,jdbcType=TINYINT} and createtime &gt;=#{startTime,jdbcType=TIMESTAMP}
+    <if test="endTime != null">
+      and and createtime &lt;=#{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="getTotalCalculForceByUserAndType" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select IFNULL(SUM(digCalcul),0) as total from digcal_record where userId=#{userid,jdbcType=INTEGER} and type=#{type,jdbcType=TINYINT}
+  </select>
+  <select id="queryListByUser" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT r.id , r.digCalcul as calculForce ,r.allCalculForce,r.name as type,r.createTime
+    FROM digcal_record r
+    where r.userId=#{userId}
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into digcal_record (userId, digCalcul, allCalculForce,name, type)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.userid,jdbcType=INTEGER}, #{item.digcalcul,jdbcType=INTEGER}, #{item.allcalculforce,jdbcType=INTEGER},
+      #{item.name,jdbcType=VARCHAR}, #{item.type,jdbcType=TINYINT})
+    </foreach>
+  </insert>
+
+  <select id="selectTodayCountByUserId" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM digcal_record
+    where type=12 and createTime &gt;= DATE_FORMAT(CURDATE(),'%Y-%m-%d %H:%i:%s')
+    <if test="userId != null">
+      and  userId = #{userId,jdbcType=TINYINT}
+    </if>
+  </select>
+
+</mapper>

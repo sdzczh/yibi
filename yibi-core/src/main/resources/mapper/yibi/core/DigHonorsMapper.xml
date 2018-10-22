@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.DigHonorsMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.DigHonors">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mineName" jdbcType="VARCHAR" property="minename" />
+    <result column="minePicUrl" jdbcType="VARCHAR" property="minepicurl" />
+    <result column="roleName" jdbcType="VARCHAR" property="rolename" />
+    <result column="roleGrade" jdbcType="TINYINT" property="rolegrade" />
+    <result column="soulMinForce" jdbcType="INTEGER" property="soulminforce" />
+    <result column="soulMaxForce" jdbcType="INTEGER" property="soulmaxforce" />
+    <result column="rolePicUrl" jdbcType="VARCHAR" property="rolepicurl" />
+    <result column="coinType" jdbcType="VARCHAR" property="cointype" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mineName, minePicUrl, roleName, roleGrade, soulMinForce, soulMaxForce, rolePicUrl, 
+    coinType, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.DigHonors">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dig_honors (mineName, minePicUrl, roleName, 
+      roleGrade, soulMinForce, soulMaxForce, 
+      rolePicUrl, coinType, createTime, 
+      updateTime)
+    values (#{minename,jdbcType=VARCHAR}, #{minepicurl,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, 
+      #{rolegrade,jdbcType=TINYINT}, #{soulminforce,jdbcType=INTEGER}, #{soulmaxforce,jdbcType=INTEGER}, 
+      #{rolepicurl,jdbcType=VARCHAR}, #{cointype,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP},
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.DigHonors">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dig_honors
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="minename != null">
+        mineName,
+      </if>
+      <if test="minepicurl != null">
+        minePicUrl,
+      </if>
+      <if test="rolename != null">
+        roleName,
+      </if>
+      <if test="rolegrade != null">
+        roleGrade,
+      </if>
+      <if test="soulminforce != null">
+        soulMinForce,
+      </if>
+      <if test="soulmaxforce != null">
+        soulMaxForce,
+      </if>
+      <if test="rolepicurl != null">
+        rolePicUrl,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="minename != null">
+        #{minename,jdbcType=VARCHAR},
+      </if>
+      <if test="minepicurl != null">
+        #{minepicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegrade != null">
+        #{rolegrade,jdbcType=TINYINT},
+      </if>
+      <if test="soulminforce != null">
+        #{soulminforce,jdbcType=INTEGER},
+      </if>
+      <if test="soulmaxforce != null">
+        #{soulmaxforce,jdbcType=INTEGER},
+      </if>
+      <if test="rolepicurl != null">
+        #{rolepicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.DigHonors">
+    update dig_honors
+    set mineName = #{minename,jdbcType=VARCHAR},
+      minePicUrl = #{minepicurl,jdbcType=VARCHAR},
+      roleName = #{rolename,jdbcType=VARCHAR},
+      roleGrade = #{rolegrade,jdbcType=TINYINT},
+      soulMinForce = #{soulminforce,jdbcType=INTEGER},
+      soulMaxForce = #{soulmaxforce,jdbcType=INTEGER},
+      rolePicUrl = #{rolepicurl,jdbcType=VARCHAR},
+      coinType = #{cointype,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.DigHonors">
+    update dig_honors
+    <set>
+      <if test="minename != null">
+        mineName = #{minename,jdbcType=VARCHAR},
+      </if>
+      <if test="minepicurl != null">
+        minePicUrl = #{minepicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        roleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="rolegrade != null">
+        roleGrade = #{rolegrade,jdbcType=TINYINT},
+      </if>
+      <if test="soulminforce != null">
+        soulMinForce = #{soulminforce,jdbcType=INTEGER},
+      </if>
+      <if test="soulmaxforce != null">
+        soulMaxForce = #{soulmaxforce,jdbcType=INTEGER},
+      </if>
+      <if test="rolepicurl != null">
+        rolePicUrl = #{rolepicurl,jdbcType=VARCHAR},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dig_honors
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dig_honors
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCalcul" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dig_honors
+    where soulMinForce &lt;= #{calcul,jdbcType=INTEGER} and soulMaxForce &gt;= #{calcul,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dig_honors
+    where 1=1 
+    <if test="minename != null">
+       and  mineName = #{minename,jdbcType=VARCHAR}
+    </if>
+    <if test="minepicurl != null">
+       and  minePicUrl = #{minepicurl,jdbcType=VARCHAR}
+    </if>
+    <if test="rolename != null">
+       and  roleName = #{rolename,jdbcType=VARCHAR}
+    </if>
+    <if test="rolegrade != null">
+       and  roleGrade = #{rolegrade,jdbcType=TINYINT}
+    </if>
+    <if test="soulminforce != null">
+       and  soulMinForce = #{soulminforce,jdbcType=INTEGER}
+    </if>
+    <if test="soulmaxforce != null">
+       and  soulMaxForce = #{soulmaxforce,jdbcType=INTEGER}
+    </if>
+    <if test="rolepicurl != null">
+       and  rolePicUrl = #{rolepicurl,jdbcType=VARCHAR}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dig_honors
+    where 1=1 
+    <if test="minename != null">
+       and  mineName = #{minename,jdbcType=VARCHAR}
+    </if>
+    <if test="minepicurl != null">
+       and  minePicUrl = #{minepicurl,jdbcType=VARCHAR}
+    </if>
+    <if test="rolename != null">
+       and  roleName = #{rolename,jdbcType=VARCHAR}
+    </if>
+    <if test="rolegrade != null">
+       and  roleGrade = #{rolegrade,jdbcType=TINYINT}
+    </if>
+    <if test="soulminforce != null">
+       and  soulMinForce = #{soulminforce,jdbcType=INTEGER}
+    </if>
+    <if test="soulmaxforce != null">
+       and  soulMaxForce = #{soulmaxforce,jdbcType=INTEGER}
+    </if>
+    <if test="rolepicurl != null">
+       and  rolePicUrl = #{rolepicurl,jdbcType=VARCHAR}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from dig_honors 
+    where 1=1 
+    <if test="minename != null">
+       and  mineName = #{minename,jdbcType=VARCHAR}
+    </if>
+    <if test="minepicurl != null">
+       and  minePicUrl = #{minepicurl,jdbcType=VARCHAR}
+    </if>
+    <if test="rolename != null">
+       and  roleName = #{rolename,jdbcType=VARCHAR}
+    </if>
+    <if test="rolegrade != null">
+       and  roleGrade = #{rolegrade,jdbcType=TINYINT}
+    </if>
+    <if test="soulminforce != null">
+       and  soulMinForce = #{soulminforce,jdbcType=INTEGER}
+    </if>
+    <if test="soulmaxforce != null">
+       and  soulMaxForce = #{soulmaxforce,jdbcType=INTEGER}
+    </if>
+    <if test="rolepicurl != null">
+       and  rolePicUrl = #{rolepicurl,jdbcType=VARCHAR}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="queryBySoul" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from dig_honors
+    where soulMinForce &gt;= #{soul,jdbcType=INTEGER}
+    and  soulMaxForce &lt;= #{soul,jdbcType=INTEGER}
+  </select>
+</mapper>

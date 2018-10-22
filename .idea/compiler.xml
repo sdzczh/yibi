@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="yibi-batch" />
+        <module name="yibi-common" />
+        <module name="yibi-core" />
+        <module name="yibi-externapi" />
+        <module name="yibi-globalmarket" />
+        <module name="yibi-openapi" />
+        <module name="yibi-orderapi" />
+        <module name="yibi-turnapi" />
+        <module name="yibi-web" />
+        <module name="yibi-websocket" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="yibi-batch" target="1.7" />
+      <module name="yibi-common" target="1.7" />
+      <module name="yibi-core" target="1.7" />
+      <module name="yibi-externapi" target="1.7" />
+      <module name="yibi-globalmarket" target="1.7" />
+      <module name="yibi-openapi" target="1.7" />
+      <module name="yibi-orderapi" target="1.7" />
+      <module name="yibi-parent" target="1.5" />
+      <module name="yibi-turnapi" target="1.7" />
+      <module name="yibi-web" target="1.7" />
+      <module name="yibi-websocket" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

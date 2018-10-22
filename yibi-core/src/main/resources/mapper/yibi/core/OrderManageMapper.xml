@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.OrderManageMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.OrderManage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="unitCoinType" jdbcType="TINYINT" property="unitcointype" />
+    <result column="onoff" jdbcType="TINYINT" property="onoff" />
+    <result column="performRate" jdbcType="DECIMAL" property="performrate" />
+    <result column="marketpPerformRate" jdbcType="DECIMAL" property="marketpPerformRate" />
+    <result column="referRate" jdbcType="DECIMAL" property="referrate" />
+    <result column="marketReferRate" jdbcType="DECIMAL" property="marketReferRate" />
+    <result column="marketSeque" jdbcType="INTEGER" property="marketseque" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="okcoinFlag" jdbcType="TINYINT" property="okcoinflag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, orderCoinType, unitCoinType, onoff, performRate, referRate, marketpPerformRate, marketReferRate,marketSeque, createTime, updateTime,
+    okcoinFlag
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.OrderManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_manage (orderCoinType, unitCoinType, onoff, marketpPerformRate, marketReferRate,marketSeque,
+      performRate, referRate, createTime, 
+      updateTime, okcoinFlag)
+    values (#{ordercointype,jdbcType=TINYINT}, #{unitcointype,jdbcType=TINYINT}, #{onoff,jdbcType=TINYINT}, 
+      #{performrate,jdbcType=DECIMAL}, #{referrate,jdbcType=DECIMAL},#{marketpPerformRate,jdbcType=DECIMAL}, #{marketReferRate,jdbcType=DECIMAL}, #{marketseque,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP},
+      #{updatetime,jdbcType=TIMESTAMP}, #{okcoinflag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.OrderManage">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType,
+      </if>
+      <if test="onoff != null">
+        onoff,
+      </if>
+      <if test="performrate != null">
+        performRate,
+      </if>
+      <if test="referrate != null">
+        referRate,
+      </if>
+      <if test="marketpPerformRate != null">
+        marketpPerformRate,
+      </if>
+      <if test="marketReferRate != null">
+        marketReferRate,
+      </if>
+      <if test="marketseque != null">
+        marketSeque,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="okcoinflag != null">
+        okcoinFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="onoff != null">
+        #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="performrate != null">
+        #{performrate,jdbcType=DECIMAL},
+      </if>
+      <if test="referrate != null">
+        #{referrate,jdbcType=DECIMAL},
+      </if>
+     <if test="marketpPerformRate != null">
+        #{marketpPerformRate,jdbcType=DECIMAL},
+      </if>
+      <if test="marketReferRate != null">
+        #{marketReferRate,jdbcType=DECIMAL},
+      </if>
+      <if test="marketseque != null">
+        #{marketseque,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="okcoinflag != null">
+        #{okcoinflag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.OrderManage">
+    update order_manage
+    set orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      onoff = #{onoff,jdbcType=TINYINT},
+      performRate = #{performrate,jdbcType=DECIMAL},
+      referRate = #{referrate,jdbcType=DECIMAL},
+      marketpPerformRate = #{marketpPerformRate,jdbcType=DECIMAL},
+      marketReferRate = #{marketReferRate,jdbcType=DECIMAL},
+      marketSeque = #{marketseque,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      okcoinFlag = #{okcoinflag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.OrderManage">
+    update order_manage
+    <set>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="onoff != null">
+        onoff = #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="performrate != null">
+        performRate = #{performrate,jdbcType=DECIMAL},
+      </if>
+      <if test="referrate != null">
+        referRate = #{referrate,jdbcType=DECIMAL},
+      </if>
+      <if test="marketpPerformRate != null">
+        marketpPerformRate = #{marketpPerformRate,jdbcType=DECIMAL},
+      </if>
+      <if test="marketReferRate != null">
+        marketReferRate = #{marketReferRate,jdbcType=DECIMAL},
+      </if>
+      <if test="marketseque != null">
+        marketSeque = #{marketseque,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="okcoinflag != null">
+        okcoinFlag = #{okcoinflag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_manage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_manage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_manage
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketpPerformRate != null">
+       and  marketpPerformRate = #{marketpPerformRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketReferRate != null">
+       and  marketReferRate = #{marketReferRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketseque != null">
+      marketSeque = #{marketseque,jdbcType=INTEGER},
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="okcoinflag != null">
+       and  okcoinFlag = #{okcoinflag,jdbcType=TINYINT}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectAllOrderBySeque" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_manage
+    where 1=1
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketpPerformRate != null">
+       and  marketpPerformRate = #{marketpPerformRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketReferRate != null">
+       and  marketReferRate = #{marketReferRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketseque != null">
+      marketSeque = #{marketseque,jdbcType=INTEGER},
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="okcoinflag != null">
+       and  okcoinFlag = #{okcoinflag,jdbcType=TINYINT}
+    </if>
+     order by marketSeque
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_manage
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketpPerformRate != null">
+       and  marketpPerformRate = #{marketpPerformRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketReferRate != null">
+       and  marketReferRate = #{marketReferRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketseque != null">
+      marketSeque = #{marketseque,jdbcType=INTEGER},
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="okcoinflag != null">
+       and  okcoinFlag = #{okcoinflag,jdbcType=TINYINT}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from order_manage 
+    where 1=1 
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="performrate != null">
+       and  performRate = #{performrate,jdbcType=DECIMAL}
+    </if>
+    <if test="referrate != null">
+       and  referRate = #{referrate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketpPerformRate != null">
+       and  marketpPerformRate = #{marketpPerformRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketReferRate != null">
+       and  marketReferRate = #{marketReferRate,jdbcType=DECIMAL}
+    </if>
+    <if test="marketseque != null">
+      marketSeque = #{marketseque,jdbcType=INTEGER},
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="okcoinflag != null">
+       and  okcoinFlag = #{okcoinflag,jdbcType=TINYINT}
+    </if>
+  </select>
+
+
+
+  <select id="selectConditionPaging" parameterType="java.util.Map" resultType="java.util.Map">
+
+    SELECT cm.coinName AS unitCoinName,cm2.coinName AS orderCoinName,om.*
+    FROM order_manage om LEFT JOIN coin_manage cm ON om.unitCoinType =cm.coinType LEFT JOIN coin_manage cm2 ON om.orderCoinType=cm2.coinType
+    where 1=1
+    <if test="orderCoinType != null">
+      and  om.orderCoinType = #{orderCoinType,jdbcType=TINYINT}
+    </if>
+    <if test="unitCoinType != null">
+      and  om.unitCoinType = #{unitCoinType,jdbcType=TINYINT}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*)
+    FROM order_manage om LEFT JOIN coin_manage cm ON om.unitCoinType =cm.coinType LEFT JOIN coin_manage cm2 ON om.orderCoinType=cm2.coinType
+    where 1=1
+    <if test="orderCoinType != null">
+      and  om.orderCoinType = #{orderCoinType,jdbcType=TINYINT}
+    </if>
+    <if test="unitCoinType != null">
+      and  om.unitCoinType = #{unitCoinType,jdbcType=TINYINT}
+    </if>
+  </select>
+
+</mapper>

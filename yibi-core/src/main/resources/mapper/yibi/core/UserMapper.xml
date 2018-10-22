@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="phone" jdbcType="CHAR" property="phone" />
+    <result column="userPassword" jdbcType="CHAR" property="userpassword" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="referenceId" jdbcType="INTEGER" property="referenceid" />
+    <result column="idCard" jdbcType="CHAR" property="idcard" />
+    <result column="idStatus" jdbcType="TINYINT" property="idstatus" />
+    <result column="headPath" jdbcType="VARCHAR" property="headpath" />
+    <result column="openId" jdbcType="VARCHAR" property="openid" />
+    <result column="secretKey" jdbcType="CHAR" property="secretkey" />
+    <result column="token" jdbcType="CHAR" property="token" />
+    <result column="tokenCreateTime" jdbcType="TIMESTAMP" property="tokencreatetime" />
+    <result column="orderPwd" jdbcType="CHAR" property="orderpwd" />
+    <result column="loginTime" jdbcType="TIMESTAMP" property="logintime" />
+    <result column="deviceNum" jdbcType="VARCHAR" property="devicenum" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="role" jdbcType="TINYINT" property="role" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickname" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="partnerFlag" jdbcType="TINYINT" property="partnerflag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, phone, userPassword, userName, referenceId, idCard, idStatus, headPath,
+    openId, secretKey, token, tokenCreateTime, orderPwd, loginTime, deviceNum, state, 
+    role, nickName, createTime, updateTime, partnerFlag
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user (phone, userPassword, userName, 
+      referenceId, idCard,
+      idStatus, headPath, openId, 
+      secretKey, token, tokenCreateTime, 
+      orderPwd, loginTime, deviceNum, 
+      state, role, nickName, 
+      partnerFlag
+      )
+    values (#{phone,jdbcType=CHAR}, #{userpassword,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+      #{referenceid,jdbcType=INTEGER},#{idcard,jdbcType=CHAR},
+      #{idstatus,jdbcType=TINYINT}, #{headpath,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{secretkey,jdbcType=CHAR}, #{token,jdbcType=CHAR}, #{tokencreatetime,jdbcType=TIMESTAMP}, 
+      #{orderpwd,jdbcType=CHAR}, #{logintime,jdbcType=TIMESTAMP}, #{devicenum,jdbcType=VARCHAR}, 
+      #{state,jdbcType=TINYINT}, #{role,jdbcType=TINYINT}, #{nickname,jdbcType=VARCHAR}, 
+      #{partnerflag,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.User">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="userpassword != null">
+        userPassword,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="referenceid != null">
+        referenceId,
+      </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="idstatus != null">
+        idStatus,
+      </if>
+      <if test="headpath != null">
+        headPath,
+      </if>
+      <if test="openid != null">
+        openId,
+      </if>
+      <if test="secretkey != null">
+        secretKey,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="tokencreatetime != null">
+        tokenCreateTime,
+      </if>
+      <if test="orderpwd != null">
+        orderPwd,
+      </if>
+      <if test="logintime != null">
+        loginTime,
+      </if>
+      <if test="devicenum != null">
+        deviceNum,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="nickname != null">
+        nickName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="partnerflag != null">
+        partnerFlag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="phone != null">
+        #{phone,jdbcType=CHAR},
+      </if>
+      <if test="userpassword != null">
+        #{userpassword,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceid != null">
+        #{referenceid,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="idstatus != null">
+        #{idstatus,jdbcType=TINYINT},
+      </if>
+      <if test="headpath != null">
+        #{headpath,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="secretkey != null">
+        #{secretkey,jdbcType=CHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=CHAR},
+      </if>
+      <if test="tokencreatetime != null">
+        #{tokencreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderpwd != null">
+        #{orderpwd,jdbcType=CHAR},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicenum != null">
+        #{devicenum,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=TINYINT},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="partnerflag != null">
+        #{partnerflag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.User">
+    update user
+    set phone = #{phone,jdbcType=CHAR},
+      userPassword = #{userpassword,jdbcType=CHAR},
+      userName = #{username,jdbcType=VARCHAR},
+      referenceId = #{referenceid,jdbcType=INTEGER},
+      idCard = #{idcard,jdbcType=CHAR},
+      idStatus = #{idstatus,jdbcType=TINYINT},
+      headPath = #{headpath,jdbcType=VARCHAR},
+      openId = #{openid,jdbcType=VARCHAR},
+      secretKey = #{secretkey,jdbcType=CHAR},
+      token = #{token,jdbcType=CHAR},
+      tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP},
+      orderPwd = #{orderpwd,jdbcType=CHAR},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      deviceNum = #{devicenum,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      role = #{role,jdbcType=TINYINT},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      partnerFlag = #{partnerflag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.User">
+    update user
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=CHAR},
+      </if>
+      <if test="userpassword != null">
+        userPassword = #{userpassword,jdbcType=CHAR},
+      </if>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceid != null">
+        referenceId = #{referenceid,jdbcType=INTEGER},
+      </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="idstatus != null">
+        idStatus = #{idstatus,jdbcType=TINYINT},
+      </if>
+      <if test="headpath != null">
+        headPath = #{headpath,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openId = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="secretkey != null">
+        secretKey = #{secretkey,jdbcType=CHAR},
+      </if>
+      <if test="token != null">
+        token = #{token,jdbcType=CHAR},
+      </if>
+      <if test="tokencreatetime != null">
+        tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderpwd != null">
+        orderPwd = #{orderpwd,jdbcType=CHAR},
+      </if>
+      <if test="logintime != null">
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="devicenum != null">
+        deviceNum = #{devicenum,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=TINYINT},
+      </if>
+      <if test="nickname != null">
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="partnerflag != null">
+        partnerFlag = #{partnerflag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where phone = #{phone,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where 1=1 
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="userpassword != null">
+       and  userPassword = #{userpassword,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+       and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="referenceid != null">
+       and  referenceId = #{referenceid,jdbcType=INTEGER}
+    </if>
+    <if test="idcard != null">
+       and  idCard = #{idcard,jdbcType=CHAR}
+    </if>
+    <if test="idstatus != null">
+       and  idStatus = #{idstatus,jdbcType=TINYINT}
+    </if>
+    <if test="headpath != null">
+       and  headPath = #{headpath,jdbcType=VARCHAR}
+    </if>
+    <if test="openid != null">
+       and  openId = #{openid,jdbcType=VARCHAR}
+    </if>
+    <if test="secretkey != null">
+       and  secretKey = #{secretkey,jdbcType=CHAR}
+    </if>
+    <if test="token != null">
+       and  token = #{token,jdbcType=CHAR}
+    </if>
+    <if test="tokencreatetime != null">
+       and  tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="orderpwd != null">
+       and  orderPwd = #{orderpwd,jdbcType=CHAR}
+    </if>
+    <if test="logintime != null">
+       and  loginTime = #{logintime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="devicenum != null">
+       and  deviceNum = #{devicenum,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="role != null">
+       and  role = #{role,jdbcType=TINYINT}
+    </if>
+    <if test="nickname != null">
+       and  nickName = #{nickname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="partnerflag != null">
+       and  partnerFlag = #{partnerflag,jdbcType=TINYINT}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where 1=1 
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="userpassword != null">
+       and  userPassword = #{userpassword,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+       and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="referenceid != null">
+       and  referenceId = #{referenceid,jdbcType=INTEGER}
+    </if>
+    <if test="idcard != null">
+       and  idCard = #{idcard,jdbcType=CHAR}
+    </if>
+    <if test="idstatus != null">
+       and  idStatus = #{idstatus,jdbcType=TINYINT}
+    </if>
+    <if test="headpath != null">
+       and  headPath = #{headpath,jdbcType=VARCHAR}
+    </if>
+    <if test="openid != null">
+       and  openId = #{openid,jdbcType=VARCHAR}
+    </if>
+    <if test="secretkey != null">
+       and  secretKey = #{secretkey,jdbcType=CHAR}
+    </if>
+    <if test="token != null">
+       and  token = #{token,jdbcType=CHAR}
+    </if>
+    <if test="tokencreatetime != null">
+       and  tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="orderpwd != null">
+       and  orderPwd = #{orderpwd,jdbcType=CHAR}
+    </if>
+    <if test="logintime != null">
+       and  loginTime = #{logintime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="devicenum != null">
+       and  deviceNum = #{devicenum,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="role != null">
+       and  role = #{role,jdbcType=TINYINT}
+    </if>
+    <if test="nickname != null">
+       and  nickName = #{nickname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="partnerflag != null">
+       and  partnerFlag = #{partnerflag,jdbcType=TINYINT}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from user 
+    where 1=1 
+    <if test="phone != null">
+       and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="userpassword != null">
+       and  userPassword = #{userpassword,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+       and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="referenceid != null">
+       and  referenceId = #{referenceid,jdbcType=INTEGER}
+    </if>
+    <if test="idcard != null">
+       and  idCard = #{idcard,jdbcType=CHAR}
+    </if>
+    <if test="idstatus != null">
+       and  idStatus = #{idstatus,jdbcType=TINYINT}
+    </if>
+    <if test="headpath != null">
+       and  headPath = #{headpath,jdbcType=VARCHAR}
+    </if>
+    <if test="openid != null">
+       and  openId = #{openid,jdbcType=VARCHAR}
+    </if>
+    <if test="secretkey != null">
+       and  secretKey = #{secretkey,jdbcType=CHAR}
+    </if>
+    <if test="token != null">
+       and  token = #{token,jdbcType=CHAR}
+    </if>
+    <if test="tokencreatetime != null">
+       and  tokenCreateTime = #{tokencreatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="orderpwd != null">
+       and  orderPwd = #{orderpwd,jdbcType=CHAR}
+    </if>
+    <if test="logintime != null">
+       and  loginTime = #{logintime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="devicenum != null">
+       and  deviceNum = #{devicenum,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="role != null">
+       and  role = #{role,jdbcType=TINYINT}
+    </if>
+    <if test="nickname != null">
+       and  nickName = #{nickname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="partnerflag != null">
+       and  partnerFlag = #{partnerflag,jdbcType=TINYINT}
+    </if>
+  </select>
+  <select id="selectUserByPhoneOrName" parameterType="java.util.Map" resultType="com.yibi.core.entity.User">
+    select *  from user
+    where 1=1
+    <if test="phone != null">
+      and  phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  userName = #{username,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+</mapper>

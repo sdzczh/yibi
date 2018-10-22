@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Notice">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+    <result column="roundup" jdbcType="VARCHAR" property="roundup" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="createId" jdbcType="INTEGER" property="createid" />
+    <result column="operId" jdbcType="INTEGER" property="operid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, pic, roundup, type, state, createId, operId, createTime, updateTime, content
+  </sql>
+  <sql id="index_Column_List">
+    id, title
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Notice">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into notice (title, pic, roundup, 
+      type, state, createId, 
+      operId, createTime, updateTime, 
+      content)
+    values (#{title,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{roundup,jdbcType=VARCHAR}, 
+      #{type,jdbcType=TINYINT}, #{state,jdbcType=TINYINT}, #{createid,jdbcType=INTEGER}, 
+      #{operid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Notice">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="pic != null">
+        pic,
+      </if>
+      <if test="roundup != null">
+        roundup,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createid != null">
+        createId,
+      </if>
+      <if test="operid != null">
+        operId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="roundup != null">
+        #{roundup,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createid != null">
+        #{createid,jdbcType=INTEGER},
+      </if>
+      <if test="operid != null">
+        #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Notice">
+    update notice
+    set title = #{title,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR},
+      roundup = #{roundup,jdbcType=VARCHAR},
+      type = #{type,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      createId = #{createid,jdbcType=INTEGER},
+      operId = #{operid,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Notice">
+    update notice
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+      <if test="roundup != null">
+        roundup = #{roundup,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createid != null">
+        createId = #{createid,jdbcType=INTEGER},
+      </if>
+      <if test="operid != null">
+        operId = #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByIdAndState" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from notice
+    where id = #{id,jdbcType=INTEGER}
+    <if test="state != null">
+      and  state = #{state,jdbcType=TINYINT}
+    </if>
+  </select>
+  <select id="selectInfoByIndex" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="index_Column_List" />
+    from notice
+    where state = 1 order by id desc limit 0,1
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice
+    where 1=1 
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="pic != null">
+       and  pic = #{pic,jdbcType=VARCHAR}
+    </if>
+    <if test="roundup != null">
+       and  roundup = #{roundup,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createid != null">
+       and  createId = #{createid,jdbcType=INTEGER}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notice
+    where 1=1 
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="pic != null">
+       and  pic = #{pic,jdbcType=VARCHAR}
+    </if>
+    <if test="roundup != null">
+       and  roundup = #{roundup,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createid != null">
+       and  createId = #{createid,jdbcType=INTEGER}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from notice 
+    where 1=1 
+    <if test="title != null">
+       and  title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="pic != null">
+       and  pic = #{pic,jdbcType=VARCHAR}
+    </if>
+    <if test="roundup != null">
+       and  roundup = #{roundup,jdbcType=VARCHAR}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createid != null">
+       and  createId = #{createid,jdbcType=INTEGER}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="content != null">
+       and  content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+  </select>
+</mapper>

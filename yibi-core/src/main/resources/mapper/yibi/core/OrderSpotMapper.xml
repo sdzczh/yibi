@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.OrderSpotMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.OrderSpot">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="orderCoinType" jdbcType="TINYINT" property="ordercointype" />
+    <result column="unitCoinType" jdbcType="TINYINT" property="unitcointype" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="orderType" jdbcType="TINYINT" property="ordertype" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="remain" jdbcType="DECIMAL" property="remain" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="levFlag" jdbcType="TINYINT" property="levflag" />
+    <result column="total" jdbcType="DECIMAL" property="total" />
+    <result column="average" jdbcType="DECIMAL" property="average" />
+    <result column="orderNum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, orderCoinType, unitCoinType, type, orderType, price, amount, remain, 
+    state, levFlag, total, average, orderNum, remark, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.OrderSpot">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_spot (userId, orderCoinType, unitCoinType, 
+      type, orderType, price, 
+      amount, remain, state, 
+      levFlag, total, average, 
+      orderNum, remark, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{ordercointype,jdbcType=TINYINT}, #{unitcointype,jdbcType=TINYINT}, 
+      #{type,jdbcType=TINYINT}, #{ordertype,jdbcType=TINYINT}, #{price,jdbcType=DECIMAL}, 
+      #{amount,jdbcType=DECIMAL}, #{remain,jdbcType=DECIMAL}, #{state,jdbcType=TINYINT}, 
+      #{levflag,jdbcType=TINYINT}, #{total,jdbcType=DECIMAL}, #{average,jdbcType=DECIMAL}, 
+      #{ordernum,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.OrderSpot">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into order_spot
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType,
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="ordertype != null">
+        orderType,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="remain != null">
+        remain,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="levflag != null">
+        levFlag,
+      </if>
+      <if test="total != null">
+        total,
+      </if>
+      <if test="average != null">
+        average,
+      </if>
+      <if test="ordernum != null">
+        orderNum,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercointype != null">
+        #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="ordertype != null">
+        #{ordertype,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remain != null">
+        #{remain,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="levflag != null">
+        #{levflag,jdbcType=TINYINT},
+      </if>
+      <if test="total != null">
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="average != null">
+        #{average,jdbcType=DECIMAL},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.OrderSpot">
+    update order_spot
+    set userId = #{userid,jdbcType=INTEGER},
+      orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      orderType = #{ordertype,jdbcType=TINYINT},
+      price = #{price,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      remain = #{remain,jdbcType=DECIMAL},
+      state = #{state,jdbcType=TINYINT},
+      levFlag = #{levflag,jdbcType=TINYINT},
+      total = #{total,jdbcType=DECIMAL},
+      average = #{average,jdbcType=DECIMAL},
+      orderNum = #{ordernum,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.OrderSpot">
+    update order_spot
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="ordercointype != null">
+        orderCoinType = #{ordercointype,jdbcType=TINYINT},
+      </if>
+      <if test="unitcointype != null">
+        unitCoinType = #{unitcointype,jdbcType=TINYINT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="ordertype != null">
+        orderType = #{ordertype,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remain != null">
+        remain = #{remain,jdbcType=DECIMAL},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="levflag != null">
+        levFlag = #{levflag,jdbcType=TINYINT},
+      </if>
+      <if test="total != null">
+        total = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="average != null">
+        average = #{average,jdbcType=DECIMAL},
+      </if>
+      <if test="ordernum != null">
+        orderNum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_spot
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_spot
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_spot
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="ordertype != null">
+       and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="price != null">
+       and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+       and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="levflag != null">
+       and  levFlag = #{levflag,jdbcType=TINYINT}
+    </if>
+    <if test="total != null">
+       and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="average != null">
+       and  average = #{average,jdbcType=DECIMAL}
+    </if>
+    <if test="ordernum != null">
+       and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_spot
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="ordertype != null">
+       and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="price != null">
+       and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+       and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="levflag != null">
+       and  levFlag = #{levflag,jdbcType=TINYINT}
+    </if>
+    <if test="total != null">
+       and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="average != null">
+       and  average = #{average,jdbcType=DECIMAL}
+    </if>
+    <if test="ordernum != null">
+       and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from order_spot 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+       and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+       and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="ordertype != null">
+       and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="price != null">
+       and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+       and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="levflag != null">
+       and  levFlag = #{levflag,jdbcType=TINYINT}
+    </if>
+    <if test="total != null">
+       and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="average != null">
+       and  average = #{average,jdbcType=DECIMAL}
+    </if>
+    <if test="ordernum != null">
+       and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectAllMatching" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_spot
+    where
+      orderCoinType = #{ordercointype,jdbcType=TINYINT}
+      and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+      and  type = #{type,jdbcType=TINYINT}
+      and  state = 0
+    <!--匹配卖出订单-->
+    <if test="type == 1 and price != null">
+      and  price &lt;= #{price,jdbcType=DECIMAL}
+    </if>
+    <!--匹配买入订单-->
+    <if test="type == 0 and price != null">
+      and  price &gt;= #{price,jdbcType=DECIMAL}
+    </if>
+
+    order by
+    <!--匹配卖出订单-->
+    <if test="type == 1">
+       price asc,
+    </if>
+    <!--匹配买入订单-->
+    <if test="type == 0">
+      price desc,
+    </if>
+    id asc
+  </select>
+
+  <select id="selectConditionPaging" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT os.*,cm2.coinName AS unitCoinName,cm.coinName AS orderCoinName,u.phone,u.userName FROM order_spot os  LEFT JOIN user u ON os.userId=u.id
+    LEFT JOIN coin_manage cm ON os.orderCoinType=cm.coinType
+    LEFT JOIN coin_manage cm2 ON os.unitCoinType=cm2.coinType
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="orderCoinType != null">
+      and  os.orderCoinType = #{orderCoinType,jdbcType=TINYINT}
+    </if>
+    <if test="unitCoinType != null">
+      and  os.unitCoinType = #{unitCoinType,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+      and  os.type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="orderType != null">
+      and  os.orderType = #{orderType,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+      and  os.state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="levFlag != null">
+      and  os.levFlag = #{levFlag,jdbcType=TINYINT}
+    </if>
+    <if test="ordernum != null">
+      and  os.orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+      and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) FROM order_spot os  LEFT JOIN user u ON os.userId=u.id
+    LEFT JOIN coin_manage cm ON os.orderCoinType=cm.coinType
+    LEFT JOIN coin_manage cm2 ON os.unitCoinType=cm2.coinType
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="orderCoinType != null">
+      and  os.orderCoinType = #{orderCoinType,jdbcType=TINYINT}
+    </if>
+    <if test="unitCoinType != null">
+      and  os.unitCoinType = #{unitCoinType,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+      and  os.type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="orderType != null">
+      and  os.orderType = #{orderType,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+      and  os.state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="levFlag != null">
+      and  os.levFlag = #{levFlag,jdbcType=TINYINT}
+    </if>
+    <if test="ordernum != null">
+      and  os.orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <select id="queryBuyOrderList" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT t.price,SUM(t.remain) remain FROM order_spot t
+        WHERE  t.orderCoinType = #{ordercointype,jdbcType=TINYINT}
+         AND t.unitCoinType = #{unitcointype,jdbcType=TINYINT}
+         AND  t.type = #{type,jdbcType=TINYINT}
+         AND  t.state = #{state,jdbcType=TINYINT}
+          AND  t.orderType = #{ordertype,jdbcType=TINYINT}
+          GROUP BY t.price ORDER BY t.price DESC limit 0,${count}
+    </select>
+
+  <select id="querySaleOrderList" parameterType="java.util.Map" resultType="java.util.Map">
+       SELECT t.price,SUM(t.remain) remain FROM order_spot t
+        WHERE  t.orderCoinType = #{ordercointype,jdbcType=TINYINT}
+         AND t.unitCoinType = #{unitcointype,jdbcType=TINYINT}
+         AND  t.type = #{type,jdbcType=TINYINT}
+         AND t.state = #{state,jdbcType=TINYINT}
+          AND  t.orderType = #{ordertype,jdbcType=TINYINT}
+          GROUP BY t.price ORDER BY t.price ASC limit 0,${count}
+    </select>
+
+  <select id="selectOrderRecordPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_spot
+    where 1=1
+    <if test="userid != null">
+      and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+      and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+      and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+      and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="ordertype != null">
+      and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="price != null">
+      and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="amount != null">
+      and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+      and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="state != null and state != -1">
+      and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="state != null and state == -1">
+      and  state != 0
+    </if>
+    <if test="levflag != null">
+      and  levFlag = #{levflag,jdbcType=TINYINT}
+    </if>
+    <if test="total != null">
+      and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="average != null">
+      and  average = #{average,jdbcType=DECIMAL}
+    </if>
+    <if test="ordernum != null">
+      and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+      and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+      and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectOrderRecordCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*)
+    from order_spot
+    where 1=1
+    <if test="userid != null">
+      and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="ordercointype != null">
+      and  orderCoinType = #{ordercointype,jdbcType=TINYINT}
+    </if>
+    <if test="unitcointype != null">
+      and  unitCoinType = #{unitcointype,jdbcType=TINYINT}
+    </if>
+    <if test="type != null">
+      and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="ordertype != null">
+      and  orderType = #{ordertype,jdbcType=TINYINT}
+    </if>
+    <if test="price != null">
+      and  price = #{price,jdbcType=DECIMAL}
+    </if>
+    <if test="amount != null">
+      and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+      and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="state != null and state != -1">
+      and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="state != null and state == -1">
+      and  state != 0
+    </if>
+    <if test="levflag != null">
+      and  levFlag = #{levflag,jdbcType=TINYINT}
+    </if>
+    <if test="total != null">
+      and  total = #{total,jdbcType=DECIMAL}
+    </if>
+    <if test="average != null">
+      and  average = #{average,jdbcType=DECIMAL}
+    </if>
+    <if test="ordernum != null">
+      and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+      and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+      and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+      and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+    <select id="selectMatchedOrder" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from order_spot
+        where 1=1
+        and id in (
+          select
+        <if test="type == 0">
+             saleId
+        </if>
+        <if test="type == 1">
+            buyId
+        </if>
+         from order_spot_record where 1=1
+        <if test="type == 0">
+            and buyId =#{orderid,jdbcType=INTEGER}
+        </if>
+        <if test="type == 1">
+            and saleId =#{orderid,jdbcType=INTEGER}
+        </if>
+        )
+        order by id desc
+    </select>
+</mapper>

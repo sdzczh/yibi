@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+
+    <bean class="com.yibi.core.common.CustomPropertyPlaceHoderConfigurer">
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <property name="locations">
+            <array>
+                <value>classpath*:yibi.properties</value>
+            </array>
+        </property>
+        <property name="fileEncoding" value="UTF-8"/>
+        <property name="secretKeys">
+            <set value-type="java.lang.String">
+                <value>jdbc.password</value>
+                <value>jdbc.username</value>
+                <value>redis.password</value>
+            </set>
+        </property>
+    </bean>
+
+
+
+</beans>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.LoanRecordMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.LoanRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="accountId" jdbcType="INTEGER" property="accountid" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="rate" jdbcType="DECIMAL" property="rate" />
+    <result column="interest" jdbcType="DECIMAL" property="interest" />
+    <result column="repaymentDeadline" jdbcType="TIMESTAMP" property="repaymentdeadline" />
+    <result column="repaymentTime" jdbcType="TIMESTAMP" property="repaymenttime" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="autoRepayFlag" jdbcType="TINYINT" property="autorepayflag" />
+    <result column="autoRenewFlag" jdbcType="TINYINT" property="autorenewflag" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, accountId, coinType, amount, rate, interest, repaymentDeadline, repaymentTime, 
+    status, autoRepayFlag, autoRenewFlag, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.LoanRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan_record (accountId, coinType, amount, 
+      rate, interest, repaymentDeadline, 
+      repaymentTime, status, autoRepayFlag, 
+      autoRenewFlag, createTime, updateTime
+      )
+    values (#{accountid,jdbcType=INTEGER}, #{cointype,jdbcType=TINYINT}, #{amount,jdbcType=DECIMAL}, 
+      #{rate,jdbcType=DECIMAL}, #{interest,jdbcType=DECIMAL}, #{repaymentdeadline,jdbcType=TIMESTAMP}, 
+      #{repaymenttime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{autorepayflag,jdbcType=TINYINT}, 
+      #{autorenewflag,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.LoanRecord">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountid != null">
+        accountId,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="repaymentdeadline != null">
+        repaymentDeadline,
+      </if>
+      <if test="repaymenttime != null">
+        repaymentTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="autorepayflag != null">
+        autoRepayFlag,
+      </if>
+      <if test="autorenewflag != null">
+        autoRenewFlag,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountid != null">
+        #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymentdeadline != null">
+        #{repaymentdeadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaymenttime != null">
+        #{repaymenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="autorepayflag != null">
+        #{autorepayflag,jdbcType=TINYINT},
+      </if>
+      <if test="autorenewflag != null">
+        #{autorenewflag,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.LoanRecord">
+    update loan_record
+    set accountId = #{accountid,jdbcType=INTEGER},
+      coinType = #{cointype,jdbcType=TINYINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      rate = #{rate,jdbcType=DECIMAL},
+      interest = #{interest,jdbcType=DECIMAL},
+      repaymentDeadline = #{repaymentdeadline,jdbcType=TIMESTAMP},
+      repaymentTime = #{repaymenttime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      autoRepayFlag = #{autorepayflag,jdbcType=TINYINT},
+      autoRenewFlag = #{autorenewflag,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.LoanRecord">
+    update loan_record
+    <set>
+      <if test="accountid != null">
+        accountId = #{accountid,jdbcType=INTEGER},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        rate = #{rate,jdbcType=DECIMAL},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaymentdeadline != null">
+        repaymentDeadline = #{repaymentdeadline,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaymenttime != null">
+        repaymentTime = #{repaymenttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="autorepayflag != null">
+        autoRepayFlag = #{autorepayflag,jdbcType=TINYINT},
+      </if>
+      <if test="autorenewflag != null">
+        autoRenewFlag = #{autorenewflag,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from loan_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loan_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loan_record
+    where 1=1 
+    <if test="accountid != null">
+       and  accountId = #{accountid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="repaymentdeadline != null">
+       and  repaymentDeadline = #{repaymentdeadline,jdbcType=TIMESTAMP}
+    </if>
+    <if test="repaymenttime != null">
+       and  repaymentTime = #{repaymenttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null">
+       and  status = #{status,jdbcType=TINYINT}
+    </if>
+    <if test="autorepayflag != null">
+       and  autoRepayFlag = #{autorepayflag,jdbcType=TINYINT}
+    </if>
+    <if test="autorenewflag != null">
+       and  autoRenewFlag = #{autorenewflag,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from loan_record
+    where 1=1 
+    <if test="accountid != null">
+       and  accountId = #{accountid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="repaymentdeadline != null">
+       and  repaymentDeadline = #{repaymentdeadline,jdbcType=TIMESTAMP}
+    </if>
+    <if test="repaymenttime != null">
+       and  repaymentTime = #{repaymenttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null">
+       and  status = #{status,jdbcType=TINYINT}
+    </if>
+    <if test="autorepayflag != null">
+       and  autoRepayFlag = #{autorepayflag,jdbcType=TINYINT}
+    </if>
+    <if test="autorenewflag != null">
+       and  autoRenewFlag = #{autorenewflag,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from loan_record 
+    where 1=1 
+    <if test="accountid != null">
+       and  accountId = #{accountid,jdbcType=INTEGER}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="rate != null">
+       and  rate = #{rate,jdbcType=DECIMAL}
+    </if>
+    <if test="interest != null">
+       and  interest = #{interest,jdbcType=DECIMAL}
+    </if>
+    <if test="repaymentdeadline != null">
+       and  repaymentDeadline = #{repaymentdeadline,jdbcType=TIMESTAMP}
+    </if>
+    <if test="repaymenttime != null">
+       and  repaymentTime = #{repaymenttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="status != null">
+       and  status = #{status,jdbcType=TINYINT}
+    </if>
+    <if test="autorepayflag != null">
+       and  autoRepayFlag = #{autorepayflag,jdbcType=TINYINT}
+    </if>
+    <if test="autorenewflag != null">
+       and  autoRenewFlag = #{autorenewflag,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+</mapper>

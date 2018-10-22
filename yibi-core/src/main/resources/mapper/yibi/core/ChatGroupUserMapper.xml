@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.ChatGroupUserMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.ChatGroupUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="talkGroupId" jdbcType="INTEGER" property="talkgroupid" />
+    <result column="role" jdbcType="TINYINT" property="role" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="isMuted" jdbcType="TINYINT" property="ismuted" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, talkGroupId, role, remark, state, isMuted, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.ChatGroupUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_group_user (userId, talkGroupId, role, 
+      remark, state, isMuted, 
+      createTime, updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{talkgroupid,jdbcType=INTEGER}, #{role,jdbcType=TINYINT},
+      #{remark,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{ismuted,jdbcType=TINYINT}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.ChatGroupUser">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into chat_group_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="talkgroupid != null">
+        talkGroupId,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="ismuted != null">
+        isMuted,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="talkgroupid != null">
+        #{talkgroupid,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="ismuted != null">
+        #{ismuted,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.ChatGroupUser">
+    update chat_group_user
+    set userId = #{userid,jdbcType=INTEGER},
+      talkGroupId = #{talkgroupid,jdbcType=INTEGER},
+      role = #{role,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      isMuted = #{ismuted,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.ChatGroupUser">
+    update chat_group_user
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="talkgroupid != null">
+        talkGroupId = #{talkgroupid,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        role = #{role,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="ismuted != null">
+        isMuted = #{ismuted,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chat_group_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_group_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_group_user
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="talkgroupid != null">
+       and  talkGroupId = #{talkgroupid,jdbcType=INTEGER}
+    </if>
+    <if test="role != null">
+       and  role = #{role,jdbcType=TINYINT}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="ismuted != null">
+       and  isMuted = #{ismuted,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from chat_group_user
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="talkgroupid != null">
+       and  talkGroupId = #{talkgroupid,jdbcType=INTEGER}
+    </if>
+    <if test="role != null">
+       and  role = #{role,jdbcType=TINYINT}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="ismuted != null">
+       and  isMuted = #{ismuted,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from chat_group_user 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="talkgroupid != null">
+       and  talkGroupId = #{talkgroupid,jdbcType=INTEGER}
+    </if>
+    <if test="role != null">
+       and  role = #{role,jdbcType=TINYINT}
+    </if>
+    <if test="remark != null">
+       and  remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="ismuted != null">
+       and  isMuted = #{ismuted,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="queryUsers" parameterType="java.util.Map" resultType="Map">
+    select u.phone,u.headPath,IF(f.id IS NULL OR f.remarkName='',u.nickName,f.remarkName) name,gu.role
+    from chat_group_user gu
+    LEFT JOIN chat_group g ON g.id = gu.talkGroupId
+    LEFT JOIN user u ON gu.userId = u.id
+    LEFT JOIN chat_friends f ON gu.userId = f.friendId AND f.userId=#{userId}
+    where g.groupId=#{groupId} order by gu.role,gu.id
+    limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+
+
+  <select id="selectConditionPaging" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT cgu.*,u.phone,u.userName ,cg.name FROM chat_group_user cgu LEFT JOIN user u ON cgu.userId=u.id LEFT JOIN chat_group cg ON cgu.talkGroupId=cg.id
+    where 1=1
+
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+      and  u.remark = #{remark,jdbcType=VARCHAR}
+    </if>
+    <if test="talkGroupId != null">
+      and cgu.talkGroupId = #{talkGroupId,jdbcType=TINYINT}
+    </if>
+    order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectConditionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM chat_group_user cgu LEFT JOIN user u ON cgu.userId=u.id  LEFT JOIN chat_group cg ON cgu.talkGroupId=cg.id
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="remark != null">
+      and  u.remark = #{remark,jdbcType=VARCHAR}
+    </if>
+  </select>
+
+  <delete id="deleteAllByTalkGroupId" parameterType="java.lang.Integer">
+    delete from chat_group_user
+    where talkGroupId = #{talkGroupId,jdbcType=INTEGER}
+  </delete>
+
+</mapper>

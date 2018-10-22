@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.RobotTaskMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.RobotTask">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="coinType" jdbcType="INTEGER" property="cointype" />
+    <result column="robotId" jdbcType="INTEGER" property="robotid" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="priceRadioMax" jdbcType="DOUBLE" property="priceradiomax" />
+    <result column="priceRadioMin" jdbcType="DOUBLE" property="priceradiomin" />
+    <result column="basePrice" jdbcType="DECIMAL" property="baseprice" />
+    <result column="numberMax" jdbcType="DECIMAL" property="numbermax" />
+    <result column="numberMin" jdbcType="DECIMAL" property="numbermin" />
+    <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="timeInterval" jdbcType="INTEGER" property="timeinterval" />
+    <result column="countMax" jdbcType="INTEGER" property="countmax" />
+    <result column="countMin" jdbcType="INTEGER" property="countmin" />
+    <result column="excuteUserId" jdbcType="INTEGER" property="excuteuserid" />
+    <result column="onoff" jdbcType="TINYINT" property="onoff" />
+    <result column="operId" jdbcType="INTEGER" property="operid" />
+    <result column="jobName" jdbcType="VARCHAR" property="jobname" />
+    <result column="jobGroupName" jdbcType="VARCHAR" property="jobgroupname" />
+    <result column="triggerName" jdbcType="VARCHAR" property="triggername" />
+    <result column="triggerGroupName" jdbcType="VARCHAR" property="triggergroupname" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coinType, robotId, type, priceRadioMax, priceRadioMin,basePrice, numberMax, numberMin,
+    startTime, endTime, timeInterval, countMax, countMin, excuteUserId, onoff, operId, 
+    jobName, jobGroupName, triggerName, triggerGroupName, createTime, updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.RobotTask">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into robot_task (coinType, robotId, type, 
+      priceRadioMax, priceRadioMin,basePrice, numberMax,
+      numberMin, startTime, endTime, 
+      timeInterval, countMax, countMin, 
+      excuteUserId, onoff, operId, 
+      jobName, jobGroupName, triggerName, 
+      triggerGroupName, createTime, updateTime
+      )
+    values (#{cointype,jdbcType=INTEGER}, #{robotid,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{priceradiomax,jdbcType=DOUBLE}, #{priceradiomin,jdbcType=DOUBLE}, #{baseprice,jdbcType=DECIMAL},#{numbermax,jdbcType=DECIMAL},
+      #{numbermin,jdbcType=DECIMAL}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{timeinterval,jdbcType=INTEGER}, #{countmax,jdbcType=INTEGER}, #{countmin,jdbcType=INTEGER}, 
+      #{excuteuserid,jdbcType=INTEGER}, #{onoff,jdbcType=TINYINT}, #{operid,jdbcType=INTEGER}, 
+      #{jobname,jdbcType=VARCHAR}, #{jobgroupname,jdbcType=VARCHAR}, #{triggername,jdbcType=VARCHAR}, 
+      #{triggergroupname,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.RobotTask">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into robot_task
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="robotid != null">
+        robotId,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="priceradiomax != null">
+        priceRadioMax,
+      </if>
+      <if test="priceradiomin != null">
+        priceRadioMin,
+      </if>
+      <if test="baseprice != null">
+        basePrice,
+      </if>
+      <if test="numbermax != null">
+        numberMax,
+      </if>
+      <if test="numbermin != null">
+        numberMin,
+      </if>
+      <if test="starttime != null">
+        startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
+      </if>
+      <if test="timeinterval != null">
+        timeInterval,
+      </if>
+      <if test="countmax != null">
+        countMax,
+      </if>
+      <if test="countmin != null">
+        countMin,
+      </if>
+      <if test="excuteuserid != null">
+        excuteUserId,
+      </if>
+      <if test="onoff != null">
+        onoff,
+      </if>
+      <if test="operid != null">
+        operId,
+      </if>
+      <if test="jobname != null">
+        jobName,
+      </if>
+      <if test="jobgroupname != null">
+        jobGroupName,
+      </if>
+      <if test="triggername != null">
+        triggerName,
+      </if>
+      <if test="triggergroupname != null">
+        triggerGroupName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cointype != null">
+        #{cointype,jdbcType=INTEGER},
+      </if>
+      <if test="robotid != null">
+        #{robotid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="priceradiomax != null">
+        #{priceradiomax,jdbcType=DOUBLE},
+      </if>
+      <if test="priceradiomin != null">
+        #{priceradiomin,jdbcType=DOUBLE},
+      </if>
+      <if test="baseprice != null">
+        #{baseprice,jdbcType=DECIMAL},
+      </if>
+      <if test="numbermax != null">
+        #{numbermax,jdbcType=DECIMAL},
+      </if>
+      <if test="numbermin != null">
+        #{numbermin,jdbcType=DECIMAL},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeinterval != null">
+        #{timeinterval,jdbcType=INTEGER},
+      </if>
+      <if test="countmax != null">
+        #{countmax,jdbcType=INTEGER},
+      </if>
+      <if test="countmin != null">
+        #{countmin,jdbcType=INTEGER},
+      </if>
+      <if test="excuteuserid != null">
+        #{excuteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="onoff != null">
+        #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="operid != null">
+        #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="jobname != null">
+        #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobgroupname != null">
+        #{jobgroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="triggername != null">
+        #{triggername,jdbcType=VARCHAR},
+      </if>
+      <if test="triggergroupname != null">
+        #{triggergroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.RobotTask">
+    update robot_task
+    set coinType = #{cointype,jdbcType=INTEGER},
+      robotId = #{robotid,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      priceRadioMax = #{priceradiomax,jdbcType=DOUBLE},
+      priceRadioMin = #{priceradiomin,jdbcType=DOUBLE},
+      basePrice = #{baseprice,jdbcType=DECIMAL},
+      numberMax = #{numbermax,jdbcType=DECIMAL},
+      numberMin = #{numbermin,jdbcType=DECIMAL},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      timeInterval = #{timeinterval,jdbcType=INTEGER},
+      countMax = #{countmax,jdbcType=INTEGER},
+      countMin = #{countmin,jdbcType=INTEGER},
+      excuteUserId = #{excuteuserid,jdbcType=INTEGER},
+      onoff = #{onoff,jdbcType=TINYINT},
+      operId = #{operid,jdbcType=INTEGER},
+      jobName = #{jobname,jdbcType=VARCHAR},
+      jobGroupName = #{jobgroupname,jdbcType=VARCHAR},
+      triggerName = #{triggername,jdbcType=VARCHAR},
+      triggerGroupName = #{triggergroupname,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.RobotTask">
+    update robot_task
+    <set>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=INTEGER},
+      </if>
+      <if test="robotid != null">
+        robotId = #{robotid,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="priceradiomax != null">
+        priceRadioMax = #{priceradiomax,jdbcType=DOUBLE},
+      </if>
+      <if test="priceradiomin != null">
+        priceRadioMin = #{priceradiomin,jdbcType=DOUBLE},
+      </if>
+      <if test="baseprice != null">
+        basePrice = #{baseprice,jdbcType=DECIMAL},
+      </if>
+      <if test="numbermax != null">
+        numberMax = #{numbermax,jdbcType=DECIMAL},
+      </if>
+      <if test="numbermin != null">
+        numberMin = #{numbermin,jdbcType=DECIMAL},
+      </if>
+      <if test="starttime != null">
+        startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeinterval != null">
+        timeInterval = #{timeinterval,jdbcType=INTEGER},
+      </if>
+      <if test="countmax != null">
+        countMax = #{countmax,jdbcType=INTEGER},
+      </if>
+      <if test="countmin != null">
+        countMin = #{countmin,jdbcType=INTEGER},
+      </if>
+      <if test="excuteuserid != null">
+        excuteUserId = #{excuteuserid,jdbcType=INTEGER},
+      </if>
+      <if test="onoff != null">
+        onoff = #{onoff,jdbcType=TINYINT},
+      </if>
+      <if test="operid != null">
+        operId = #{operid,jdbcType=INTEGER},
+      </if>
+      <if test="jobname != null">
+        jobName = #{jobname,jdbcType=VARCHAR},
+      </if>
+      <if test="jobgroupname != null">
+        jobGroupName = #{jobgroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="triggername != null">
+        triggerName = #{triggername,jdbcType=VARCHAR},
+      </if>
+      <if test="triggergroupname != null">
+        triggerGroupName = #{triggergroupname,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from robot_task
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot_task
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot_task
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="robotid != null">
+       and  robotId = #{robotid,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="priceradiomax != null">
+       and  priceRadioMax = #{priceradiomax,jdbcType=DOUBLE}
+    </if>
+    <if test="priceradiomin != null">
+       and  priceRadioMin = #{priceradiomin,jdbcType=DOUBLE}
+    </if>
+    <if test="numbermax != null">
+       and  numberMax = #{numbermax,jdbcType=DECIMAL}
+    </if>
+    <if test="baseprice != null">
+       and  basePrice = #{baseprice,jdbcType=DECIMAL}
+    </if>
+    <if test="numbermin != null">
+       and  numberMin = #{numbermin,jdbcType=DECIMAL}
+    </if>
+    <if test="starttime != null">
+       and  startTime = #{starttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endtime != null">
+       and  endTime = #{endtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="timeinterval != null">
+       and  timeInterval = #{timeinterval,jdbcType=INTEGER}
+    </if>
+    <if test="countmax != null">
+       and  countMax = #{countmax,jdbcType=INTEGER}
+    </if>
+    <if test="countmin != null">
+       and  countMin = #{countmin,jdbcType=INTEGER}
+    </if>
+    <if test="excuteuserid != null">
+       and  excuteUserId = #{excuteuserid,jdbcType=INTEGER}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="jobname != null">
+       and  jobName = #{jobname,jdbcType=VARCHAR}
+    </if>
+    <if test="jobgroupname != null">
+       and  jobGroupName = #{jobgroupname,jdbcType=VARCHAR}
+    </if>
+    <if test="triggername != null">
+       and  triggerName = #{triggername,jdbcType=VARCHAR}
+    </if>
+    <if test="triggergroupname != null">
+       and  triggerGroupName = #{triggergroupname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from robot_task
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="robotid != null">
+       and  robotId = #{robotid,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="priceradiomax != null">
+       and  priceRadioMax = #{priceradiomax,jdbcType=DOUBLE}
+    </if>
+    <if test="priceradiomin != null">
+       and  priceRadioMin = #{priceradiomin,jdbcType=DOUBLE}
+    </if>
+    <if test="basePrice != null">
+       and  baseprice = #{baseprice,jdbcType=DECIMAL}
+    </if>
+    <if test="numbermax != null">
+       and  numberMax = #{numbermax,jdbcType=DECIMAL}
+    </if>
+    <if test="numbermin != null">
+       and  numberMin = #{numbermin,jdbcType=DECIMAL}
+    </if>
+    <if test="starttime != null">
+       and  startTime = #{starttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endtime != null">
+       and  endTime = #{endtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="timeinterval != null">
+       and  timeInterval = #{timeinterval,jdbcType=INTEGER}
+    </if>
+    <if test="countmax != null">
+       and  countMax = #{countmax,jdbcType=INTEGER}
+    </if>
+    <if test="countmin != null">
+       and  countMin = #{countmin,jdbcType=INTEGER}
+    </if>
+    <if test="excuteuserid != null">
+       and  excuteUserId = #{excuteuserid,jdbcType=INTEGER}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="jobname != null">
+       and  jobName = #{jobname,jdbcType=VARCHAR}
+    </if>
+    <if test="jobgroupname != null">
+       and  jobGroupName = #{jobgroupname,jdbcType=VARCHAR}
+    </if>
+    <if test="triggername != null">
+       and  triggerName = #{triggername,jdbcType=VARCHAR}
+    </if>
+    <if test="triggergroupname != null">
+       and  triggerGroupName = #{triggergroupname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from robot_task 
+    where 1=1 
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=INTEGER}
+    </if>
+    <if test="robotid != null">
+       and  robotId = #{robotid,jdbcType=INTEGER}
+    </if>
+    <if test="type != null">
+       and  type = #{type,jdbcType=TINYINT}
+    </if>
+    <if test="priceradiomax != null">
+       and  priceRadioMax = #{priceradiomax,jdbcType=DOUBLE}
+    </if>
+    <if test="priceradiomin != null">
+       and  priceRadioMin = #{priceradiomin,jdbcType=DOUBLE}
+    </if>
+    <if test="baseprice != null">
+       and  basePrice = #{baseprice,jdbcType=DECIMAL}
+    </if>
+    <if test="numbermax != null">
+       and  numberMax = #{numbermax,jdbcType=DECIMAL}
+    </if>
+    <if test="numbermin != null">
+       and  numberMin = #{numbermin,jdbcType=DECIMAL}
+    </if>
+    <if test="starttime != null">
+       and  startTime = #{starttime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endtime != null">
+       and  endTime = #{endtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="timeinterval != null">
+       and  timeInterval = #{timeinterval,jdbcType=INTEGER}
+    </if>
+    <if test="countmax != null">
+       and  countMax = #{countmax,jdbcType=INTEGER}
+    </if>
+    <if test="countmin != null">
+       and  countMin = #{countmin,jdbcType=INTEGER}
+    </if>
+    <if test="excuteuserid != null">
+       and  excuteUserId = #{excuteuserid,jdbcType=INTEGER}
+    </if>
+    <if test="onoff != null">
+       and  onoff = #{onoff,jdbcType=TINYINT}
+    </if>
+    <if test="operid != null">
+       and  operId = #{operid,jdbcType=INTEGER}
+    </if>
+    <if test="jobname != null">
+       and  jobName = #{jobname,jdbcType=VARCHAR}
+    </if>
+    <if test="jobgroupname != null">
+       and  jobGroupName = #{jobgroupname,jdbcType=VARCHAR}
+    </if>
+    <if test="triggername != null">
+       and  triggerName = #{triggername,jdbcType=VARCHAR}
+    </if>
+    <if test="triggergroupname != null">
+       and  triggerGroupName = #{triggergroupname,jdbcType=VARCHAR}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="updateTaskByCoinType" parameterType="java.util.Map">
+    UPDATE robot_task
+    <set>
+      <if test="type != null">
+        onoff = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="operId != null">
+        operId = #{operId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where coinType = #{coinType,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectTaskByRobotId" parameterType="java.lang.Integer" resultType="java.util.Map">
+    SELECT m.userName,cm.coinName,u.phone, rt.* FROM robot_task rt LEFT JOIN manager m ON rt.operId=m.id LEFT JOIN coin_manage cm ON rt.coinType=cm.coinType LEFT JOIN user u ON rt.excuteUserId=u.id
+    where rt.robotId = #{robotid,jdbcType=INTEGER}
+  </select>
+
+</mapper>

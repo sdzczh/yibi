@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yibi.core.dao.RechargeMapper">
+  <resultMap id="BaseResultMap" type="com.yibi.core.entity.Recharge">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="fee" jdbcType="DECIMAL" property="fee" />
+    <result column="remain" jdbcType="DECIMAL" property="remain" />
+    <result column="coinType" jdbcType="TINYINT" property="cointype" />
+    <result column="orderNum" jdbcType="VARCHAR" property="ordernum" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, userId, address, amount, fee, remain, coinType, orderNum, state, createTime, 
+    updateTime
+  </sql>
+  <insert id="insert" parameterType="com.yibi.core.entity.Recharge">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into recharge (userId, address, amount, 
+      fee, remain, coinType, 
+      orderNum, state, createTime, 
+      updateTime)
+    values (#{userid,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{fee,jdbcType=DECIMAL}, #{remain,jdbcType=DECIMAL}, #{cointype,jdbcType=TINYINT}, 
+      #{ordernum,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yibi.core.entity.Recharge">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into recharge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="fee != null">
+        fee,
+      </if>
+      <if test="remain != null">
+        remain,
+      </if>
+      <if test="cointype != null">
+        coinType,
+      </if>
+      <if test="ordernum != null">
+        orderNum,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null">
+        #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="remain != null">
+        #{remain,jdbcType=DECIMAL},
+      </if>
+      <if test="cointype != null">
+        #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.yibi.core.entity.Recharge">
+    update recharge
+    set userId = #{userid,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      fee = #{fee,jdbcType=DECIMAL},
+      remain = #{remain,jdbcType=DECIMAL},
+      coinType = #{cointype,jdbcType=TINYINT},
+      orderNum = #{ordernum,jdbcType=VARCHAR},
+      state = #{state,jdbcType=TINYINT},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yibi.core.entity.Recharge">
+    update recharge
+    <set>
+      <if test="userid != null">
+        userId = #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="fee != null">
+        fee = #{fee,jdbcType=DECIMAL},
+      </if>
+      <if test="remain != null">
+        remain = #{remain,jdbcType=DECIMAL},
+      </if>
+      <if test="cointype != null">
+        coinType = #{cointype,jdbcType=TINYINT},
+      </if>
+      <if test="ordernum != null">
+        orderNum = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recharge
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recharge
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recharge
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="fee != null">
+       and  fee = #{fee,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+       and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="ordernum != null">
+       and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc 
+  </select>
+  <select id="selectPaging" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recharge
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="fee != null">
+       and  fee = #{fee,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+       and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="ordernum != null">
+       and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+     order by id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+  <select id="selectCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    select count(*) 
+    from recharge 
+    where 1=1 
+    <if test="userid != null">
+       and  userId = #{userid,jdbcType=INTEGER}
+    </if>
+    <if test="address != null">
+       and  address = #{address,jdbcType=VARCHAR}
+    </if>
+    <if test="amount != null">
+       and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="fee != null">
+       and  fee = #{fee,jdbcType=DECIMAL}
+    </if>
+    <if test="remain != null">
+       and  remain = #{remain,jdbcType=DECIMAL}
+    </if>
+    <if test="cointype != null">
+       and  coinType = #{cointype,jdbcType=TINYINT}
+    </if>
+    <if test="ordernum != null">
+       and  orderNum = #{ordernum,jdbcType=VARCHAR}
+    </if>
+    <if test="state != null">
+       and  state = #{state,jdbcType=TINYINT}
+    </if>
+    <if test="createtime != null">
+       and  createTime = #{createtime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="updatetime != null">
+       and  updateTime = #{updatetime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+  <select id="selectRechargeOrPhone" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT cm.coinName,ud.*,u.phone,u.userName FROM recharge ud LEFT JOIN user u ON ud.userId=u.id
+    LEFT JOIN coin_manage cm ON ud.coinType = cm.coinType
+
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="orderNum != null">
+      and  ud.orderNum = #{orderNum,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  ud.cointype = #{coinType,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+      and  ud.state = #{state,jdbcType=TINYINT}
+    </if>
+    order by ud.id desc limit #{firstResult,jdbcType=INTEGER},#{maxResult,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectCountRechargeOrPhone" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT count(*) FROM recharge ud LEFT JOIN user u ON ud.userId=u.id
+    LEFT JOIN coin_manage cm ON ud.coinType = cm.coinType
+
+    where 1=1
+    <if test="phone != null">
+      and  u.phone = #{phone,jdbcType=CHAR}
+    </if>
+    <if test="username != null">
+      and  u.username = #{username,jdbcType=VARCHAR}
+    </if>
+    <if test="orderNum != null">
+      and  ud.orderNum = #{orderNum,jdbcType=VARCHAR}
+    </if>
+    <if test="coinType != null">
+      and  ud.cointype = #{coinType,jdbcType=TINYINT}
+    </if>
+    <if test="state != null">
+      and  ud.state = #{state,jdbcType=TINYINT}
+    </if>
+  </select>
+</mapper>
